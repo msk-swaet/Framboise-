@@ -8,112 +8,289 @@
 <title>Framboise 🍇</title>
 
 <style>
+  
+/* 🍓 FRAMBOISE — STYLE PRINCIPAL */
+
 :root {
-  --accent: #a52d68;
-  --accent-dark: #70204f;
-  --bg: #fff5fa;
-  --card: #ffffff;
-  --text: #402338;
-  --muted: #98788b;
-  --border: #f0dce8;
-  --soft: #fbe5f0;
-  --shadow: 0 8px 25px #65254b12;
+  --framboise: #c2185b;
+  --framboise-clair: #f8d7e5;
+  --rose: #fff0f6;
+  --violet: #8e63ce;
+  --violet-clair: #eee5ff;
+  --blanc: #ffffff;
+  --texte: #42263b;
+  --texte-doux: #876b80;
+  --bordure: #f0d5e3;
+  --ombre: 0 5px 18px rgba(150, 45, 100, 0.10);
 }
 
-* { box-sizing: border-box; }
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
 
 body {
   margin: 0;
+  min-height: 100vh;
   font-family: "Trebuchet MS", Arial, sans-serif;
-  background: var(--bg);
-  color: var(--text);
-  transition: background .2s, color .2s;
+  color: var(--texte);
+  background: linear-gradient(
+    135deg,
+    #fff0f6,
+    #f5edff,
+    #fff7fa
+  );
 }
 
-button, input, select, textarea { font: inherit; }
-button { cursor: pointer; }
+/* Titres */
 
-header {
-  background: linear-gradient(125deg, var(--accent-dark), var(--accent));
-  color: white;
-  padding: 22px 6%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 15px;
-  flex-wrap: wrap;
+h1, h2, h3 {
+  color: var(--framboise);
+  font-weight: 700;
 }
 
-.logo { font-size: 27px; font-weight: bold; }
-.subtitle { font-size: 13px; opacity: .9; margin-top: 5px; }
-
-header button {
-  border: 1px solid #ffffff80;
-  background: #ffffff18;
-  color: white;
-  border-radius: 12px;
-  padding: 10px 13px;
+h1 {
+  letter-spacing: -0.5px;
 }
+
+p {
+  line-height: 1.6;
+}
+
+/* Liens */
+
+a {
+  color: var(--framboise);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Menus et navigation */
 
 nav {
   display: flex;
-  justify-content: center;
-  gap: 8px;
   flex-wrap: wrap;
-  padding: 14px 10px;
-  background: var(--card);
-  border-bottom: 1px solid var(--border);
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding: 16px;
 }
 
+nav a,
 nav button {
-  background: transparent;
+  padding: 10px 16px;
+  border: 1px solid var(--bordure);
+  border-radius: 18px;
+  background: var(--blanc);
+  color: var(--framboise);
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+nav a:hover,
+nav button:hover {
+  background: var(--framboise-clair);
+  transform: translateY(-2px);
+}
+
+/* Cartes et sections */
+
+section,
+.card,
+.task-card,
+.calendar,
+.settings-card {
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid var(--bordure);
+  border-radius: 22px;
+  padding: 20px;
+  margin: 16px 0;
+  box-shadow: var(--ombre);
+}
+
+/* Boutons */
+
+button,
+input[type="submit"] {
+  font-family: inherit;
+}
+
+button,
+.btn,
+input[type="submit"] {
   border: none;
-  color: var(--muted);
-  border-radius: 12px;
-  padding: 11px 14px;
+  border-radius: 15px;
+  padding: 11px 18px;
+  background: var(--framboise);
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
 }
 
-nav button.active, nav button:hover {
-  background: var(--soft);
-  color: var(--accent);
+button:hover,
+.btn:hover,
+input[type="submit"]:hover {
+  background: #a3124b;
+  transform: translateY(-1px);
 }
 
-main {
-  width: min(1050px, 92%);
-  margin: 28px auto 60px;
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 3px solid var(--violet);
+  outline-offset: 3px;
 }
 
-.page { display: none; }
-.page.active { display: block; }
+/* Champs de saisie */
 
-h1 { font-size: clamp(23px, 4vw, 32px); margin: 0 0 10px; }
-h2 { font-size: 19px; margin-top: 0; }
-p { line-height: 1.6; }
-
-.muted { color: var(--muted); }
-.small { font-size: 13px; }
-
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-  gap: 16px;
-  margin: 22px 0;
+input,
+textarea,
+select {
+  width: 100%;
+  max-width: 100%;
+  padding: 12px 14px;
+  margin: 6px 0 12px;
+  border: 1px solid var(--bordure);
+  border-radius: 13px;
+  background: #fffafd;
+  color: var(--texte);
+  font: inherit;
 }
 
-.card {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 20px;
-  padding: 21px;
-  box-shadow: var(--shadow);
+input::placeholder,
+textarea::placeholder {
+  color: #b49aab;
 }
 
-.stat-number {
-  color: var(--accent);
-  font-size: 32px;
-  font-weight: bold;
-  margin-top: 10px;
+/* Tâches */
+
+.task-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  overflow-wrap: anywhere;
 }
 
-.welcome {
-  background: linear-gradient(120deg, var(--soft), var(--
+.task-card.completed {
+  opacity: 0.65;
+  text-decoration: line-through;
+}
+
+.task-card input[type="checkbox"] {
+  width: auto;
+  accent-color: var(--framboise);
+}
+
+/* Calendrier */
+
+.calendar {
+  overflow-x: auto;
+}
+
+.calendar button {
+  margin: 3px;
+}
+
+.calendar .today {
+  background: var(--violet);
+}
+
+/* Petits détails */
+
+hr {
+  border: none;
+  border-top: 1px solid var(--bordure);
+  margin: 20px 0;
+}
+
+small,
+.muted {
+  color: var(--texte-doux);
+}
+
+footer {
+  padding: 24px 16px;
+  text-align: center;
+  color: var(--texte-doux);
+}
+
+/* Mode sombre */
+
+body.dark {
+  --blanc: #291d2d;
+  --texte: #fff0fa;
+  --texte-doux: #d0b9cf;
+  --bordure: #50344f;
+  --rose: #35243a;
+  --framboise-clair: #563049;
+  --violet-clair: #423252;
+
+  background: #1d1522;
+  color: var(--texte);
+}
+
+body.dark section,
+body.dark .card,
+body.dark .task-card,
+body.dark .calendar,
+body.dark .settings-card {
+  background: #291d2d;
+  border-color: var(--bordure);
+}
+
+body.dark input,
+body.dark textarea,
+body.dark select {
+  background: #35243a;
+  color: var(--texte);
+  border-color: var(--bordure);
+}
+
+body.dark nav a,
+body.dark nav button {
+  background: #35243a;
+  color: #ffd6e8;
+  border-color: var(--bordure);
+}
+
+/* Téléphones */
+
+@media (max-width: 600px) {
+  nav {
+    gap: 7px;
+    padding: 12px;
+  }
+
+  nav a,
+  nav button {
+    padding: 9px 12px;
+    font-size: 13px;
+  }
+
+  section,
+  .card,
+  .task-card,
+  .calendar,
+  .settings-card {
+    padding: 15px;
+    border-radius: 17px;
+  }
+
+  h1 {
+    font-size: 1.7rem;
+  }
+
+  .task-card {
+    align-items: flex-start;
+  }
+}
