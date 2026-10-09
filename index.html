@@ -314,6 +314,7 @@ footer {
   <button data-page="tasks" type="button">✓ Tâches</button>
   <button data-page="calendar" type="button">▦ Calendrier</button>
   <button data-page="settings" type="button">⚙ Personnaliser</button>
+  <button data-page="timer" type="button">⏱️ Timer</button>
 </nav>
 
 <main>
@@ -405,6 +406,38 @@ footer {
       <button id="addForDate" class="primary" type="button">＋ Ajouter une tâche à ce jour</button>
     </div>
   </section>
+
+  
+<section id="timer" class="page">
+  <h1>Mon temps de concentration ⏱️</h1>
+  <p class="muted">Un petit pas à la fois, tu vas y arriver. 💗</p>
+
+  <div class="card" style="max-width:520px;margin:25px auto;text-align:center;padding:30px 20px">
+    <div style="font-size:45px;margin-bottom:10px">🍇</div>
+    <h2 id="timerMode">Session de concentration</h2>
+
+    <div id="timerDisplay" role="timer" aria-live="off"
+      style="font-size:clamp(55px,14vw,85px);font-weight:bold;color:var(--accent);margin:20px 0">
+      30:00
+    </div>
+
+    <p id="timerMessage" class="muted">Prête à te concentrer ?</p>
+
+    <div style="display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin:22px 0">
+      <button id="timerStart" class="primary" type="button">▶ Démarrer</button>
+      <button id="timerPause" class="secondary" type="button">⏸ Pause</button>
+      <button id="timerReset" class="secondary" type="button">↻ Réinitialiser</button>
+    </div>
+
+    <div style="display:flex;justify-content:center;gap:8px;flex-wrap:wrap">
+      <button class="secondary timer-preset" data-minutes="15" type="button">15 min</button>
+      <button class="secondary timer-preset" data-minutes="25" type="button">25 min</button>
+      <button class="secondary timer-preset" data-minutes="30" type="button">30 min</button>
+      <button class="secondary timer-preset" data-minutes="45" type="button">45 min</button>
+    </div>
+  </div>
+</section>
+
 
   <section id="settings" class="page">
     <h1>Mon petit univers 🎨</h1>
@@ -931,6 +964,98 @@ footer {
 
     renderAll();
   });
+  
+  // TIMER FRAMBOISE 🍇
+  let timerDuration = 30 * 60;
+  let timerRemaining = timerDuration;
+  let timerInterval = null;
+  let timerEndTime = null;
+
+  function updateTimerDisplay() {
+    const minutes = Math.floor(timerRemaining / 60);
+    const seconds = timerRemaining % 60;
+
+    $("timerDisplay").textContent =
+      String(minutes).padStart(2, "0") + ":" +
+      String(seconds).padStart(2, "0");
+
+    document.title =
+      timerInterval
+        ? `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")} — Framboise 🍇`
+        : "Framboise 🍇";
+  }
+
+  function stopTimer() {
+    if (timerInterval !== null) {
+      clearInterval(timerInterval);
+      timerInterval = null;
+    }
+    timerEndTime = null;
+  }
+
+  function resetTimer() {
+    stopTimer();
+    timerRemaining = timerDuration;
+    $("timerMessage").textContent = "Prête à te concentrer ? 💗";
+    $("timerMode").textContent = "Session de concentration";
+    updateTimerDisplay();
+  }
+
+  function startTimer() {
+    if (timerInterval !== null) return;
+
+    if (timerRemaining <= 0) resetTimer();
+
+    $("timerMessage").textContent = "Tu gères ! Reste concentrée. ✨";
+    timerEndTime = Date.now() + timerRemaining * 1000;
+
+    timerInterval = setInterval(() => {
+      timerRemaining = Math.max(
+        0,
+        Math.ceil((timerEndTime - Date.now()) / 1000)
+      );
+
+      updateTimerDisplay();
+
+      if (timerRemaining <= 0) {
+        stopTimer();
+        $("timerMessage").textContent = "Bravo ! Ta session est terminée. 🎉";
+        $("timerMode").textContent = "Temps écoulé !";
+        document.title = "Terminé ! — Framboise 🍇";
+        alert("Bravo ! Ta session de concentration est terminée. 💗");
+      }
+    }, 250);
+
+    updateTimerDisplay();
+  }
+
+  $("timerStart").addEventListener("click", startTimer);
+
+  $("timerPause").addEventListener("click", () => {
+    if (timerInterval === null) return;
+
+    timerRemaining = Math.max(
+      0,
+      Math.ceil((timerEndTime - Date.now()) / 1000)
+    );
+
+    stopTimer();
+    updateTimerDisplay();
+    $("timerMessage").textContent = "Petite pause. Reprends quand tu veux. 🌷";
+  });
+
+  $("timerReset").addEventListener("click", resetTimer);
+
+  document.querySelectorAll(".timer-preset").forEach(button => {
+    button.addEventListener("click", () => {
+      timerDuration = Number(button.dataset.minutes) * 60;
+      resetTimer();
+      $("timerMessage").textContent =
+        "Session réglée sur " + button.dataset.minutes + " minutes. 💗";
+    });
+  });
+
+  resetTimer();
 
   loadTasks();
   loadSettings();
