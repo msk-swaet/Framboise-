@@ -1,0 +1,247 @@
+:root {
+  --framboise: #c2185b;
+  --rose: #fff0f6;
+  --rose-clair: #f8d7e5;
+  --violet: #8e63ce;
+  --violet-clair: #eee5ff;
+  --blanc: #ffffff;
+  --texte: #42263b;
+  --texte-doux: #876b80;
+  --bordure: #f0d5e3;
+  --ombre: 0 5px 18px rgba(150, 45, 100, 0.10);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "Trebuchet MS", Arial, sans-serif;
+  color: var(--texte);
+  background: linear-gradient(
+    135deg,
+    #fff0f6,
+    #f5edff,
+    #fff7fa
+  );
+}
+
+h1, h2, h3 {
+  color: var(--framboise);
+  font-weight: 700;
+}
+
+p {
+  line-height: 1.6;
+}
+/* Liens */
+a {
+  color: var(--framboise);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Navigation */
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding: 16px;
+}
+
+nav a,
+nav button {
+  padding: 10px 16px;
+  border: 1px solid var(--bordure);
+  border-radius: 18px;
+  background: var(--blanc);
+  color: var(--framboise);
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+nav a:hover,
+nav button:hover {
+  background: var(--rose-clair);
+  transform: translateY(-2px);
+}
+
+/* Boutons */
+button,
+.btn,
+input[type="submit"] {
+  font-family: inherit;
+  border: none;
+  border-radius: 15px;
+  padding: 11px 18px;
+  background: var(--framboise);
+  color: white;
+  font
+  /* Cartes et sections */
+section,
+.card,
+.task-card,
+.calendar,
+.settings-card {
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid var(--bordure);
+  border-radius: 22px;
+  padding: 20px;
+  margin: 16px 0;
+  box-shadow: var(--ombre);
+}
+
+/* Champs de saisie */
+input,
+textarea,
+select {
+  width: 100%;
+  max-width: 100%;
+  padding: 12px 14px;
+  margin: 6px 0 12px;
+  border: 1px solid var(--bordure);
+  border-radius: 13px;
+  background: #fffafd;
+  color: var(--texte);
+  font: inherit;
+}
+
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 3px solid var(--violet);
+  outline-offset: 3px;
+}
+
+/* Liste des tâches */
+.task-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  overflow-wrap: anywhere;
+}
+
+.task-card.completed {
+  opacity: 0.65;
+  text-decoration: line-through;
+}
+
+.task-card input[type="checkbox"] {
+  width: auto;
+  accent-color: var(--framboise);
+}
+
+/* Calendrier */
+.calendar {
+  overflow-x: auto;
+}
+
+.calendar button {
+  margin: 3px;
+}
+
+.calendar .today {
+  background: var(--violet);
+}
+
+/* Séparateurs et textes secondaires */
+hr {
+  border: none;
+  border-top: 1px solid var(--bordure);
+  margin: 20px 0;
+}
+
+small,
+.muted {
+  color: var(--texte-doux);
+}
+
+footer {
+  padding: 24px 16px;
+  text-align: center;
+  color: var(--texte-doux);
+}
+  /* 🌙 MODE SOMBRE */
+
+body.dark {
+  --blanc: #291d2d;
+  --texte: #fff0fa;
+  --texte-doux: #d0b9cf;
+  --bordure: #50344f;
+  --rose: #35243a;
+  --rose-clair: #563049;
+  --violet-clair: #423252;
+
+  background: #1d1522;
+  color: var(--texte);
+}
+
+body.dark section,
+body.dark .card,
+body.dark .task-card,
+body.dark .calendar,
+body.dark .settings-card {
+  background: #291d2d;
+  border-color: var(--bordure);
+}
+
+body.dark input,
+body.dark textarea,
+body.dark select {
+  background: #35243a;
+  color: var(--texte);
+  border-color: var(--bordure);
+}
+
+body.dark nav a,
+body.dark nav button {
+  background: #35243a;
+  color: #ffd6e8;
+  border-color: var(--bordure);
+}
+
+/* 📱 ADAPTATION AUX TÉLÉPHONES */
+
+@media (max-width: 600px) {
+  nav {
+    gap: 7px;
+    padding: 12px;
+  }
+
+  nav a,
+  nav button {
+    padding: 9px 12px;
+    font-size: 13px;
+  }
+
+  section,
+  .card,
+  .task-card,
+  .calendar,
+  .settings-card {
+    padding: 15px;
+    border-radius: 17px;
+  }
+
+  h1 {
+    font-size: 1.7rem;
+  }
+
+  .task-card {
+    align-items: flex-start;
+  }
+}
+  
