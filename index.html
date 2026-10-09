@@ -139,4 +139,870 @@ footer { text-align:center; padding:24px; color:var(--muted); }
   background:
     radial-gradient(circle at 15% 20%,#ffe3f0 0,transparent 32%),
     radial-gradient(circle at 85% 30%,#e9ddff 0,transparent 34%),
-    radial-gradient(circle at 55% 100%,#fff0d9 0,transparent 35%
+    radial-gradient(circle at 55% 100%,#fff0d9 0,transparent 35%),
+    linear-gradient(145deg,#fff8fc,#f9f0ff,#fff6f0);
+  border:1px solid #f1ddec;
+  box-shadow:0 15px 40px rgba(174,112,163,.16);
+  color:#624568;
+}
+body.dark .timer-shell {
+  background:
+    radial-gradient(circle at 15% 20%,#58354e 0,transparent 35%),
+    radial-gradient(circle at 85% 30%,#40335e 0,transparent 35%),
+    linear-gradient(145deg,#302438,#28213a);
+  border-color:#59425e; color:#f8e9f7;
+}
+.timer-shell > *:not(.bubble):not(.sparkle) { position:relative; z-index:2; }
+.timer-shell h2 { margin:6px 0; font-size:1.4rem; }
+.timer-subtitle { color:#997b9a; margin:8px 0 20px; }
+body.dark .timer-subtitle { color:#d0b5d0; }
+.bubble {
+  position:absolute; z-index:0; border-radius:50%;
+  background:rgba(255,255,255,.45); border:1px solid rgba(255,255,255,.65);
+  animation:floatBubble 7s ease-in-out infinite;
+}
+.bubble.b1 { width:34px;height:34px;left:8%;top:18%; }
+.bubble.b2 { width:19px;height:19px;right:9%;top:25%;animation-delay:-2s; }
+.bubble.b3 { width:46px;height:46px;right:12%;bottom:12%;animation-delay:-4s; }
+.bubble.b4 { width:23px;height:23px;left:12%;bottom:18%;animation-delay:-1s; }
+@keyframes floatBubble {
+  0%,100% { transform:translateY(0) translateX(0); }
+  50% { transform:translateY(-18px) translateX(7px); }
+}
+.sparkle {
+  position:absolute; z-index:1; color:#d6a4e8;
+  animation:twinkle 2.4s ease-in-out infinite;
+  pointer-events:none;
+}
+.sparkle.s1 { top:13%;left:25%;font-size:23px; }
+.sparkle.s2 { top:35%;right:10%;font-size:19px;animation-delay:-.7s; }
+.sparkle.s3 { bottom:25%;left:7%;font-size:18px;animation-delay:-1.3s; }
+.sparkle.s4 { top:8%;right:28%;font-size:15px;animation-delay:-1.8s; }
+@keyframes twinkle {
+  0%,100% { opacity:.35;transform:scale(.7) rotate(0); }
+  50% { opacity:1;transform:scale(1.25) rotate(20deg); }
+}
+.timer-character {
+  width:130px;height:130px;position:relative;margin:12px auto 0;
+  display:flex;align-items:center;justify-content:center;
+}
+.raspberry {
+  width:75px;height:78px;position:relative;
+  filter:drop-shadow(0 7px 4px rgba(132,52,99,.15));
+  transform-origin:bottom center;
+}
+.berry-balls {
+  position:absolute;inset:12px 2px 0;
+}
+.berry-balls i {
+  position:absolute;width:27px;height:27px;border-radius:50%;
+  background:radial-gradient(circle at 30% 25%,#ff9bc3,#e83c83 65%,#bd2467);
+  border:1px solid rgba(170,28,89,.16);
+}
+.berry-balls i:nth-child(1) { left:23px;top:0; }
+.berry-balls i:nth-child(2) { left:8px;top:13px; }
+.berry-balls i:nth-child(3) { left:37px;top:13px; }
+.berry-balls i:nth-child(4) { left:0;top:31px; }
+.berry-balls i:nth-child(5) { left:22px;top:31px; }
+.berry-balls i:nth-child(6) { left:44px;top:31px; }
+.berry-balls i:nth-child(7) { left:11px;top:48px; }
+.berry-balls i:nth-child(8) { left:34px;top:48px; }
+.berry-leaf {
+  position:absolute;top:2px;left:25px;width:28px;height:17px;
+  background:#78bd78;border-radius:100% 0 100% 0;transform:rotate(-24deg);
+}
+.berry-leaf::after {
+  content:"";position:absolute;width:23px;height:13px;left:14px;top:3px;
+  background:#91ce8a;border-radius:0 100% 0 100%;transform:rotate(40deg);
+}
+.berry-face {
+  position:absolute;left:21px;top:34px;width:37px;
+  display:flex;justify-content:space-between;align-items:center;
+}
+.berry-face span {
+  width:5px;height:7px;border-radius:50%;background:#54283e;
+}
+.berry-smile {
+  position:absolute;top:47px;left:34px;width:12px;height:7px;
+  border-bottom:2px solid #54283e;border-radius:0 0 12px 12px;
+}
+.timer-character.running .raspberry { animation:berryBounce .65s ease-in-out infinite; }
+.timer-character.finished .raspberry { animation:berryHappy .5s ease-in-out 3; }
+@keyframes berryBounce {
+  0%,100% { transform:translateY(0) rotate(-4deg); }
+  50% { transform:translateY(-13px) rotate(4deg); }
+}
+@keyframes berryHappy {
+  0%,100% { transform:rotate(0) scale(1); }
+  50% { transform:rotate(12deg) scale(1.12); }
+}
+.timer-ring {
+  width:min(76vw,300px); height:min(76vw,300px);
+  margin:5px auto 18px; position:relative;
+  display:grid;place-items:center;
+}
+.timer-ring svg { width:100%;height:100%;position:absolute;inset:0;transform:rotate(-90deg); }
+.ring-track { fill:none;stroke:rgba(208,157,202,.28);stroke-width:8; }
+.ring-progress {
+  fill:none;stroke:#d66aa0;stroke-width:8;stroke-linecap:round;
+  stroke-dasharray:565.49;stroke-dashoffset:0;
+  transition:stroke-dashoffset .35s linear;
+}
+.timer-ring-content { position:relative;z-index:1;width:100%; }
+#timerDisplay {
+  font-size:clamp(2.5rem,10vw,4.4rem);font-weight:bold;
+  letter-spacing:1px;font-variant-numeric:tabular-nums;
+}
+#timerMode { font-size:1rem;color:#a07c9c;margin:8px 0; }
+body.dark #timerMode { color:#d6b8d5; }
+.timer-message { min-height:28px;margin:8px 0 18px;font-size:.95rem; }
+.timer-controls { display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin:14px 0; }
+.timer-controls button { min-width:105px; }
+.timer-settings {
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:10px;max-width:390px;margin:18px auto;
+}
+.timer-settings label { font-size:.85rem;text-align:left; }
+.timer-settings input { text-align:center;padding:12px 5px; }
+.timer-presets { display:flex;justify-content:center;gap:7px;flex-wrap:wrap;margin-top:12px; }
+.timer-presets button { padding:9px 12px;font-size:.86rem; }
+.timer-presets button.selected { background:var(--accent);color:white; }
+.timer-note { font-size:.8rem;color:#9c7e9b;margin:14px 0 0; }
+@media(max-width:480px) {
+  nav { gap:5px; }
+  nav button { padding:9px 10px;font-size:.82rem; }
+  main { padding:18px 12px 40px; }
+  .card { padding:16px; }
+  .timer-shell { padding:20px 10px 24px; }
+  .timer-controls button { flex:1;min-width:95px; }
+  .calendar-day { min-height:49px; }
+}
+</style>
+</head>
+
+<body data-theme="berry">
+<header>
+  <div class="logo">🍇</div>
+  <h1>Framboise</h1>
+  <p>Ton petit espace pour apprendre, t'organiser et réussir ✨</p>
+</header>
+
+<nav aria-label="Navigation principale">
+  <button class="active" data-page="home">🏡 Accueil</button>
+  <button data-page="tasks">📝 Tâches</button>
+  <button data-page="calendar">📅 Calendrier</button>
+  <button data-page="timer">⏱️ Timer</button>
+  <button data-page="customize">🎨 Personnaliser</button>
+</nav>
+
+<main>
+  <!-- ACCUEIL -->
+  <section id="home" class="page active">
+    <h1>Coucou, bienvenue ! 🌷</h1>
+    <p class="muted">Avance à ton rythme. Chaque petit progrès compte.</p>
+
+    <div class="grid">
+      <div class="card">
+        <h2>📝 Mes tâches</h2>
+        <p><strong id="homeTaskCount">0</strong> tâche(s) à terminer</p>
+        <button class="primary" data-goto="tasks">Voir mes tâches</button>
+      </div>
+      <div class="card">
+        <h2>⏱️ Mon temps de concentration</h2>
+        <p>Un moment rien que pour tes études.</p>
+        <button class="primary" data-goto="timer">Lancer le timer</button>
+      </div>
+      <div class="card">
+        <h2>📅 Mon calendrier</h2>
+        <p>Retrouve tes tâches et organise tes journées.</p>
+        <button class="primary" data-goto="calendar">Ouvrir le calendrier</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>✨ Mes prochaines tâches</h2>
+      <div id="homeTasks"></div>
+    </div>
+  </section>
+
+  <!-- TÂCHES -->
+  <section id="tasks" class="page">
+    <h1>Mes tâches 📝</h1>
+    <p class="muted">Note ce que tu dois faire et coche chaque tâche terminée.</p>
+
+    <div class="card">
+      <h2>Ajouter une tâche</h2>
+      <form id="taskForm">
+        <label for="taskTitle">Nom de la tâche</label>
+        <input id="taskTitle" maxlength="120" placeholder="Ex. Réviser les maths" required>
+
+        <div class="grid">
+          <div>
+            <label for="taskCategory">Catégorie</label>
+            <select id="taskCategory">
+              <option>Études</option>
+              <option>Devoirs</option>
+              <option>Révisions</option>
+              <option>Personnel</option>
+              <option>Autre</option>
+            </select>
+          </div>
+          <div>
+            <label for="taskDate">Date (facultatif)</label>
+            <input id="taskDate" type="date">
+          </div>
+        </div>
+
+        <label for="taskPriority">Priorité</label>
+        <select id="taskPriority">
+          <option value="Normale">Normale</option>
+          <option value="Importante">Importante</option>
+          <option value="Urgente">Urgente</option>
+        </select>
+
+        <div style="margin-top:15px">
+          <button class="primary" type="submit">＋ Ajouter la tâche</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="card">
+      <div class="row">
+        <h2>Ma liste</h2>
+        <select id="taskFilter" aria-label="Filtrer les tâches">
+          <option value="all">Toutes les tâches</option>
+          <option value="todo">À faire</option>
+          <option value="done">Terminées</option>
+        </select>
+      </div>
+      <div id="taskList"></div>
+      <div class="row" style="margin-top:12px">
+        <button id="deleteCompleted" class="secondary">🧹 Supprimer les tâches terminées</button>
+        <button id="exportTasks" class="secondary">⬇️ Exporter mes tâches</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- CALENDRIER -->
+  <section id="calendar" class="page">
+    <h1>Mon calendrier 📅</h1>
+    <p class="muted">Sélectionne une date pour voir les tâches prévues.</p>
+
+    <div class="card">
+      <div class="calendar-head">
+        <button id="prevMonth" aria-label="Mois précédent">←</button>
+        <h2 id="monthTitle"></h2>
+        <button id="nextMonth" aria-label="Mois suivant">→</button>
+      </div>
+      <div class="calendar-grid" id="calendarNames"></div>
+      <div class="calendar-grid" id="calendarDays"></div>
+      <div class="calendar-detail">
+        <h2 id="selectedDateTitle">Mes tâches du jour</h2>
+        <div id="calendarTasks"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TIMER -->
+  <section id="timer" class="page">
+    <h1>Mon temps de concentration ⏱️</h1>
+    <p class="muted">Un petit pas à la fois, tu vas y arriver. 💗</p>
+
+    <div class="timer-shell">
+      <span class="bubble b1"></span>
+      <span class="bubble b2"></span>
+      <span class="bubble b3"></span>
+      <span class="bubble b4"></span>
+      <span class="sparkle s1">✦</span>
+      <span class="sparkle s2">✧</span>
+      <span class="sparkle s3">✦</span>
+      <span class="sparkle s4">✧</span>
+
+      <h2>Mon petit moment à moi</h2>
+      <p class="timer-subtitle">Respire, concentre-toi et fais de ton mieux 🌸</p>
+
+      <div id="timerCharacter" class="timer-character" aria-hidden="true">
+        <div class="raspberry">
+          <div class="berry-leaf"></div>
+          <div class="berry-balls">
+            <i></i><i></i><i></i><i></i>
+            <i></i><i></i><i></i><i></i>
+          </div>
+          <div class="berry-face"><span></span><span></span></div>
+          <div class="berry-smile"></div>
+        </div>
+      </div>
+
+      <div class="timer-ring">
+        <svg viewBox="0 0 200 200" aria-hidden="true">
+          <circle class="ring-track" cx="100" cy="100" r="90"></circle>
+          <circle id="timerProgress" class="ring-progress" cx="100" cy="100" r="90"></circle>
+        </svg>
+        <div class="timer-ring-content">
+          <div id="timerDisplay" role="timer" aria-live="off">30:00</div>
+          <div id="timerMode">Session de concentration</div>
+        </div>
+      </div>
+
+      <p id="timerMessage" class="timer-message">Prête à te concentrer ? 💗</p>
+
+      <div class="timer-controls">
+        <button id="timerStart" class="primary" type="button">▶ Démarrer</button>
+        <button id="timerPause" class="secondary" type="button">⏸ Pause</button>
+        <button id="timerReset" class="secondary" type="button">↻ Réinitialiser</button>
+      </div>
+
+      <div class="card" style="background:rgba(255,255,255,.48);box-shadow:none;border-color:rgba(225,190,220,.65);">
+        <h2>Choisis ta durée 🌷</h2>
+        <div class="timer-settings">
+          <div>
+            <label for="timerHours">Heures</label>
+            <input id="timerHours" type="number" min="0" max="99" value="0" inputmode="numeric">
+          </div>
+          <div>
+            <label for="timerMinutes">Minutes</label>
+            <input id="timerMinutes" type="number" min="0" max="59" value="30" inputmode="numeric">
+          </div>
+          <div>
+            <label for="timerSeconds">Secondes</label>
+            <input id="timerSeconds" type="number" min="0" max="59" value="0" inputmode="numeric">
+          </div>
+        </div>
+        <button id="timerApply" class="primary" type="button">Appliquer ma durée</button>
+
+        <div class="timer-presets">
+          <button class="secondary timer-preset" data-minutes="15" type="button">15 min</button>
+          <button class="secondary timer-preset" data-minutes="25" type="button">25 min</button>
+          <button class="secondary timer-preset selected" data-minutes="30" type="button">30 min</button>
+          <button class="secondary timer-preset" data-minutes="45" type="button">45 min</button>
+          <button class="secondary timer-preset" data-minutes="60" type="button">1 heure</button>
+        </div>
+      </div>
+      <p class="timer-note">Tu peux choisir une durée courte ou longue, comme tu veux. 🍇</p>
+    </div>
+  </section>
+
+  <!-- PERSONNALISATION -->
+  <section id="customize" class="page">
+    <h1>Personnaliser Framboise 🎨</h1>
+    <p class="muted">Choisis l'ambiance qui te plaît.</p>
+
+    <div class="card">
+      <h2>Couleurs du site</h2>
+      <div class="grid">
+        <button class="theme-choice" data-theme-choice="berry">🍇 Framboise</button>
+        <button class="theme-choice" data-theme-choice="purple">💜 Lavande</button>
+        <button class="theme-choice" data-theme-choice="rose">🌸 Rose</button>
+        <button class="theme-choice" data-theme-choice="plum">🪻 Prune</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Mode sombre 🌙</h2>
+      <p class="muted">Pour une ambiance plus douce le soir.</p>
+      <button id="darkToggle" class="primary">Activer / désactiver le mode sombre</button>
+    </div>
+
+    <div class="card">
+      <h2>Ambiance sonore 🎵</h2>
+      <p class="muted">Un son doux généré directement par le navigateur, sans musique à télécharger.</p>
+      <button id="ambienceToggle" class="primary">♫ Activer l'ambiance</button>
+      <p id="ambienceStatus" class="muted">Ambiance désactivée.</p>
+    </div>
+  </section>
+</main>
+
+<footer>Fait avec 💗 pour t'aider à avancer à ton rythme · Framboise 🍇</footer>
+
+<script>
+"use strict";
+
+const $ = id => document.getElementById(id);
+const STORAGE_KEY = "framboise-tasks-v1";
+
+let tasks = [];
+try {
+  const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+  tasks = Array.isArray(saved) ? saved : [];
+} catch (error) {
+  tasks = [];
+}
+
+function saveTasks() {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(tasks));
+  } catch (error) {
+    alert("Impossible d'enregistrer les tâches dans ce navigateur.");
+  }
+}
+
+function makeId() {
+  return Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
+}
+
+function escapeHTML(value) {
+  return String(value ?? "").replace(/[&<>"']/g, char => ({
+    "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#39;"
+  })[char]);
+}
+
+function localDateString(date = new Date()) {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}`;
+}
+
+/* NAVIGATION */
+function showPage(pageId) {
+  document.querySelectorAll(".page").forEach(page => {
+    page.classList.toggle("active", page.id === pageId);
+  });
+  document.querySelectorAll("nav [data-page]").forEach(button => {
+    button.classList.toggle("active", button.dataset.page === pageId);
+  });
+  if (pageId === "calendar") renderCalendar();
+  if (pageId === "tasks") renderTasks();
+  if (pageId === "home") renderHome();
+}
+
+document.querySelectorAll("nav [data-page]").forEach(button => {
+  button.addEventListener("click", () => showPage(button.dataset.page));
+});
+document.querySelectorAll("[data-goto]").forEach(button => {
+  button.addEventListener("click", () => showPage(button.dataset.goto));
+});
+
+/* TÂCHES */
+function renderTasks() {
+  const list = $("taskList");
+  const filter = $("taskFilter").value;
+  let filtered = [...tasks];
+
+  if (filter === "todo") filtered = filtered.filter(task => !task.done);
+  if (filter === "done") filtered = filtered.filter(task => task.done);
+
+  filtered.sort((a, b) => {
+    if (a.done !== b.done) return Number(a.done) - Number(b.done);
+    if (a.date && b.date) return a.date.localeCompare(b.date);
+    if (a.date) return -1;
+    if (b.date) return 1;
+    return (b.created || 0) - (a.created || 0);
+  });
+
+  if (!filtered.length) {
+    list.innerHTML = '<div class="empty">Rien ici pour le moment. 🌷</div>';
+  } else {
+    list.innerHTML = filtered.map(task => `
+      <div class="task-item ${task.done ? "done" : ""}">
+        <input type="checkbox" data-toggle-task="${escapeHTML(task.id)}"
+          ${task.done ? "checked" : ""} aria-label="Marquer comme terminée">
+        <div class="task-content">
+          <strong>${escapeHTML(task.title)}</strong>
+          <small>${task.date ? "📅 " + escapeHTML(task.date) + " · " : ""}${escapeHTML(task.category || "Autre")}</small>
+          <span class="tag">${escapeHTML(task.priority || "Normale")}</span>
+        </div>
+        <button class="secondary" data-delete-task="${escapeHTML(task.id)}" aria-label="Supprimer cette tâche">🗑️</button>
+      </div>
+    `).join("");
+  }
+
+  list.querySelectorAll("[data-toggle-task]").forEach(input => {
+    input.addEventListener("change", () => {
+      const task = tasks.find(item => item.id === input.dataset.toggleTask);
+      if (task) task.done = input.checked;
+      saveTasks();
+      renderAll();
+    });
+  });
+
+  list.querySelectorAll("[data-delete-task]").forEach(button => {
+    button.addEventListener("click", () => {
+      tasks = tasks.filter(task => task.id !== button.dataset.deleteTask);
+      saveTasks();
+      renderAll();
+    });
+  });
+}
+
+$("taskForm").addEventListener("submit", event => {
+  event.preventDefault();
+  const title = $("taskTitle").value.trim();
+  if (!title) return;
+
+  tasks.push({
+    id: makeId(),
+    title,
+    category: $("taskCategory").value,
+    date: $("taskDate").value,
+    priority: $("taskPriority").value,
+    done: false,
+    created: Date.now()
+  });
+
+  saveTasks();
+  $("taskForm").reset();
+  renderAll();
+  $("taskTitle").focus();
+});
+
+$("taskFilter").addEventListener("change", renderTasks);
+
+$("deleteCompleted").addEventListener("click", () => {
+  const count = tasks.filter(task => task.done).length;
+  if (!count) {
+    alert("Tu n'as pas encore de tâche terminée à supprimer. 🌷");
+    return;
+  }
+  if (confirm(`Supprimer les ${count} tâche(s) terminée(s) ?`)) {
+    tasks = tasks.filter(task => !task.done);
+    saveTasks();
+    renderAll();
+  }
+});
+
+$("exportTasks").addEventListener("click", () => {
+  const blob = new Blob([JSON.stringify(tasks, null, 2)], {type:"application/json"});
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = "mes-taches-framboise.json";
+  link.click();
+  URL.revokeObjectURL(url);
+});
+
+function renderHome() {
+  const remaining = tasks.filter(task => !task.done);
+  $("homeTaskCount").textContent = remaining.length;
+  const homeList = $("homeTasks");
+
+  const upcoming = [...remaining].sort((a, b) => {
+    if (a.date && b.date) return a.date.localeCompare(b.date);
+    if (a.date) return -1;
+    if (b.date) return 1;
+    return (b.created || 0) - (a.created || 0);
+  }).slice(0, 5);
+
+  homeList.innerHTML = upcoming.length
+    ? upcoming.map(task => `
+      <div class="task-item">
+        <div class="task-content">
+          <strong>${escapeHTML(task.title)}</strong>
+          <small>${task.date ? "📅 " + escapeHTML(task.date) : escapeHTML(task.category || "Autre")}</small>
+        </div>
+      </div>`).join("")
+    : '<div class="empty">Tu es à jour ! Prends un petit moment pour toi. 💗</div>';
+}
+
+function renderAll() {
+  renderTasks();
+  renderHome();
+  renderCalendar();
+}
+
+/* CALENDRIER */
+let calendarDate = new Date();
+let selectedDate = localDateString();
+
+$("calendarNames").innerHTML = ["Lun","Mar","Mer","Jeu","Ven","Sam","Dim"]
+  .map(name => `<div class="calendar-day-name">${name}</div>`).join("");
+
+function renderCalendar() {
+  const year = calendarDate.getFullYear();
+  const month = calendarDate.getMonth();
+  $("monthTitle").textContent = new Intl.DateTimeFormat("fr-FR", {
+    month:"long", year:"numeric"
+  }).format(calendarDate);
+
+  const firstDay = new Date(year, month, 1);
+  const offset = (firstDay.getDay() + 6) % 7;
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
+  const cells = [];
+
+  for (let i = 0; i < offset; i++) {
+    cells.push('<div></div>');
+  }
+
+  for (let day = 1; day <= daysInMonth; day++) {
+    const date = `${year}-${String(month + 1).padStart(2,"0")}-${String(day).padStart(2,"0")}`;
+    const hasTasks = tasks.some(task => task.date === date);
+    const isToday = date === localDateString();
+    const isSelected = date === selectedDate;
+
+    cells.push(`
+      <button type="button" class="calendar-day ${isToday ? "today" : ""} ${isSelected ? "selected" : ""}"
+        data-calendar-date="${date}" aria-label="${date}">
+        ${day}${hasTasks ? '<div class="dot">•</div>' : ""}
+      </button>
+    `);
+  }
+
+  $("calendarDays").innerHTML = cells.join("");
+  $("calendarDays").querySelectorAll("[data-calendar-date]").forEach(button => {
+    button.addEventListener("click", () => {
+      selectedDate = button.dataset.calendarDate;
+      renderCalendar();
+    });
+  });
+
+  const prettyDate = new Date(selectedDate + "T12:00:00");
+  $("selectedDateTitle").textContent = new Intl.DateTimeFormat("fr-FR", {
+    day:"numeric", month:"long", year:"numeric"
+  }).format(prettyDate);
+
+  const dayTasks = tasks.filter(task => task.date === selectedDate);
+  $("calendarTasks").innerHTML = dayTasks.length
+    ? dayTasks.map(task => `
+      <div class="task-item ${task.done ? "done" : ""}">
+        <div class="task-content">
+          <strong>${escapeHTML(task.title)}</strong>
+          <small>${escapeHTML(task.category || "Autre")} · ${task.done ? "Terminée" : "À faire"}</small>
+        </div>
+      </div>`).join("")
+    : '<div class="empty">Aucune tâche prévue pour cette date. 🌼</div>';
+}
+
+$("prevMonth").addEventListener("click", () => {
+  calendarDate = new Date(calendarDate.getFullYear(), calendarDate.getMonth() - 1, 1);
+  renderCalendar();
+});
+$("nextMonth").addEventListener("click", () => {
+  calendarDate = new Date(calendarDate.getFullYear(), calendarDate.getMonth() + 1, 1);
+  renderCalendar();
+});
+
+/* PERSONNALISATION */
+document.querySelectorAll("[data-theme-choice]").forEach(button => {
+  button.addEventListener("click", () => {
+    document.body.dataset.theme = button.dataset.themeChoice;
+    localStorage.setItem("framboise-theme", button.dataset.themeChoice);
+  });
+});
+
+$("darkToggle").addEventListener("click", () => {
+  document.body.classList.toggle("dark");
+  localStorage.setItem("framboise-dark", document.body.classList.contains("dark") ? "yes" : "no");
+});
+
+try {
+  const savedTheme = localStorage.getItem("framboise-theme");
+  if (["berry","purple","rose","plum"].includes(savedTheme)) {
+    document.body.dataset.theme = savedTheme;
+  }
+  if (localStorage.getItem("framboise-dark") === "yes") {
+    document.body.classList.add("dark");
+  }
+} catch (error) {}
+
+/* AMBIANCE SONORE */
+let audioContext = null;
+let ambienceTimer = null;
+let ambienceOn = false;
+
+function playSoftNote() {
+  if (!audioContext || !ambienceOn) return;
+  const frequencies = [261.63,329.63,392,440,523.25];
+  const frequency = frequencies[Math.floor(Math.random() * frequencies.length)];
+  const oscillator = audioContext.createOscillator();
+  const gain = audioContext.createGain();
+
+  oscillator.type = "sine";
+  oscillator.frequency.value = frequency;
+  gain.gain.setValueAtTime(0.0001, audioContext.currentTime);
+  gain.gain.exponentialRampToValueAtTime(0.035, audioContext.currentTime + .08);
+  gain.gain.exponentialRampToValueAtTime(0.0001, audioContext.currentTime + 1.1);
+
+  oscillator.connect(gain);
+  gain.connect(audioContext.destination);
+  oscillator.start();
+  oscillator.stop(audioContext.currentTime + 1.15);
+}
+
+$("ambienceToggle").addEventListener("click", async () => {
+  if (!ambienceOn) {
+    try {
+      const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+      if (!AudioContextClass) throw new Error("Audio non disponible");
+      audioContext = audioContext || new AudioContextClass();
+      if (audioContext.state === "suspended") await audioContext.resume();
+
+      ambienceOn = true;
+      playSoftNote();
+      ambienceTimer = setInterval(playSoftNote, 1600);
+      $("ambienceToggle").textContent = "♫ Désactiver l'ambiance";
+      $("ambienceStatus").textContent = "Ambiance activée. 🎶";
+    } catch (error) {
+      alert("L'ambiance sonore n'est pas disponible sur ce navigateur.");
+    }
+  } else {
+    ambienceOn = false;
+    clearInterval(ambienceTimer);
+    ambienceTimer = null;
+    $("ambienceToggle").textContent = "♫ Activer l'ambiance";
+    $("ambienceStatus").textContent = "Ambiance désactivée.";
+  }
+});
+
+/* TIMER FRAMBOISE : durée libre + cercle animé */
+let timerDuration = 30 * 60;
+let timerRemaining = timerDuration;
+let timerInterval = null;
+let timerEndTime = null;
+const ringCircumference = 2 * Math.PI * 90;
+
+$("timerProgress").style.strokeDasharray = ringCircumference;
+$("timerProgress").style.strokeDashoffset = 0;
+
+function formatTime(seconds) {
+  seconds = Math.max(0, Math.floor(seconds));
+  const hours = Math.floor(seconds / 3600);
+  const minutes = Math.floor((seconds % 3600) / 60);
+  const secs = seconds % 60;
+
+  if (hours > 0) {
+    return `${String(hours).padStart(2,"0")}:${String(minutes).padStart(2,"0")}:${String(secs).padStart(2,"0")}`;
+  }
+  return `${String(minutes).padStart(2,"0")}:${String(secs).padStart(2,"0")}`;
+}
+
+function updateTimerDisplay() {
+  $("timerDisplay").textContent = formatTime(timerRemaining);
+
+  const elapsedRatio = timerDuration > 0
+    ? 1 - timerRemaining / timerDuration
+    : 0;
+  $("timerProgress").style.strokeDashoffset =
+    ringCircumference * Math.max(0, Math.min(1, elapsedRatio));
+
+  document.title = timerInterval
+    ? `${formatTime(timerRemaining)} — Framboise 🍇`
+    : "Framboise 🍇";
+}
+
+function stopTimer() {
+  if (timerInterval !== null) {
+    clearInterval(timerInterval);
+    timerInterval = null;
+  }
+  timerEndTime = null;
+  $("timerCharacter").classList.remove("running");
+}
+
+function syncTimerInputs() {
+  $("timerHours").value = Math.floor(timerDuration / 3600);
+  $("timerMinutes").value = Math.floor((timerDuration % 3600) / 60);
+  $("timerSeconds").value = timerDuration % 60;
+}
+
+function resetTimer() {
+  stopTimer();
+  timerRemaining = timerDuration;
+  $("timerCharacter").classList.remove("finished");
+  $("timerMode").textContent = "Session de concentration";
+  $("timerMessage").textContent = "Prête à te concentrer ? 💗";
+  updateTimerDisplay();
+}
+
+function applyCustomDuration() {
+  if (timerInterval !== null) {
+    stopTimer();
+  }
+
+  let hours = Number($("timerHours").value);
+  let minutes = Number($("timerMinutes").value);
+  let seconds = Number($("timerSeconds").value);
+
+  hours = Number.isFinite(hours) ? Math.min(99, Math.max(0, Math.floor(hours))) : 0;
+  minutes = Number.isFinite(minutes) ? Math.min(59, Math.max(0, Math.floor(minutes))) : 0;
+  seconds = Number.isFinite(seconds) ? Math.min(59, Math.max(0, Math.floor(seconds))) : 0;
+
+  $("timerHours").value = hours;
+  $("timerMinutes").value = minutes;
+  $("timerSeconds").value = seconds;
+
+  const total = hours * 3600 + minutes * 60 + seconds;
+  if (total <= 0) {
+    $("timerMessage").textContent = "Choisis une durée supérieure à zéro. 🌷";
+    return;
+  }
+
+  timerDuration = total;
+  timerRemaining = total;
+  document.querySelectorAll(".timer-preset").forEach(button => {
+    button.classList.toggle("selected", total === Number(button.dataset.minutes) * 60);
+  });
+  $("timerMode").textContent = "Ta durée personnalisée";
+  $("timerMessage").textContent = "C'est parti quand tu veux ! 💗";
+  updateTimerDisplay();
+}
+
+function startTimer() {
+  if (timerInterval !== null) return;
+
+  if (timerRemaining <= 0) {
+    timerRemaining = timerDuration;
+    $("timerCharacter").classList.remove("finished");
+  }
+
+  $("timerMessage").textContent = "Tu gères ! Reste concentrée. ✨";
+  $("timerMode").textContent = "Session de concentration";
+  $("timerCharacter").classList.add("running");
+  timerEndTime = Date.now() + timerRemaining * 1000;
+
+  timerInterval = setInterval(() => {
+    timerRemaining = Math.max(0, Math.ceil((timerEndTime - Date.now()) / 1000));
+    updateTimerDisplay();
+
+    if (timerRemaining <= 0) {
+      stopTimer();
+      $("timerCharacter").classList.add("finished");
+      $("timerMessage").textContent = "Bravo ! Ta session est terminée. 🎉";
+      $("timerMode").textContent = "Temps écoulé !";
+      document.title = "Terminé ! — Framboise 🍇";
+      alert("Bravo ! Ta session de concentration est terminée. 💗");
+    }
+  }, 250);
+
+  updateTimerDisplay();
+}
+
+$("timerStart").addEventListener("click", startTimer);
+
+$("timerPause").addEventListener("click", () => {
+  if (timerInterval === null) return;
+
+  timerRemaining = Math.max(0, Math.ceil((timerEndTime - Date.now()) / 1000));
+  stopTimer();
+  updateTimerDisplay();
+  $("timerMessage").textContent = "Petite pause. Reprends quand tu veux. 🌷";
+  $("timerMode").textContent = "Session en pause";
+});
+
+$("timerReset").addEventListener("click", resetTimer);
+$("timerApply").addEventListener("click", applyCustomDuration);
+
+document.querySelectorAll(".timer-preset").forEach(button => {
+  button.addEventListener("click", () => {
+    stopTimer();
+    timerDuration = Number(button.dataset.minutes) * 60;
+    timerRemaining = timerDuration;
+    syncTimerInputs();
+
+    document.querySelectorAll(".timer-preset").forEach(item => {
+      item.classList.toggle("selected", item === button);
+    });
+
+    $("timerMode").textContent = "Session de concentration";
+    $("timerMessage").textContent =
+      "Session réglée sur " + button.dataset.minutes + " minutes. 💗";
+    $("timerCharacter").classList.remove("finished");
+    updateTimerDisplay();
+  });
+});
+
+syncTimerInputs();
+resetTimer();
+renderAll();
+</script>
+</body>
+</html>
