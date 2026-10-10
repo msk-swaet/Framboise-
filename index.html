@@ -3,83 +3,85 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#211a29">
+<meta name="theme-color" content="#f8e8f1">
 <meta name="description" content="Framboise, ton petit espace pour t'organiser, étudier et te concentrer.">
 <title>Framboise 🍇</title>
 
 <style>
 :root {
-  --bg: #211a29;
-  --surface: #302638;
-  --surface2: #3a2c43;
-  --text: #f7eaf5;
-  --muted: #c2a9c1;
-  --accent: #e795c1;
-  --accent2: #c3a1f0;
-  --border: #4c3b52;
-  --shadow: 0 8px 25px rgba(0,0,0,.2);
+  --bg: #fff7fb;
+  --surface: #ffffff;
+  --surface2: #fff0f7;
+  --text: #51384d;
+  --muted: #987b91;
+  --accent: #d66aa0;
+  --accent2: #a984d6;
+  --border: #f0d9e8;
+  --shadow: 0 8px 25px rgba(145, 86, 125, .10);
+}
+body[data-theme="purple"] {
+  --bg:#faf6ff; --surface:#fff; --surface2:#f0e8ff;
+  --text:#49375d; --muted:#89749e; --accent:#9874d8;
+  --accent2:#c39be8; --border:#e7daf8;
+}
+body[data-theme="rose"] {
+  --bg:#fff6f5; --surface:#fff; --surface2:#ffe9e8;
+  --text:#633d49; --muted:#a07b85; --accent:#e77d91;
+  --accent2:#f3b1bd; --border:#f7d9dd;
+}
+body[data-theme="plum"] {
+  --bg:#f8f3fa; --surface:#fff; --surface2:#eee2f4;
+  --text:#49344e; --muted:#8b7590; --accent:#9562a5;
+  --accent2:#c59acb; --border:#e4d2e9;
+}
+body.dark {
+  --bg:#211a29; --surface:#302638; --surface2:#3a2c43;
+  --text:#f7eaf5; --muted:#c2a9c1; --accent:#e795c1;
+  --accent2:#c3a1f0; --border:#4c3b52;
+  --shadow:0 8px 25px rgba(0,0,0,.2);
 }
 * { box-sizing:border-box; }
 body {
-  margin:0;
-  background:var(--bg);
-  color:var(--text);
+  margin:0; background:var(--bg); color:var(--text);
   font-family:"Trebuchet MS",Arial,sans-serif;
   transition:background .3s,color .3s;
 }
 button,input,select,textarea { font:inherit; }
 button {
-  border:0;
-  border-radius:14px;
-  padding:11px 15px;
-  background:var(--surface2);
-  color:var(--text);
-  cursor:pointer;
-  transition:transform .2s,opacity .2s;
+  border:0; border-radius:14px; padding:11px 15px;
+  background:var(--surface2); color:var(--text);
+  cursor:pointer; transition:transform .2s,opacity .2s;
 }
 button:hover { transform:translateY(-2px); }
 button:focus-visible,input:focus-visible,select:focus-visible {
-  outline:3px solid var(--accent2);
-  outline-offset:2px;
+  outline:3px solid var(--accent2); outline-offset:2px;
 }
-button.primary { background:var(--accent); color:#321e2d; }
+button.primary { background:var(--accent); color:white; }
 button.secondary { border:1px solid var(--border); }
-button.danger { background:#603342; color:#ffdbe6; }
+button.danger { background:#ffe4e8; color:#a83f5c; }
 input,select,textarea {
-  width:100%;
-  padding:12px;
-  border-radius:12px;
-  border:1px solid var(--border);
-  background:var(--surface);
+  width:100%; padding:12px; border-radius:12px;
+  border:1px solid var(--border); background:var(--surface);
   color:var(--text);
 }
-input::placeholder,textarea::placeholder { color:#a58da8; }
 label { display:block; margin:10px 0 6px; font-size:.92rem; }
 h1 { font-size:clamp(1.7rem,4vw,2.3rem); margin:8px 0 12px; }
 h2 { font-size:1.2rem; }
 p { line-height:1.6; }
 .muted { color:var(--muted); }
 header {
-  padding:24px 18px 18px;
-  text-align:center;
-  background:linear-gradient(135deg,#3a2c43,#211a29);
+  padding:24px 18px 18px; text-align:center;
+  background:linear-gradient(135deg,var(--surface2),var(--bg));
 }
 .logo { font-size:2.3rem; }
 header p { margin:6px 0; }
 nav {
-  display:flex;
-  flex-wrap:wrap;
-  justify-content:center;
-  gap:8px;
-  padding:12px;
-  position:sticky;
-  top:0;
-  z-index:10;
-  background:var(--bg);
-  border-bottom:1px solid var(--border);
+  display:flex; flex-wrap:wrap; justify-content:center; gap:8px;
+  padding:12px; position:sticky; top:0; z-index:10;
+  background:var(--bg); border-bottom:1px solid var(--border);
 }
 nav button { font-size:.92rem; padding:10px 13px; }
-nav button.active { background:var(--accent); color:#321e2d; }
+nav button.active { background:var(--accent); color:white; }
 main { max-width:1000px; margin:auto; padding:24px 16px 60px; }
 .page { display:none; animation:fadeIn .3s ease; }
 .page.active { display:block; }
@@ -88,106 +90,75 @@ main { max-width:1000px; margin:auto; padding:24px 16px 60px; }
   to { opacity:1; transform:translateY(0); }
 }
 .card {
-  background:var(--surface);
-  border:1px solid var(--border);
-  border-radius:22px;
-  padding:20px;
-  margin:16px 0;
+  background:var(--surface); border:1px solid var(--border);
+  border-radius:22px; padding:20px; margin:16px 0;
   box-shadow:var(--shadow);
 }
-.grid {
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:14px;
-}
+.grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:14px; }
 .row { display:flex; gap:10px; flex-wrap:wrap; align-items:center; }
 .row > * { flex:1; }
 .row button { flex:0 0 auto; }
 .task-item {
-  display:flex;
-  gap:12px;
-  align-items:flex-start;
-  padding:13px 0;
-  border-bottom:1px solid var(--border);
+  display:flex; gap:12px; align-items:flex-start;
+  padding:13px 0; border-bottom:1px solid var(--border);
 }
 .task-item:last-child { border-bottom:0; }
-.task-item input[type="checkbox"] {
-  width:20px;
-  margin-top:4px;
-  accent-color:var(--accent);
-}
+.task-item input[type="checkbox"] { width:20px; margin-top:4px; accent-color:var(--accent); }
 .task-content { flex:1; min-width:0; }
 .task-content strong { overflow-wrap:anywhere; }
 .task-content small { display:block; margin-top:5px; color:var(--muted); }
 .task-item.done .task-content strong {
-  text-decoration:line-through;
-  opacity:.6;
+  text-decoration:line-through; opacity:.6;
 }
 .tag {
-  display:inline-block;
-  border-radius:20px;
-  padding:4px 9px;
-  background:var(--surface2);
-  font-size:.78rem;
-  margin-top:6px;
+  display:inline-block; border-radius:20px; padding:4px 9px;
+  background:var(--surface2); font-size:.78rem; margin-top:6px;
 }
 .empty { text-align:center; color:var(--muted); padding:22px 8px; }
 footer { text-align:center; padding:24px; color:var(--muted); }
 .calendar-head {
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:12px;
+  display:flex; justify-content:space-between; align-items:center; gap:12px;
 }
 .calendar-grid { display:grid; grid-template-columns:repeat(7,1fr); gap:5px; }
-.calendar-day-name {
-  text-align:center;
-  padding:8px 0;
-  font-size:.8rem;
-  color:var(--muted);
-}
+.calendar-day-name { text-align:center; padding:8px 0; font-size:.8rem; color:var(--muted); }
 .calendar-day {
-  min-height:65px;
-  padding:7px 2px;
-  border:1px solid var(--border);
-  background:var(--surface);
-  border-radius:12px;
-  text-align:center;
-  font-size:.9rem;
-  cursor:pointer;
+  min-height:65px; padding:7px 2px; border:1px solid var(--border);
+  background:var(--surface); border-radius:12px; text-align:center;
+  font-size:.9rem; cursor:pointer;
 }
 .calendar-day.today { border:2px solid var(--accent); }
 .calendar-day.selected { background:var(--surface2); }
 .calendar-day .dot { color:var(--accent); font-size:1.2rem; line-height:1; }
 .calendar-detail { margin-top:18px; }
 
-/* TIMER : ambiance sombre et pastel */
+/* TIMER : ambiance pastel */
 .timer-shell {
-  max-width:650px;
-  margin:22px auto;
-  position:relative;
-  overflow:hidden;
-  border-radius:30px;
-  padding:25px 16px 30px;
-  text-align:center;
-  isolation:isolate;
+  max-width:650px; margin:22px auto; position:relative; overflow:hidden;
+  border-radius:30px; padding:25px 16px 30px;
+  text-align:center; isolation:isolate;
+  background:
+    radial-gradient(circle at 15% 20%,#ffe3f0 0,transparent 32%),
+    radial-gradient(circle at 85% 30%,#e9ddff 0,transparent 34%),
+    radial-gradient(circle at 55% 100%,#fff0d9 0,transparent 35%),
+    linear-gradient(145deg,#fff8fc,#f9f0ff,#fff6f0);
+  border:1px solid #f1ddec;
+  box-shadow:0 15px 40px rgba(174,112,163,.16);
+  color:#624568;
+}
+body.dark .timer-shell {
   background:
     radial-gradient(circle at 15% 20%,#58354e 0,transparent 35%),
     radial-gradient(circle at 85% 30%,#40335e 0,transparent 35%),
     linear-gradient(145deg,#302438,#28213a);
-  border:1px solid #59425e;
-  box-shadow:0 15px 40px rgba(0,0,0,.22);
-  color:#f8e9f7;
+  border-color:#59425e; color:#f8e9f7;
 }
 .timer-shell > *:not(.bubble):not(.sparkle) { position:relative; z-index:2; }
 .timer-shell h2 { margin:6px 0; font-size:1.4rem; }
-.timer-subtitle { color:#d0b5d0; margin:8px 0 20px; }
+.timer-subtitle { color:#997b9a; margin:8px 0 20px; }
+body.dark .timer-subtitle { color:#d0b5d0; }
 .bubble {
-  position:absolute;
-  z-index:0;
-  border-radius:50%;
-  background:rgba(255,255,255,.08);
-  border:1px solid rgba(255,255,255,.12);
+  position:absolute; z-index:0; border-radius:50%;
+  background:rgba(255,255,255,.45); border:1px solid rgba(255,255,255,.65);
   animation:floatBubble 7s ease-in-out infinite;
 }
 .bubble.b1 { width:34px;height:34px;left:8%;top:18%; }
@@ -199,9 +170,7 @@ footer { text-align:center; padding:24px; color:var(--muted); }
   50% { transform:translateY(-18px) translateX(7px); }
 }
 .sparkle {
-  position:absolute;
-  z-index:1;
-  color:#d6a4e8;
+  position:absolute; z-index:1; color:#d6a4e8;
   animation:twinkle 2.4s ease-in-out infinite;
   pointer-events:none;
 }
@@ -214,27 +183,19 @@ footer { text-align:center; padding:24px; color:var(--muted); }
   50% { opacity:1;transform:scale(1.25) rotate(20deg); }
 }
 .timer-character {
-  width:130px;
-  height:130px;
-  position:relative;
-  margin:12px auto 0;
-  display:flex;
-  align-items:center;
-  justify-content:center;
+  width:130px;height:130px;position:relative;margin:12px auto 0;
+  display:flex;align-items:center;justify-content:center;
 }
 .raspberry {
-  width:75px;
-  height:78px;
-  position:relative;
+  width:75px;height:78px;position:relative;
   filter:drop-shadow(0 7px 4px rgba(132,52,99,.15));
   transform-origin:bottom center;
 }
-.berry-balls { position:absolute;inset:12px 2px 0; }
+.berry-balls {
+  position:absolute;inset:12px 2px 0;
+}
 .berry-balls i {
-  position:absolute;
-  width:27px;
-  height:27px;
-  border-radius:50%;
+  position:absolute;width:27px;height:27px;border-radius:50%;
   background:radial-gradient(circle at 30% 25%,#ff9bc3,#e83c83 65%,#bd2467);
   border:1px solid rgba(170,28,89,.16);
 }
@@ -247,49 +208,23 @@ footer { text-align:center; padding:24px; color:var(--muted); }
 .berry-balls i:nth-child(7) { left:11px;top:48px; }
 .berry-balls i:nth-child(8) { left:34px;top:48px; }
 .berry-leaf {
-  position:absolute;
-  top:2px;
-  left:25px;
-  width:28px;
-  height:17px;
-  background:#78bd78;
-  border-radius:100% 0 100% 0;
-  transform:rotate(-24deg);
+  position:absolute;top:2px;left:25px;width:28px;height:17px;
+  background:#78bd78;border-radius:100% 0 100% 0;transform:rotate(-24deg);
 }
 .berry-leaf::after {
-  content:"";
-  position:absolute;
-  width:23px;
-  height:13px;
-  left:14px;
-  top:3px;
-  background:#91ce8a;
-  border-radius:0 100% 0 100%;
-  transform:rotate(40deg);
+  content:"";position:absolute;width:23px;height:13px;left:14px;top:3px;
+  background:#91ce8a;border-radius:0 100% 0 100%;transform:rotate(40deg);
 }
 .berry-face {
-  position:absolute;
-  left:21px;
-  top:34px;
-  width:37px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
+  position:absolute;left:21px;top:34px;width:37px;
+  display:flex;justify-content:space-between;align-items:center;
 }
 .berry-face span {
-  width:5px;
-  height:7px;
-  border-radius:50%;
-  background:#54283e;
+  width:5px;height:7px;border-radius:50%;background:#54283e;
 }
 .berry-smile {
-  position:absolute;
-  top:47px;
-  left:34px;
-  width:12px;
-  height:7px;
-  border-bottom:2px solid #54283e;
-  border-radius:0 0 12px 12px;
+  position:absolute;top:47px;left:34px;width:12px;height:7px;
+  border-bottom:2px solid #54283e;border-radius:0 0 12px 12px;
 }
 .timer-character.running .raspberry { animation:berryBounce .65s ease-in-out infinite; }
 .timer-character.finished .raspberry { animation:berryHappy .5s ease-in-out 3; }
@@ -302,133 +237,61 @@ footer { text-align:center; padding:24px; color:var(--muted); }
   50% { transform:rotate(12deg) scale(1.12); }
 }
 .timer-ring {
-  width:min(76vw,300px);
-  height:min(76vw,300px);
-  margin:5px auto 18px;
-  position:relative;
-  display:grid;
-  place-items:center;
+  width:min(76vw,300px); height:min(76vw,300px);
+  margin:5px auto 18px; position:relative;
+  display:grid;place-items:center;
 }
-.timer-ring svg {
-  width:100%;
-  height:100%;
-  position:absolute;
-  inset:0;
-  transform:rotate(-90deg);
-}
+.timer-ring svg { width:100%;height:100%;position:absolute;inset:0;transform:rotate(-90deg); }
 .ring-track { fill:none;stroke:rgba(208,157,202,.28);stroke-width:8; }
 .ring-progress {
-  fill:none;
-  stroke:#e795c1;
-  stroke-width:8;
-  stroke-linecap:round;
-  stroke-dasharray:565.49;
-  stroke-dashoffset:0;
+  fill:none;stroke:#d66aa0;stroke-width:8;stroke-linecap:round;
+  stroke-dasharray:565.49;stroke-dashoffset:0;
   transition:stroke-dashoffset .35s linear;
 }
 .timer-ring-content { position:relative;z-index:1;width:100%; }
 #timerDisplay {
-  font-size:clamp(2.5rem,10vw,4.4rem);
-  font-weight:bold;
-  letter-spacing:1px;
-  font-variant-numeric:tabular-nums;
+  font-size:clamp(2.5rem,10vw,4.4rem);font-weight:bold;
+  letter-spacing:1px;font-variant-numeric:tabular-nums;
 }
-#timerMode { font-size:1rem;color:#d6b8d5;margin:8px 0; }
+#timerMode { font-size:1rem;color:#a07c9c;margin:8px 0; }
+body.dark #timerMode { color:#d6b8d5; }
 .timer-message { min-height:28px;margin:8px 0 18px;font-size:.95rem; }
-.timer-controls {
-  display:flex;
-  justify-content:center;
-  gap:8px;
-  flex-wrap:wrap;
-  margin:14px 0;
-}
+.timer-controls { display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin:14px 0; }
 .timer-controls button { min-width:105px; }
 .timer-settings {
-  display:grid;
-  grid-template-columns:repeat(3,minmax(0,1fr));
-  gap:10px;
-  max-width:390px;
-  margin:18px auto;
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:10px;max-width:390px;margin:18px auto;
 }
 .timer-settings label { font-size:.85rem;text-align:left; }
 .timer-settings input { text-align:center;padding:12px 5px; }
-.timer-presets {
-  display:flex;
-  justify-content:center;
-  gap:7px;
-  flex-wrap:wrap;
-  margin-top:12px;
-}
+.timer-presets { display:flex;justify-content:center;gap:7px;flex-wrap:wrap;margin-top:12px; }
 .timer-presets button { padding:9px 12px;font-size:.86rem; }
-.timer-presets button.selected { background:var(--accent);color:#321e2d; }
-.timer-note { font-size:.8rem;color:#d0b5d0;margin:14px 0 0; }
+.timer-presets button.selected { background:var(--accent);color:white; }
+.timer-note { font-size:.8rem;color:#9c7e9b;margin:14px 0 0; }
 
 /* NOTES ET POST-IT */
 .notes-form textarea { min-height:120px; resize:vertical; }
-.note-card {
-  border:1px solid var(--border);
-  border-radius:18px;
-  padding:16px;
-  background:var(--surface);
-  margin:12px 0;
-}
+.note-card { border:1px solid var(--border); border-radius:18px; padding:16px; background:var(--surface); margin:12px 0; }
 .note-card h3 { margin:0 0 8px; overflow-wrap:anywhere; }
-.note-card p { white-space:pre-wrap; overflow-wrap:anywhere; }
-.note-card .note-subject { color:var(--muted); font-size:.85rem; }
-.note-actions { display:flex; gap:8px; flex-wrap:wrap; }
-.postit-board {
-  position:relative;
-  min-height:480px;
-  overflow:hidden;
-  border:2px dashed var(--border);
-  border-radius:18px;
-  background:
-    radial-gradient(circle at 15% 20%,rgba(255,220,238,.10),transparent 35%),
-    radial-gradient(circle at 85% 75%,rgba(224,211,255,.12),transparent 35%),
-    var(--surface2);
-}
-.postit {
-  position:absolute;
-  width:175px;
-  min-height:145px;
-  padding:0 12px 12px;
-  border-radius:3px 3px 12px 3px;
-  box-shadow:3px 7px 14px rgba(0,0,0,.25);
-  color:#57434f;
-  transform:rotate(var(--tilt, -1deg));
-  z-index:1;
-}
-.postit-head {
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:8px;
-  min-height:34px;
-  cursor:grab;
-  user-select:none;
-  font-size:.8rem;
-  border-bottom:1px dashed rgba(80,60,70,.2);
-  margin-bottom:8px;
-}
-.postit-head:active { cursor:grabbing; }
-.postit-text { white-space:pre-wrap; overflow-wrap:anywhere; min-height:80px; font-size:.92rem; }
-.postit-actions { display:flex; gap:4px; }
-.postit-actions button {
-  padding:3px 6px;
-  font-size:.8rem;
-  background:rgba(255,255,255,.55);
-  color:#57434f;
-  border-radius:7px;
-}
-.postit.dragging { z-index:20; transform:rotate(0deg); box-shadow:6px 12px 24px rgba(0,0,0,.35); }
+.note-card .note-subject { color:var(--muted); font-size:.85rem; margin-bottom:12px; }
+.note-canvas { position:relative; min-height:260px; padding:12px; margin:14px 0; border:1px dashed var(--border); border-radius:12px; background:var(--surface2); overflow:hidden; isolation:isolate; }
+.note-body { position:relative; z-index:0; margin:0; white-space:pre-wrap; overflow-wrap:anywhere; line-height:1.7; }
+.note-postit { position:absolute; width:175px; min-height:145px; padding:0 12px 12px; border-radius:3px 3px 12px 3px; box-shadow:3px 7px 14px rgba(0,0,0,.25); color:#57434f; transform:rotate(var(--tilt, -1deg)); z-index:2; }
+.note-postit-head { display:flex; align-items:center; justify-content:space-between; gap:8px; min-height:34px; cursor:grab; user-select:none; touch-action:none; font-size:.8rem; border-bottom:1px dashed rgba(80,60,70,.2); margin-bottom:8px; }
+.note-postit-head:active { cursor:grabbing; }
+.note-postit-text { min-height:80px; white-space:pre-wrap; overflow-wrap:anywhere; font-size:.92rem; }
+.note-postit-actions { display:flex; gap:4px; }
+.note-postit-actions button { padding:3px 6px; font-size:.8rem; background:rgba(255,255,255,.65); color:#57434f; border-radius:7px; }
+.note-postit.dragging { z-index:50; transform:rotate(0deg); box-shadow:6px 12px 24px rgba(0,0,0,.3); }
 .postit-color-1 { background:#fff0a8; }
 .postit-color-2 { background:#ffd9e8; }
 .postit-color-3 { background:#dff5d7; }
 .postit-color-4 { background:#e7ddff; }
 .postit-color-5 { background:#d9f2ff; }
+.note-actions { display:flex; gap:8px; flex-wrap:wrap; }
+@media(max-width:480px) { .note-postit { width:145px; } .note-canvas { min-height:300px; } }
+
 @media(max-width:480px) {
-  .postit { width:145px; }
-  .postit-board { min-height:560px; }
   nav { gap:5px; }
   nav button { padding:9px 10px;font-size:.82rem; }
   main { padding:18px 12px 40px; }
@@ -439,14 +302,12 @@ footer { text-align:center; padding:24px; color:var(--muted); }
 }
 </style>
 </head>
-
-<body class="dark" data-theme="berry">
+<body data-theme="berry">
 <header>
   <div class="logo">🍇</div>
   <h1>Framboise</h1>
   <p>Ton petit espace pour apprendre, t'organiser et réussir ✨</p>
 </header>
-
 <nav aria-label="Navigation principale">
   <button class="active" data-page="home">🏡 Accueil</button>
   <button data-page="tasks">📝 Tâches</button>
@@ -455,13 +316,10 @@ footer { text-align:center; padding:24px; color:var(--muted); }
   <button data-page="timer">⏱️ Timer</button>
   <button data-page="customize">🎨 Personnaliser</button>
 </nav>
-
 <main>
-  <!-- ACCUEIL -->
   <section id="home" class="page active">
     <h1>Coucou, bienvenue ! 🌷</h1>
     <p class="muted">Avance à ton rythme. Chaque petit progrès compte.</p>
-
     <div class="grid">
       <div class="card">
         <h2>📝 Mes tâches</h2>
@@ -484,33 +342,25 @@ footer { text-align:center; padding:24px; color:var(--muted); }
         <button class="primary" data-goto="notes">Ouvrir mes notes</button>
       </div>
     </div>
-
     <div class="card">
       <h2>✨ Mes prochaines tâches</h2>
       <div id="homeTasks"></div>
     </div>
   </section>
 
-  <!-- TÂCHES -->
   <section id="tasks" class="page">
     <h1>Mes tâches 📝</h1>
     <p class="muted">Note ce que tu dois faire et coche chaque tâche terminée.</p>
-
     <div class="card">
       <h2>Ajouter une tâche</h2>
       <form id="taskForm">
         <label for="taskTitle">Nom de la tâche</label>
         <input id="taskTitle" maxlength="120" placeholder="Ex. Réviser les maths" required>
-
         <div class="grid">
           <div>
             <label for="taskCategory">Catégorie</label>
             <select id="taskCategory">
-              <option>Études</option>
-              <option>Devoirs</option>
-              <option>Révisions</option>
-              <option>Personnel</option>
-              <option>Autre</option>
+              <option>Études</option><option>Devoirs</option><option>Révisions</option><option>Personnel</option><option>Autre</option>
             </select>
           </div>
           <div>
@@ -518,27 +368,18 @@ footer { text-align:center; padding:24px; color:var(--muted); }
             <input id="taskDate" type="date">
           </div>
         </div>
-
         <label for="taskPriority">Priorité</label>
         <select id="taskPriority">
-          <option value="Normale">Normale</option>
-          <option value="Importante">Importante</option>
-          <option value="Urgente">Urgente</option>
+          <option value="Normale">Normale</option><option value="Importante">Importante</option><option value="Urgente">Urgente</option>
         </select>
-
-        <div style="margin-top:15px">
-          <button class="primary" type="submit">＋ Ajouter la tâche</button>
-        </div>
+        <div style="margin-top:15px"><button class="primary" type="submit">＋ Ajouter la tâche</button></div>
       </form>
     </div>
-
     <div class="card">
       <div class="row">
         <h2>Ma liste</h2>
         <select id="taskFilter" aria-label="Filtrer les tâches">
-          <option value="all">Toutes les tâches</option>
-          <option value="todo">À faire</option>
-          <option value="done">Terminées</option>
+          <option value="all">Toutes les tâches</option><option value="todo">À faire</option><option value="done">Terminées</option>
         </select>
       </div>
       <div id="taskList"></div>
@@ -549,11 +390,9 @@ footer { text-align:center; padding:24px; color:var(--muted); }
     </div>
   </section>
 
-  <!-- CALENDRIER -->
   <section id="calendar" class="page">
     <h1>Mon calendrier 📅</h1>
     <p class="muted">Sélectionne une date pour voir les tâches prévues.</p>
-
     <div class="card">
       <div class="calendar-head">
         <button id="prevMonth" aria-label="Mois précédent">←</button>
@@ -569,90 +408,9 @@ footer { text-align:center; padding:24px; color:var(--muted); }
     </div>
   </section>
 
-  <!-- TIMER -->
-  <section id="timer" class="page">
-    <h1>Mon temps de concentration ⏱️</h1>
-    <p class="muted">Un petit pas à la fois, tu vas y arriver. 💗</p>
-
-    <div class="timer-shell">
-      <span class="bubble b1"></span>
-      <span class="bubble b2"></span>
-      <span class="bubble b3"></span>
-      <span class="bubble b4"></span>
-      <span class="sparkle s1">✦</span>
-      <span class="sparkle s2">✧</span>
-      <span class="sparkle s3">✦</span>
-      <span class="sparkle s4">✧</span>
-
-      <h2>Mon petit moment à moi</h2>
-      <p class="timer-subtitle">Respire, concentre-toi et fais de ton mieux 🌸</p>
-
-      <div id="timerCharacter" class="timer-character" aria-hidden="true">
-        <div class="raspberry">
-          <div class="berry-leaf"></div>
-          <div class="berry-balls">
-            <i></i><i></i><i></i><i></i>
-            <i></i><i></i><i></i><i></i>
-          </div>
-          <div class="berry-face"><span></span><span></span></div>
-          <div class="berry-smile"></div>
-        </div>
-      </div>
-
-      <div class="timer-ring">
-        <svg viewBox="0 0 200 200" aria-hidden="true">
-          <circle class="ring-track" cx="100" cy="100" r="90"></circle>
-          <circle id="timerProgress" class="ring-progress" cx="100" cy="100" r="90"></circle>
-        </svg>
-        <div class="timer-ring-content">
-          <div id="timerDisplay" role="timer" aria-live="off">30:00</div>
-          <div id="timerMode">Session de concentration</div>
-        </div>
-      </div>
-
-      <p id="timerMessage" class="timer-message">Prête à te concentrer ? 💗</p>
-
-      <div class="timer-controls">
-        <button id="timerStart" class="primary" type="button">▶ Démarrer</button>
-        <button id="timerPause" class="secondary" type="button">⏸ Pause</button>
-        <button id="timerReset" class="secondary" type="button">↻ Réinitialiser</button>
-      </div>
-
-      <div class="card" style="background:rgba(40,30,50,.55);box-shadow:none;border-color:rgba(225,190,220,.2);">
-        <h2>Choisis ta durée 🌷</h2>
-        <div class="timer-settings">
-          <div>
-            <label for="timerHours">Heures</label>
-            <input id="timerHours" type="number" min="0" max="99" value="0" inputmode="numeric">
-          </div>
-          <div>
-            <label for="timerMinutes">Minutes</label>
-            <input id="timerMinutes" type="number" min="0" max="59" value="30" inputmode="numeric">
-          </div>
-          <div>
-            <label for="timerSeconds">Secondes</label>
-            <input id="timerSeconds" type="number" min="0" max="59" value="0" inputmode="numeric">
-          </div>
-        </div>
-        <button id="timerApply" class="primary" type="button">Appliquer ma durée</button>
-
-        <div class="timer-presets">
-          <button class="secondary timer-preset" data-minutes="15" type="button">15 min</button>
-          <button class="secondary timer-preset" data-minutes="25" type="button">25 min</button>
-          <button class="secondary timer-preset selected" data-minutes="30" type="button">30 min</button>
-          <button class="secondary timer-preset" data-minutes="45" type="button">45 min</button>
-          <button class="secondary timer-preset" data-minutes="60" type="button">1 heure</button>
-        </div>
-      </div>
-      <p class="timer-note">Tu peux choisir une durée courte ou longue, comme tu veux. 🍇</p>
-    </div>
-  </section>
-
-  <!-- NOTES -->
   <section id="notes" class="page">
     <h1>Mon carnet de notes 📒</h1>
     <p class="muted">Tes idées, tes cours et tes petits rappels restent ici. 💗</p>
-
     <div class="card">
       <h2>✍️ Écrire une note</h2>
       <form id="noteForm" class="notes-form">
@@ -668,34 +426,80 @@ footer { text-align:center; padding:24px; color:var(--muted); }
         </div>
       </form>
     </div>
-
     <div class="card">
       <h2>📚 Mes notes enregistrées</h2>
       <div id="notesList"></div>
     </div>
+  </section>
 
-    <div class="card">
-      <h2>🎀 Mes Post-it</h2>
-      <p class="muted">Crée des petits rappels et déplace-les librement sur le tableau. Tu peux les superposer, comme sur un vrai bureau !</p>
-      <div class="row">
-        <button class="primary" id="addPostit" type="button">＋ Ajouter un Post-it</button>
-        <button class="secondary" id="clearPostits" type="button">🧹 Tout effacer</button>
+  <section id="timer" class="page">
+    <h1>Mon temps de concentration ⏱️</h1>
+    <p class="muted">Un petit pas à la fois, tu vas y arriver. 💗</p>
+    <div class="timer-shell">
+      <span class="bubble b1"></span><span class="bubble b2"></span><span class="bubble b3"></span><span class="bubble b4"></span>
+      <span class="sparkle s1">✦</span><span class="sparkle s2">✧</span><span class="sparkle s3">✦</span><span class="sparkle s4">✧</span>
+      <h2>Mon petit moment à moi</h2>
+      <p class="timer-subtitle">Respire, concentre-toi et fais de ton mieux 🌸</p>
+      <div id="timerCharacter" class="timer-character" aria-hidden="true">
+        <div class="raspberry">
+          <div class="berry-leaf"></div>
+          <div class="berry-balls"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+          <div class="berry-face"><span></span><span></span></div><div class="berry-smile"></div>
+        </div>
       </div>
-      <p class="muted" style="font-size:.85rem">Astuce : fais glisser le Post-it en attrapant sa petite barre du haut.</p>
-      <div id="postitBoard" class="postit-board" aria-label="Tableau de Post-it déplaçables"></div>
+      <div class="timer-ring">
+        <svg viewBox="0 0 200 200" aria-hidden="true">
+          <circle class="ring-track" cx="100" cy="100" r="90"></circle>
+          <circle id="timerProgress" class="ring-progress" cx="100" cy="100" r="90"></circle>
+        </svg>
+        <div class="timer-ring-content">
+          <div id="timerDisplay" role="timer" aria-live="off">30:00</div>
+          <div id="timerMode">Session de concentration</div>
+        </div>
+      </div>
+      <p id="timerMessage" class="timer-message">Prête à te concentrer ? 💗</p>
+      <div class="timer-controls">
+        <button id="timerStart" class="primary" type="button">▶ Démarrer</button>
+        <button id="timerPause" class="secondary" type="button">⏸ Pause</button>
+        <button id="timerReset" class="secondary" type="button">↻ Réinitialiser</button>
+      </div>
+      <div class="card" style="background:rgba(255,255,255,.48);box-shadow:none;border-color:rgba(225,190,220,.65);">
+        <h2>Choisis ta durée 🌷</h2>
+        <div class="timer-settings">
+          <div><label for="timerHours">Heures</label><input id="timerHours" type="number" min="0" max="99" value="0" inputmode="numeric"></div>
+          <div><label for="timerMinutes">Minutes</label><input id="timerMinutes" type="number" min="0" max="59" value="30" inputmode="numeric"></div>
+          <div><label for="timerSeconds">Secondes</label><input id="timerSeconds" type="number" min="0" max="59" value="0" inputmode="numeric"></div>
+        </div>
+        <button id="timerApply" class="primary" type="button">Appliquer ma durée</button>
+        <div class="timer-presets">
+          <button class="secondary timer-preset" data-minutes="15" type="button">15 min</button>
+          <button class="secondary timer-preset" data-minutes="25" type="button">25 min</button>
+          <button class="secondary timer-preset selected" data-minutes="30" type="button">30 min</button>
+          <button class="secondary timer-preset" data-minutes="45" type="button">45 min</button>
+          <button class="secondary timer-preset" data-minutes="60" type="button">1 heure</button>
+        </div>
+      </div>
+      <p class="timer-note">Tu peux choisir une durée courte ou longue, comme tu veux. 🍇</p>
     </div>
   </section>
 
-  <!-- PERSONNALISATION -->
   <section id="customize" class="page">
     <h1>Personnaliser Framboise 🎨</h1>
     <p class="muted">Choisis l'ambiance qui te plaît.</p>
-
     <div class="card">
-      <h2>🌙 Mode sombre permanent</h2>
-      <p class="muted">Framboise reste toujours en mode sombre, pour garder ton ambiance douce et violette. 💜</p>
+      <h2>Couleurs du site</h2>
+      <div class="grid">
+        <button class="theme-choice" data-theme-choice="berry">🍇 Framboise</button>
+        <button class="theme-choice" data-theme-choice="purple">💜 Lavande</button>
+        <button class="theme-choice" data-theme-choice="rose">🌸 Rose</button>
+        <button class="theme-choice" data-theme-choice="plum">🪻 Prune</button>
+      </div>
     </div>
-
+    <div class="card">
+      <h2>Mode sombre 🌙</h2>
+      <p class="muted">Pour une ambiance plus douce le soir.</p>
+      <button id="darkToggle" class="primary">Activer / désactiver le mode sombre</button>
+    </div>
     <div class="card">
       <h2>Ambiance sonore 🎵</h2>
       <p class="muted">Un son doux généré directement par le navigateur, sans musique à télécharger.</p>
@@ -704,29 +508,13 @@ footer { text-align:center; padding:24px; color:var(--muted); }
     </div>
   </section>
 </main>
-
 <footer>Fait avec 💗 pour t'aider à avancer à ton rythme · Framboise 🍇</footer>
 <script>
 "use strict";
 
 const $ = id => document.getElementById(id);
 const STORAGE_KEY = "framboise-tasks-v1";
-
-let tasks = [];
-try {
-  const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
-  tasks = Array.isArray(saved) ? saved : [];
-} catch (error) {
-  tasks = [];
-}
-
-function saveTasks() {
-  try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(tasks));
-  } catch (error) {
-    alert("Impossible d'enregistrer les tâches dans ce navigateur.");
-  }
-}
+const NOTES_STORAGE_KEY = "framboise-notes-v1";
 
 function makeId() {
   return Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
@@ -739,10 +527,28 @@ function escapeHTML(value) {
 }
 
 function localDateString(date = new Date()) {
-  const year = date.getFullYear();
-  const month = String(date.getMonth() + 1).padStart(2, "0");
-  const day = String(date.getDate()).padStart(2, "0");
-  return `${year}-${month}-${day}`;
+  return `${date.getFullYear()}-${String(date.getMonth()+1).padStart(2,"0")}-${String(date.getDate()).padStart(2,"0")}`;
+}
+
+function loadArray(key) {
+  try {
+    const value = JSON.parse(localStorage.getItem(key) || "[]");
+    return Array.isArray(value) ? value : [];
+  } catch {
+    return [];
+  }
+}
+
+let tasks = loadArray(STORAGE_KEY);
+let notes = loadArray(NOTES_STORAGE_KEY);
+let editingNoteId = null;
+
+function saveTasks() {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(tasks));
+}
+
+function saveNotes() {
+  localStorage.setItem(NOTES_STORAGE_KEY, JSON.stringify(notes));
 }
 
 /* NAVIGATION */
@@ -755,10 +561,7 @@ function showPage(pageId) {
   });
   if (pageId === "calendar") renderCalendar();
   if (pageId === "tasks") renderTasks();
-  if (pageId === "notes") {
-    renderNotes();
-    renderPostits();
-  }
+  if (pageId === "notes") renderNotes();
   if (pageId === "home") renderHome();
 }
 
@@ -778,34 +581,30 @@ function renderTasks() {
   if (filter === "todo") filtered = filtered.filter(task => !task.done);
   if (filter === "done") filtered = filtered.filter(task => task.done);
 
-  filtered.sort((a, b) => {
-    if (a.done !== b.done) return Number(a.done) - Number(b.done);
+  filtered.sort((a,b) => {
+    if (a.done !== b.done) return Number(a.done)-Number(b.done);
     if (a.date && b.date) return a.date.localeCompare(b.date);
     if (a.date) return -1;
     if (b.date) return 1;
-    return (b.created || 0) - (a.created || 0);
+    return (b.created || 0)-(a.created || 0);
   });
 
-  if (!filtered.length) {
-    list.innerHTML = '<div class="empty">Rien ici pour le moment. 🌷</div>';
-  } else {
-    list.innerHTML = filtered.map(task => `
-      <div class="task-item ${task.done ? "done" : ""}">
-        <input type="checkbox" data-toggle-task="${escapeHTML(task.id)}"
-          ${task.done ? "checked" : ""} aria-label="Marquer comme terminée">
-        <div class="task-content">
-          <strong>${escapeHTML(task.title)}</strong>
-          <small>${task.date ? "📅 " + escapeHTML(task.date) + " · " : ""}${escapeHTML(task.category || "Autre")}</small>
-          <span class="tag">${escapeHTML(task.priority || "Normale")}</span>
-        </div>
-        <button class="secondary" data-delete-task="${escapeHTML(task.id)}" aria-label="Supprimer cette tâche">🗑️</button>
+  list.innerHTML = filtered.length ? filtered.map(task => `
+    <div class="task-item ${task.done ? "done" : ""}">
+      <input type="checkbox" data-toggle-task="${escapeHTML(task.id)}"
+        ${task.done ? "checked" : ""} aria-label="Marquer comme terminée">
+      <div class="task-content">
+        <strong>${escapeHTML(task.title)}</strong>
+        <small>${task.date ? "📅 "+escapeHTML(task.date)+" · " : ""}${escapeHTML(task.category || "Autre")}</small>
+        <span class="tag">${escapeHTML(task.priority || "Normale")}</span>
       </div>
-    `).join("");
-  }
+      <button class="secondary" data-delete-task="${escapeHTML(task.id)}">🗑️</button>
+    </div>
+  `).join("") : '<div class="empty">Rien ici pour le moment. 🌷</div>';
 
   list.querySelectorAll("[data-toggle-task]").forEach(input => {
     input.addEventListener("change", () => {
-      const task = tasks.find(item => item.id === input.dataset.toggleTask);
+      const task = tasks.find(t => t.id === input.dataset.toggleTask);
       if (task) task.done = input.checked;
       saveTasks();
       renderAll();
@@ -814,7 +613,7 @@ function renderTasks() {
 
   list.querySelectorAll("[data-delete-task]").forEach(button => {
     button.addEventListener("click", () => {
-      tasks = tasks.filter(task => task.id !== button.dataset.deleteTask);
+      tasks = tasks.filter(t => t.id !== button.dataset.deleteTask);
       saveTasks();
       renderAll();
     });
@@ -827,38 +626,34 @@ $("taskForm").addEventListener("submit", event => {
   if (!title) return;
 
   tasks.push({
-    id: makeId(),
+    id:makeId(),
     title,
-    category: $("taskCategory").value,
-    date: $("taskDate").value,
-    priority: $("taskPriority").value,
-    done: false,
-    created: Date.now()
+    category:$("taskCategory").value,
+    date:$("taskDate").value,
+    priority:$("taskPriority").value,
+    done:false,
+    created:Date.now()
   });
 
   saveTasks();
   $("taskForm").reset();
   renderAll();
-  $("taskTitle").focus();
 });
 
 $("taskFilter").addEventListener("change", renderTasks);
 
 $("deleteCompleted").addEventListener("click", () => {
-  const count = tasks.filter(task => task.done).length;
-  if (!count) {
-    alert("Tu n'as pas encore de tâche terminée à supprimer. 🌷");
-    return;
-  }
+  const count = tasks.filter(t => t.done).length;
+  if (!count) return alert("Tu n'as pas encore de tâche terminée. 🌷");
   if (confirm(`Supprimer les ${count} tâche(s) terminée(s) ?`)) {
-    tasks = tasks.filter(task => !task.done);
+    tasks = tasks.filter(t => !t.done);
     saveTasks();
     renderAll();
   }
 });
 
 $("exportTasks").addEventListener("click", () => {
-  const blob = new Blob([JSON.stringify(tasks, null, 2)], {type:"application/json"});
+  const blob = new Blob([JSON.stringify(tasks,null,2)], {type:"application/json"});
   const url = URL.createObjectURL(blob);
   const link = document.createElement("a");
   link.href = url;
@@ -868,26 +663,23 @@ $("exportTasks").addEventListener("click", () => {
 });
 
 function renderHome() {
-  const remaining = tasks.filter(task => !task.done);
+  const remaining = tasks.filter(t => !t.done);
   $("homeTaskCount").textContent = remaining.length;
-  const homeList = $("homeTasks");
-
-  const upcoming = [...remaining].sort((a, b) => {
+  const upcoming = [...remaining].sort((a,b) => {
     if (a.date && b.date) return a.date.localeCompare(b.date);
     if (a.date) return -1;
     if (b.date) return 1;
-    return (b.created || 0) - (a.created || 0);
-  }).slice(0, 5);
+    return (b.created || 0)-(a.created || 0);
+  }).slice(0,5);
 
-  homeList.innerHTML = upcoming.length
-    ? upcoming.map(task => `
-      <div class="task-item">
-        <div class="task-content">
-          <strong>${escapeHTML(task.title)}</strong>
-          <small>${task.date ? "📅 " + escapeHTML(task.date) : escapeHTML(task.category || "Autre")}</small>
-        </div>
-      </div>`).join("")
-    : '<div class="empty">Tu es à jour ! Prends un petit moment pour toi. 💗</div>';
+  $("homeTasks").innerHTML = upcoming.length ? upcoming.map(task => `
+    <div class="task-item">
+      <div class="task-content">
+        <strong>${escapeHTML(task.title)}</strong>
+        <small>${task.date ? "📅 "+escapeHTML(task.date) : escapeHTML(task.category || "Autre")}</small>
+      </div>
+    </div>
+  `).join("") : '<div class="empty">Tu es à jour ! Prends un petit moment pour toi. 💗</div>';
 }
 
 function renderAll() {
@@ -906,27 +698,22 @@ $("calendarNames").innerHTML = ["Lun","Mar","Mer","Jeu","Ven","Sam","Dim"]
 function renderCalendar() {
   const year = calendarDate.getFullYear();
   const month = calendarDate.getMonth();
+
   $("monthTitle").textContent = new Intl.DateTimeFormat("fr-FR", {
     month:"long", year:"numeric"
   }).format(calendarDate);
 
-  const firstDay = new Date(year, month, 1);
-  const offset = (firstDay.getDay() + 6) % 7;
-  const daysInMonth = new Date(year, month + 1, 0).getDate();
+  const offset = (new Date(year,month,1).getDay()+6)%7;
+  const daysInMonth = new Date(year,month+1,0).getDate();
   const cells = [];
 
-  for (let i = 0; i < offset; i++) {
-    cells.push("<div></div>");
-  }
+  for (let i=0;i<offset;i++) cells.push("<div></div>");
 
-  for (let day = 1; day <= daysInMonth; day++) {
-    const date = `${year}-${String(month + 1).padStart(2,"0")}-${String(day).padStart(2,"0")}`;
-    const hasTasks = tasks.some(task => task.date === date);
-    const isToday = date === localDateString();
-    const isSelected = date === selectedDate;
-
+  for (let day=1;day<=daysInMonth;day++) {
+    const date = `${year}-${String(month+1).padStart(2,"0")}-${String(day).padStart(2,"0")}`;
+    const hasTasks = tasks.some(t => t.date === date);
     cells.push(`
-      <button type="button" class="calendar-day ${isToday ? "today" : ""} ${isSelected ? "selected" : ""}"
+      <button type="button" class="calendar-day ${date===localDateString()?"today":""} ${date===selectedDate?"selected":""}"
         data-calendar-date="${date}" aria-label="${date}">
         ${day}${hasTasks ? '<div class="dot">•</div>' : ""}
       </button>
@@ -941,87 +728,101 @@ function renderCalendar() {
     });
   });
 
-  const prettyDate = new Date(selectedDate + "T12:00:00");
   $("selectedDateTitle").textContent = new Intl.DateTimeFormat("fr-FR", {
     day:"numeric", month:"long", year:"numeric"
-  }).format(prettyDate);
+  }).format(new Date(selectedDate+"T12:00:00"));
 
-  const dayTasks = tasks.filter(task => task.date === selectedDate);
-  $("calendarTasks").innerHTML = dayTasks.length
-    ? dayTasks.map(task => `
-      <div class="task-item ${task.done ? "done" : ""}">
-        <div class="task-content">
-          <strong>${escapeHTML(task.title)}</strong>
-          <small>${escapeHTML(task.category || "Autre")} · ${task.done ? "Terminée" : "À faire"}</small>
-        </div>
-      </div>`).join("")
-    : '<div class="empty">Aucune tâche prévue pour cette date. 🌼</div>';
+  const dayTasks = tasks.filter(t => t.date === selectedDate);
+  $("calendarTasks").innerHTML = dayTasks.length ? dayTasks.map(task => `
+    <div class="task-item ${task.done?"done":""}">
+      <div class="task-content">
+        <strong>${escapeHTML(task.title)}</strong>
+        <small>${escapeHTML(task.category || "Autre")} · ${task.done?"Terminée":"À faire"}</small>
+      </div>
+    </div>
+  `).join("") : '<div class="empty">Aucune tâche prévue pour cette date. 🌼</div>';
 }
 
 $("prevMonth").addEventListener("click", () => {
-  calendarDate = new Date(calendarDate.getFullYear(), calendarDate.getMonth() - 1, 1);
+  calendarDate = new Date(calendarDate.getFullYear(),calendarDate.getMonth()-1,1);
   renderCalendar();
 });
 $("nextMonth").addEventListener("click", () => {
-  calendarDate = new Date(calendarDate.getFullYear(), calendarDate.getMonth() + 1, 1);
+  calendarDate = new Date(calendarDate.getFullYear(),calendarDate.getMonth()+1,1);
   renderCalendar();
 });
-  /* NOTES : notes écrites + Post-it déplaçables */
-const NOTES_STORAGE_KEY = "framboise-notes-v1";
-const POSTITS_STORAGE_KEY = "framboise-postits-v1";
-let notes = [];
-let postits = [];
-let editingNoteId = null;
 
-try {
-  const savedNotes = JSON.parse(localStorage.getItem(NOTES_STORAGE_KEY) || "[]");
-  notes = Array.isArray(savedNotes) ? savedNotes : [];
-} catch (error) { notes = []; }
-
-try {
-  const savedPostits = JSON.parse(localStorage.getItem(POSTITS_STORAGE_KEY) || "[]");
-  postits = Array.isArray(savedPostits) ? savedPostits : [];
-} catch (error) { postits = []; }
-
-function saveNotes() {
-  try {
-    localStorage.setItem(NOTES_STORAGE_KEY, JSON.stringify(notes));
-  } catch (error) {
-    alert("Impossible d'enregistrer les notes dans ce navigateur.");
-  }
-}
-
-function savePostits() {
-  try {
-    localStorage.setItem(POSTITS_STORAGE_KEY, JSON.stringify(postits));
-  } catch (error) {
-    alert("Impossible d'enregistrer les Post-it dans ce navigateur.");
-  }
-}
+/* NOTES ET POST-IT SUR CHAQUE NOTE */
+const postitColors = [
+  "postit-color-1","postit-color-2","postit-color-3",
+  "postit-color-4","postit-color-5"
+];
 
 function renderNotes() {
   const list = $("notesList");
+
   if (!notes.length) {
     list.innerHTML = '<div class="empty">Ton carnet est encore vide. Écris ta première note ! 🌷</div>';
     return;
   }
 
   list.innerHTML = [...notes]
-    .sort((a,b) => (b.updated || b.created || 0) - (a.updated || a.created || 0))
+    .sort((a,b) => (b.updated || b.created || 0)-(a.updated || a.created || 0))
     .map(note => `
-      <article class="note-card">
+      <article class="note-card" data-note-id="${escapeHTML(note.id)}">
         <h3>${escapeHTML(note.title)}</h3>
         ${note.subject ? `<div class="note-subject">${escapeHTML(note.subject)}</div>` : ""}
-        <p>${escapeHTML(note.body)}</p>
-        <div class="note-actions">
-          <button type="button" class="secondary" data-edit-note="${escapeHTML(note.id)}">✏️ Modifier</button>
-          <button type="button" class="danger" data-delete-note="${escapeHTML(note.id)}">🗑️ Supprimer</button>
+        <div class="note-canvas">
+          <p class="note-body">${escapeHTML(note.body)}</p>
+          ${(note.postits || []).map((p,i) => `
+            <article class="note-postit ${postitColors.includes(p.color)?p.color:postitColors[i%5]}"
+              data-postit-id="${escapeHTML(p.id)}"
+              style="left:${Math.max(0,Number(p.x)||0)}px;top:${Math.max(0,Number(p.y)||0)}px;--tilt:${Number(p.tilt)||0}deg">
+              <div class="note-postit-head" data-drag-handle="${escapeHTML(p.id)}">
+                <span>✦ Petit rappel</span>
+                <span class="note-postit-actions">
+                  <button type="button" data-edit-p="${escapeHTML(p.id)}">✏️</button>
+                  <button type="button" data-delete-p="${escapeHTML(p.id)}">×</button>
+                </span>
+              </div>
+              <div class="note-postit-text">${escapeHTML(p.text)}</div>
+            </article>
+          `).join("")}
         </div>
-      </article>`).join("");
+        <div class="note-actions">
+          <button class="primary" type="button" data-add-p="${escapeHTML(note.id)}">＋ Ajouter un Post-it</button>
+          <button class="secondary" type="button" data-edit-note="${escapeHTML(note.id)}">✏️ Modifier</button>
+          <button class="danger" type="button" data-delete-note="${escapeHTML(note.id)}">🗑️ Supprimer</button>
+        </div>
+      </article>
+    `).join("");
+
+  list.querySelectorAll("[data-add-p]").forEach(button => {
+    button.addEventListener("click", () => {
+      const note = notes.find(n => n.id === button.dataset.addP);
+      if (!note) return;
+
+      const text = prompt("Que veux-tu écrire sur ton Post-it ?", "N'oublie pas de réviser ! 💗");
+      if (text === null || !text.trim()) return;
+
+      if (!Array.isArray(note.postits)) note.postits = [];
+      const i = note.postits.length;
+
+      note.postits.push({
+        id:makeId(), text:text.trim(),
+        x:12+(i%3)*25, y:12+(i%4)*22,
+        color:postitColors[i%5], tilt:((i%3)-1)*1.2
+      });
+
+      note.updated = Date.now();
+      saveNotes();
+      renderNotes();
+    });
+  });
 
   list.querySelectorAll("[data-edit-note]").forEach(button => {
     button.addEventListener("click", () => {
-      const note = notes.find(item => item.id === button.dataset.editNote);
+      const note = notes.find(n => n.id === button.dataset.editNote);
       if (!note) return;
 
       editingNoteId = note.id;
@@ -1030,10 +831,8 @@ function renderNotes() {
       $("noteBody").value = note.body;
       $("saveNoteButton").textContent = "💾 Enregistrer les modifications";
       $("cancelNoteEdit").hidden = false;
-      $("noteTitle").focus();
-
       window.scrollTo({
-        top: $("noteForm").getBoundingClientRect().top + window.scrollY - 90,
+        top:$("noteForm").getBoundingClientRect().top+window.scrollY-90,
         behavior:"smooth"
       });
     });
@@ -1041,13 +840,78 @@ function renderNotes() {
 
   list.querySelectorAll("[data-delete-note]").forEach(button => {
     button.addEventListener("click", () => {
-      const note = notes.find(item => item.id === button.dataset.deleteNote);
-      if (note && confirm(`Supprimer la note « ${note.title} » ?`)) {
-        notes = notes.filter(item => item.id !== note.id);
+      const note = notes.find(n => n.id === button.dataset.deleteNote);
+      if (note && confirm(`Supprimer « ${note.title} » et ses Post-it ?`)) {
+        notes = notes.filter(n => n.id !== note.id);
         if (editingNoteId === note.id) resetNoteForm();
         saveNotes();
         renderNotes();
       }
+    });
+  });
+
+  list.querySelectorAll("[data-edit-p]").forEach(button => {
+    button.addEventListener("click", () => {
+      const card = button.closest("[data-note-id]");
+      const note = notes.find(n => n.id === card.dataset.noteId);
+      const p = note?.postits?.find(x => x.id === button.dataset.editP);
+      if (!p) return;
+
+      const text = prompt("Modifier ton Post-it :", p.text);
+      if (text === null || !text.trim()) return;
+      p.text = text.trim();
+      saveNotes();
+      renderNotes();
+    });
+  });
+
+  list.querySelectorAll("[data-delete-p]").forEach(button => {
+    button.addEventListener("click", () => {
+      const card = button.closest("[data-note-id]");
+      const note = notes.find(n => n.id === card.dataset.noteId);
+      if (!note || !confirm("Supprimer ce Post-it ?")) return;
+      note.postits = (note.postits || []).filter(p => p.id !== button.dataset.deleteP);
+      saveNotes();
+      renderNotes();
+    });
+  });
+
+  list.querySelectorAll("[data-drag-handle]").forEach(handle => {
+    handle.addEventListener("pointerdown", event => {
+      if (event.target.closest("button")) return;
+
+      const element = handle.closest(".note-postit");
+      const canvas = handle.closest(".note-canvas");
+      const card = handle.closest("[data-note-id]");
+      const note = notes.find(n => n.id === card?.dataset.noteId);
+      const p = note?.postits?.find(x => x.id === handle.dataset.dragHandle);
+      if (!element || !canvas || !p) return;
+
+      event.preventDefault();
+      const startX = event.clientX;
+      const startY = event.clientY;
+      const originalX = element.offsetLeft;
+      const originalY = element.offsetTop;
+      element.classList.add("dragging");
+
+      const move = e => {
+        element.style.left = Math.max(0,originalX+e.clientX-startX)+"px";
+        element.style.top = Math.max(0,originalY+e.clientY-startY)+"px";
+      };
+
+      const finish = () => {
+        element.classList.remove("dragging");
+        p.x = element.offsetLeft;
+        p.y = element.offsetTop;
+        saveNotes();
+        handle.removeEventListener("pointermove",move);
+        handle.removeEventListener("pointerup",finish);
+        handle.removeEventListener("pointercancel",finish);
+      };
+
+      handle.addEventListener("pointermove",move);
+      handle.addEventListener("pointerup",finish);
+      handle.addEventListener("pointercancel",finish);
     });
   });
 }
@@ -1061,28 +925,18 @@ function resetNoteForm() {
 
 $("noteForm").addEventListener("submit", event => {
   event.preventDefault();
-
   const title = $("noteTitle").value.trim();
   const subject = $("noteSubject").value.trim();
   const body = $("noteBody").value.trim();
   if (!title || !body) return;
 
   if (editingNoteId) {
-    const note = notes.find(item => item.id === editingNoteId);
-    if (note) {
-      note.title = title;
-      note.subject = subject;
-      note.body = body;
-      note.updated = Date.now();
-    }
+    const note = notes.find(n => n.id === editingNoteId);
+    if (note) Object.assign(note,{title,subject,body,updated:Date.now()});
   } else {
     notes.push({
-      id:makeId(),
-      title,
-      subject,
-      body,
-      created:Date.now(),
-      updated:Date.now()
+      id:makeId(),title,subject,body,postits:[],
+      created:Date.now(),updated:Date.now()
     });
   }
 
@@ -1091,148 +945,33 @@ $("noteForm").addEventListener("submit", event => {
   renderNotes();
 });
 
-$("cancelNoteEdit").addEventListener("click", resetNoteForm);
-
-const postitColors = [
-  "postit-color-1",
-  "postit-color-2",
-  "postit-color-3",
-  "postit-color-4",
-  "postit-color-5"
-];
-
-function renderPostits() {
-  const board = $("postitBoard");
-
-  board.innerHTML = postits.map((item, index) => `
-    <article class="postit ${postitColors.includes(item.color) ? item.color : postitColors[index % postitColors.length]}"
-      data-postit-id="${escapeHTML(item.id)}"
-      style="left:${Math.max(0, Number(item.x) || 0)}px;top:${Math.max(0, Number(item.y) || 0)}px;--tilt:${Number(item.tilt) || 0}deg">
-      <div class="postit-head" data-drag-handle="${escapeHTML(item.id)}" title="Faire glisser pour déplacer">
-        <span>✦ Petit rappel</span>
-        <span class="postit-actions">
-          <button type="button" data-edit-postit="${escapeHTML(item.id)}" aria-label="Modifier le Post-it">✏️</button>
-          <button type="button" data-delete-postit="${escapeHTML(item.id)}" aria-label="Supprimer le Post-it">×</button>
-        </span>
-      </div>
-      <div class="postit-text">${escapeHTML(item.text)}</div>
-    </article>`).join("");
-
-  board.querySelectorAll("[data-edit-postit]").forEach(button => {
-    button.addEventListener("click", () => {
-      const item = postits.find(note => note.id === button.dataset.editPostit);
-      if (!item) return;
-
-      const updated = prompt("Modifie le texte de ton Post-it :", item.text);
-      if (updated !== null && updated.trim()) {
-        item.text = updated.trim();
-        savePostits();
-        renderPostits();
-      }
-    });
+$("cancelNoteEdit").addEventListener("click",resetNoteForm);
+  $("cancelNoteEdit").addEventListener("click",resetNoteForm);
+  /* PERSONNALISATION */
+document.querySelectorAll("[data-theme-choice]").forEach(button => {
+  button.addEventListener("click", () => {
+    document.body.dataset.theme = button.dataset.themeChoice;
+    localStorage.setItem("framboise-theme", button.dataset.themeChoice);
   });
+});
 
-  board.querySelectorAll("[data-delete-postit]").forEach(button => {
-    button.addEventListener("click", () => {
-      const item = postits.find(note => note.id === button.dataset.deletePostit);
-      if (item && confirm("Supprimer ce Post-it ?")) {
-        postits = postits.filter(note => note.id !== item.id);
-        savePostits();
-        renderPostits();
-      }
-    });
-  });
-
-  board.querySelectorAll("[data-drag-handle]").forEach(handle => {
-    handle.addEventListener("pointerdown", event => {
-      if (event.target.closest("button")) return;
-
-      const card = handle.closest(".postit");
-      const item = postits.find(note => note.id === handle.dataset.dragHandle);
-      if (!card || !item) return;
-
-      event.preventDefault();
-
-      const startX = event.clientX;
-      const startY = event.clientY;
-      const originalX = card.offsetLeft;
-      const originalY = card.offsetTop;
-
-      card.classList.add("dragging");
-      card.style.zIndex = "20";
-      handle.setPointerCapture?.(event.pointerId);
-
-      const move = moveEvent => {
-        const maxX = Math.max(0, board.clientWidth - card.offsetWidth);
-        const maxY = Math.max(0, board.clientHeight - card.offsetHeight);
-        const x = Math.min(maxX, Math.max(0, originalX + moveEvent.clientX - startX));
-        const y = Math.min(maxY, Math.max(0, originalY + moveEvent.clientY - startY));
-
-        card.style.left = x + "px";
-        card.style.top = y + "px";
-      };
-
-      const finish = () => {
-        card.classList.remove("dragging");
-        card.style.zIndex = "";
-        handle.removeEventListener("pointermove", move);
-        handle.removeEventListener("pointerup", finish);
-        handle.removeEventListener("pointercancel", finish);
-
-        item.x = card.offsetLeft;
-        item.y = card.offsetTop;
-        savePostits();
-      };
-
-      handle.addEventListener("pointermove", move);
-      handle.addEventListener("pointerup", finish);
-      handle.addEventListener("pointercancel", finish);
-    });
-  });
-}
-
-$("addPostit").addEventListener("click", () => {
-  const text = prompt(
-    "Qu'est-ce que tu veux écrire sur ton Post-it ?",
-    "N'oublie pas de réviser ! 💗"
+$("darkToggle").addEventListener("click", () => {
+  document.body.classList.toggle("dark");
+  localStorage.setItem(
+    "framboise-dark",
+    document.body.classList.contains("dark") ? "yes" : "no"
   );
-
-  if (text === null || !text.trim()) return;
-
-  const board = $("postitBoard");
-  const index = postits.length;
-  const cardWidth = window.innerWidth <= 480 ? 145 : 175;
-  const maxX = Math.max(0, board.clientWidth - cardWidth);
-
-  postits.push({
-    id:makeId(),
-    text:text.trim(),
-    x:Math.min(maxX, 14 + (index % 4) * (cardWidth + 12)),
-    y:12 + (index % 5) * 24,
-    color:postitColors[index % postitColors.length],
-    tilt:((index % 3) - 1) * 1.2
-  });
-
-  savePostits();
-  renderPostits();
 });
 
-$("clearPostits").addEventListener("click", () => {
-  if (!postits.length) {
-    alert("Tu n'as pas encore de Post-it à effacer. 🌷");
-    return;
+try {
+  const savedTheme = localStorage.getItem("framboise-theme");
+  if (["berry","purple","rose","plum"].includes(savedTheme)) {
+    document.body.dataset.theme = savedTheme;
   }
-
-  if (confirm("Supprimer tous tes Post-it ?")) {
-    postits = [];
-    savePostits();
-    renderPostits();
+  if (localStorage.getItem("framboise-dark") === "yes") {
+    document.body.classList.add("dark");
   }
-});
-
-/* PERSONNALISATION : mode sombre permanent */
-document.body.classList.add("dark");
-document.body.dataset.theme = "berry";
+} catch (error) {}
 
 /* AMBIANCE SONORE */
 let audioContext = null;
@@ -1243,23 +982,23 @@ function playSoftNote() {
   if (!audioContext || !ambienceOn) return;
 
   const frequencies = [261.63,329.63,392,440,523.25];
-  const frequency = frequencies[Math.floor(Math.random() * frequencies.length)];
+  const frequency = frequencies[Math.floor(Math.random()*frequencies.length)];
   const oscillator = audioContext.createOscillator();
   const gain = audioContext.createGain();
 
   oscillator.type = "sine";
   oscillator.frequency.value = frequency;
-  gain.gain.setValueAtTime(0.0001, audioContext.currentTime);
-  gain.gain.exponentialRampToValueAtTime(0.035, audioContext.currentTime + .08);
-  gain.gain.exponentialRampToValueAtTime(0.0001, audioContext.currentTime + 1.1);
+  gain.gain.setValueAtTime(0.0001,audioContext.currentTime);
+  gain.gain.exponentialRampToValueAtTime(0.035,audioContext.currentTime+.08);
+  gain.gain.exponentialRampToValueAtTime(0.0001,audioContext.currentTime+1.1);
 
   oscillator.connect(gain);
   gain.connect(audioContext.destination);
   oscillator.start();
-  oscillator.stop(audioContext.currentTime + 1.15);
+  oscillator.stop(audioContext.currentTime+1.15);
 }
 
-$("ambienceToggle").addEventListener("click", async () => {
+$("ambienceToggle").addEventListener("click",async () => {
   if (!ambienceOn) {
     try {
       const AudioContextClass = window.AudioContext || window.webkitAudioContext;
@@ -1270,7 +1009,7 @@ $("ambienceToggle").addEventListener("click", async () => {
 
       ambienceOn = true;
       playSoftNote();
-      ambienceTimer = setInterval(playSoftNote, 1600);
+      ambienceTimer = setInterval(playSoftNote,1600);
       $("ambienceToggle").textContent = "♫ Désactiver l'ambiance";
       $("ambienceStatus").textContent = "Ambiance activée. 🎶";
     } catch (error) {
@@ -1285,21 +1024,21 @@ $("ambienceToggle").addEventListener("click", async () => {
   }
 });
 
-/* TIMER FRAMBOISE : durée libre + cercle animé */
-let timerDuration = 30 * 60;
+/* TIMER FRAMBOISE */
+let timerDuration = 30*60;
 let timerRemaining = timerDuration;
 let timerInterval = null;
 let timerEndTime = null;
-const ringCircumference = 2 * Math.PI * 90;
+const ringCircumference = 2*Math.PI*90;
 
 $("timerProgress").style.strokeDasharray = ringCircumference;
 $("timerProgress").style.strokeDashoffset = 0;
 
 function formatTime(seconds) {
-  seconds = Math.max(0, Math.floor(seconds));
-  const hours = Math.floor(seconds / 3600);
-  const minutes = Math.floor((seconds % 3600) / 60);
-  const secs = seconds % 60;
+  seconds = Math.max(0,Math.floor(seconds));
+  const hours = Math.floor(seconds/3600);
+  const minutes = Math.floor((seconds%3600)/60);
+  const secs = seconds%60;
 
   if (hours > 0) {
     return `${String(hours).padStart(2,"0")}:${String(minutes).padStart(2,"0")}:${String(secs).padStart(2,"0")}`;
@@ -1310,12 +1049,9 @@ function formatTime(seconds) {
 function updateTimerDisplay() {
   $("timerDisplay").textContent = formatTime(timerRemaining);
 
-  const elapsedRatio = timerDuration > 0
-    ? 1 - timerRemaining / timerDuration
-    : 0;
-
+  const ratio = timerDuration > 0 ? 1-timerRemaining/timerDuration : 0;
   $("timerProgress").style.strokeDashoffset =
-    ringCircumference * Math.max(0, Math.min(1, elapsedRatio));
+    ringCircumference*Math.max(0,Math.min(1,ratio));
 
   document.title = timerInterval
     ? `${formatTime(timerRemaining)} — Framboise 🍇`
@@ -1327,15 +1063,14 @@ function stopTimer() {
     clearInterval(timerInterval);
     timerInterval = null;
   }
-
   timerEndTime = null;
   $("timerCharacter").classList.remove("running");
 }
 
 function syncTimerInputs() {
-  $("timerHours").value = Math.floor(timerDuration / 3600);
-  $("timerMinutes").value = Math.floor((timerDuration % 3600) / 60);
-  $("timerSeconds").value = timerDuration % 60;
+  $("timerHours").value = Math.floor(timerDuration/3600);
+  $("timerMinutes").value = Math.floor((timerDuration%3600)/60);
+  $("timerSeconds").value = timerDuration%60;
 }
 
 function resetTimer() {
@@ -1348,24 +1083,21 @@ function resetTimer() {
 }
 
 function applyCustomDuration() {
-  if (timerInterval !== null) {
-    stopTimer();
-  }
+  if (timerInterval !== null) stopTimer();
 
   let hours = Number($("timerHours").value);
   let minutes = Number($("timerMinutes").value);
   let seconds = Number($("timerSeconds").value);
 
-  hours = Number.isFinite(hours) ? Math.min(99, Math.max(0, Math.floor(hours))) : 0;
-  minutes = Number.isFinite(minutes) ? Math.min(59, Math.max(0, Math.floor(minutes))) : 0;
-  seconds = Number.isFinite(seconds) ? Math.min(59, Math.max(0, Math.floor(seconds))) : 0;
+  hours = Number.isFinite(hours) ? Math.min(99,Math.max(0,Math.floor(hours))) : 0;
+  minutes = Number.isFinite(minutes) ? Math.min(59,Math.max(0,Math.floor(minutes))) : 0;
+  seconds = Number.isFinite(seconds) ? Math.min(59,Math.max(0,Math.floor(seconds))) : 0;
 
   $("timerHours").value = hours;
   $("timerMinutes").value = minutes;
   $("timerSeconds").value = seconds;
 
-  const total = hours * 3600 + minutes * 60 + seconds;
-
+  const total = hours*3600+minutes*60+seconds;
   if (total <= 0) {
     $("timerMessage").textContent = "Choisis une durée supérieure à zéro. 🌷";
     return;
@@ -1375,7 +1107,7 @@ function applyCustomDuration() {
   timerRemaining = total;
 
   document.querySelectorAll(".timer-preset").forEach(button => {
-    button.classList.toggle("selected", total === Number(button.dataset.minutes) * 60);
+    button.classList.toggle("selected",total===Number(button.dataset.minutes)*60);
   });
 
   $("timerMode").textContent = "Ta durée personnalisée";
@@ -1394,10 +1126,10 @@ function startTimer() {
   $("timerMessage").textContent = "Tu gères ! Reste concentrée. ✨";
   $("timerMode").textContent = "Session de concentration";
   $("timerCharacter").classList.add("running");
-  timerEndTime = Date.now() + timerRemaining * 1000;
+  timerEndTime = Date.now()+timerRemaining*1000;
 
   timerInterval = setInterval(() => {
-    timerRemaining = Math.max(0, Math.ceil((timerEndTime - Date.now()) / 1000));
+    timerRemaining = Math.max(0,Math.ceil((timerEndTime-Date.now())/1000));
     updateTimerDisplay();
 
     if (timerRemaining <= 0) {
@@ -1408,40 +1140,40 @@ function startTimer() {
       document.title = "Terminé ! — Framboise 🍇";
       alert("Bravo ! Ta session de concentration est terminée. 💗");
     }
-  }, 250);
+  },250);
 
   updateTimerDisplay();
 }
 
-$("timerStart").addEventListener("click", startTimer);
+$("timerStart").addEventListener("click",startTimer);
 
-$("timerPause").addEventListener("click", () => {
+$("timerPause").addEventListener("click",() => {
   if (timerInterval === null) return;
 
-  timerRemaining = Math.max(0, Math.ceil((timerEndTime - Date.now()) / 1000));
+  timerRemaining = Math.max(0,Math.ceil((timerEndTime-Date.now())/1000));
   stopTimer();
   updateTimerDisplay();
   $("timerMessage").textContent = "Petite pause. Reprends quand tu veux. 🌷";
   $("timerMode").textContent = "Session en pause";
 });
 
-$("timerReset").addEventListener("click", resetTimer);
-$("timerApply").addEventListener("click", applyCustomDuration);
+$("timerReset").addEventListener("click",resetTimer);
+$("timerApply").addEventListener("click",applyCustomDuration);
 
 document.querySelectorAll(".timer-preset").forEach(button => {
-  button.addEventListener("click", () => {
+  button.addEventListener("click",() => {
     stopTimer();
-    timerDuration = Number(button.dataset.minutes) * 60;
+    timerDuration = Number(button.dataset.minutes)*60;
     timerRemaining = timerDuration;
     syncTimerInputs();
 
     document.querySelectorAll(".timer-preset").forEach(item => {
-      item.classList.toggle("selected", item === button);
+      item.classList.toggle("selected",item===button);
     });
 
     $("timerMode").textContent = "Session de concentration";
     $("timerMessage").textContent =
-      "Session réglée sur " + button.dataset.minutes + " minutes. 💗";
+      "Session réglée sur "+button.dataset.minutes+" minutes. 💗";
     $("timerCharacter").classList.remove("finished");
     updateTimerDisplay();
   });
@@ -1451,7 +1183,6 @@ syncTimerInputs();
 resetTimer();
 renderAll();
 renderNotes();
-renderPostits();
 </script>
 </body>
 </html>
