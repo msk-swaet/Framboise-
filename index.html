@@ -3,85 +3,83 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#f8e8f1">
+<meta name="theme-color" content="#211a29">
 <meta name="description" content="Framboise, ton petit espace pour t'organiser, étudier et te concentrer.">
 <title>Framboise 🍇</title>
 
 <style>
 :root {
-  --bg: #fff7fb;
-  --surface: #ffffff;
-  --surface2: #fff0f7;
-  --text: #51384d;
-  --muted: #987b91;
-  --accent: #d66aa0;
-  --accent2: #a984d6;
-  --border: #f0d9e8;
-  --shadow: 0 8px 25px rgba(145, 86, 125, .10);
-}
-body[data-theme="purple"] {
-  --bg:#faf6ff; --surface:#fff; --surface2:#f0e8ff;
-  --text:#49375d; --muted:#89749e; --accent:#9874d8;
-  --accent2:#c39be8; --border:#e7daf8;
-}
-body[data-theme="rose"] {
-  --bg:#fff6f5; --surface:#fff; --surface2:#ffe9e8;
-  --text:#633d49; --muted:#a07b85; --accent:#e77d91;
-  --accent2:#f3b1bd; --border:#f7d9dd;
-}
-body[data-theme="plum"] {
-  --bg:#f8f3fa; --surface:#fff; --surface2:#eee2f4;
-  --text:#49344e; --muted:#8b7590; --accent:#9562a5;
-  --accent2:#c59acb; --border:#e4d2e9;
-}
-body.dark {
-  --bg:#211a29; --surface:#302638; --surface2:#3a2c43;
-  --text:#f7eaf5; --muted:#c2a9c1; --accent:#e795c1;
-  --accent2:#c3a1f0; --border:#4c3b52;
-  --shadow:0 8px 25px rgba(0,0,0,.2);
+  --bg: #211a29;
+  --surface: #302638;
+  --surface2: #3a2c43;
+  --text: #f7eaf5;
+  --muted: #c2a9c1;
+  --accent: #e795c1;
+  --accent2: #c3a1f0;
+  --border: #4c3b52;
+  --shadow: 0 8px 25px rgba(0,0,0,.2);
 }
 * { box-sizing:border-box; }
 body {
-  margin:0; background:var(--bg); color:var(--text);
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
   font-family:"Trebuchet MS",Arial,sans-serif;
   transition:background .3s,color .3s;
 }
 button,input,select,textarea { font:inherit; }
 button {
-  border:0; border-radius:14px; padding:11px 15px;
-  background:var(--surface2); color:var(--text);
-  cursor:pointer; transition:transform .2s,opacity .2s;
+  border:0;
+  border-radius:14px;
+  padding:11px 15px;
+  background:var(--surface2);
+  color:var(--text);
+  cursor:pointer;
+  transition:transform .2s,opacity .2s;
 }
 button:hover { transform:translateY(-2px); }
 button:focus-visible,input:focus-visible,select:focus-visible {
-  outline:3px solid var(--accent2); outline-offset:2px;
+  outline:3px solid var(--accent2);
+  outline-offset:2px;
 }
-button.primary { background:var(--accent); color:white; }
+button.primary { background:var(--accent); color:#321e2d; }
 button.secondary { border:1px solid var(--border); }
-button.danger { background:#ffe4e8; color:#a83f5c; }
+button.danger { background:#603342; color:#ffdbe6; }
 input,select,textarea {
-  width:100%; padding:12px; border-radius:12px;
-  border:1px solid var(--border); background:var(--surface);
+  width:100%;
+  padding:12px;
+  border-radius:12px;
+  border:1px solid var(--border);
+  background:var(--surface);
   color:var(--text);
 }
+input::placeholder,textarea::placeholder { color:#a58da8; }
 label { display:block; margin:10px 0 6px; font-size:.92rem; }
 h1 { font-size:clamp(1.7rem,4vw,2.3rem); margin:8px 0 12px; }
 h2 { font-size:1.2rem; }
 p { line-height:1.6; }
 .muted { color:var(--muted); }
 header {
-  padding:24px 18px 18px; text-align:center;
-  background:linear-gradient(135deg,var(--surface2),var(--bg));
+  padding:24px 18px 18px;
+  text-align:center;
+  background:linear-gradient(135deg,#3a2c43,#211a29);
 }
 .logo { font-size:2.3rem; }
 header p { margin:6px 0; }
 nav {
-  display:flex; flex-wrap:wrap; justify-content:center; gap:8px;
-  padding:12px; position:sticky; top:0; z-index:10;
-  background:var(--bg); border-bottom:1px solid var(--border);
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:8px;
+  padding:12px;
+  position:sticky;
+  top:0;
+  z-index:10;
+  background:var(--bg);
+  border-bottom:1px solid var(--border);
 }
 nav button { font-size:.92rem; padding:10px 13px; }
-nav button.active { background:var(--accent); color:white; }
+nav button.active { background:var(--accent); color:#321e2d; }
 main { max-width:1000px; margin:auto; padding:24px 16px 60px; }
 .page { display:none; animation:fadeIn .3s ease; }
 .page.active { display:block; }
@@ -90,75 +88,106 @@ main { max-width:1000px; margin:auto; padding:24px 16px 60px; }
   to { opacity:1; transform:translateY(0); }
 }
 .card {
-  background:var(--surface); border:1px solid var(--border);
-  border-radius:22px; padding:20px; margin:16px 0;
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:22px;
+  padding:20px;
+  margin:16px 0;
   box-shadow:var(--shadow);
 }
-.grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:14px; }
+.grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:14px;
+}
 .row { display:flex; gap:10px; flex-wrap:wrap; align-items:center; }
 .row > * { flex:1; }
 .row button { flex:0 0 auto; }
 .task-item {
-  display:flex; gap:12px; align-items:flex-start;
-  padding:13px 0; border-bottom:1px solid var(--border);
+  display:flex;
+  gap:12px;
+  align-items:flex-start;
+  padding:13px 0;
+  border-bottom:1px solid var(--border);
 }
 .task-item:last-child { border-bottom:0; }
-.task-item input[type="checkbox"] { width:20px; margin-top:4px; accent-color:var(--accent); }
+.task-item input[type="checkbox"] {
+  width:20px;
+  margin-top:4px;
+  accent-color:var(--accent);
+}
 .task-content { flex:1; min-width:0; }
 .task-content strong { overflow-wrap:anywhere; }
 .task-content small { display:block; margin-top:5px; color:var(--muted); }
 .task-item.done .task-content strong {
-  text-decoration:line-through; opacity:.6;
+  text-decoration:line-through;
+  opacity:.6;
 }
 .tag {
-  display:inline-block; border-radius:20px; padding:4px 9px;
-  background:var(--surface2); font-size:.78rem; margin-top:6px;
+  display:inline-block;
+  border-radius:20px;
+  padding:4px 9px;
+  background:var(--surface2);
+  font-size:.78rem;
+  margin-top:6px;
 }
 .empty { text-align:center; color:var(--muted); padding:22px 8px; }
 footer { text-align:center; padding:24px; color:var(--muted); }
 .calendar-head {
-  display:flex; justify-content:space-between; align-items:center; gap:12px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
 }
 .calendar-grid { display:grid; grid-template-columns:repeat(7,1fr); gap:5px; }
-.calendar-day-name { text-align:center; padding:8px 0; font-size:.8rem; color:var(--muted); }
+.calendar-day-name {
+  text-align:center;
+  padding:8px 0;
+  font-size:.8rem;
+  color:var(--muted);
+}
 .calendar-day {
-  min-height:65px; padding:7px 2px; border:1px solid var(--border);
-  background:var(--surface); border-radius:12px; text-align:center;
-  font-size:.9rem; cursor:pointer;
+  min-height:65px;
+  padding:7px 2px;
+  border:1px solid var(--border);
+  background:var(--surface);
+  border-radius:12px;
+  text-align:center;
+  font-size:.9rem;
+  cursor:pointer;
 }
 .calendar-day.today { border:2px solid var(--accent); }
 .calendar-day.selected { background:var(--surface2); }
 .calendar-day .dot { color:var(--accent); font-size:1.2rem; line-height:1; }
 .calendar-detail { margin-top:18px; }
 
-/* TIMER : ambiance pastel */
+/* TIMER : ambiance sombre et pastel */
 .timer-shell {
-  max-width:650px; margin:22px auto; position:relative; overflow:hidden;
-  border-radius:30px; padding:25px 16px 30px;
-  text-align:center; isolation:isolate;
-  background:
-    radial-gradient(circle at 15% 20%,#ffe3f0 0,transparent 32%),
-    radial-gradient(circle at 85% 30%,#e9ddff 0,transparent 34%),
-    radial-gradient(circle at 55% 100%,#fff0d9 0,transparent 35%),
-    linear-gradient(145deg,#fff8fc,#f9f0ff,#fff6f0);
-  border:1px solid #f1ddec;
-  box-shadow:0 15px 40px rgba(174,112,163,.16);
-  color:#624568;
-}
-body.dark .timer-shell {
+  max-width:650px;
+  margin:22px auto;
+  position:relative;
+  overflow:hidden;
+  border-radius:30px;
+  padding:25px 16px 30px;
+  text-align:center;
+  isolation:isolate;
   background:
     radial-gradient(circle at 15% 20%,#58354e 0,transparent 35%),
     radial-gradient(circle at 85% 30%,#40335e 0,transparent 35%),
     linear-gradient(145deg,#302438,#28213a);
-  border-color:#59425e; color:#f8e9f7;
+  border:1px solid #59425e;
+  box-shadow:0 15px 40px rgba(0,0,0,.22);
+  color:#f8e9f7;
 }
 .timer-shell > *:not(.bubble):not(.sparkle) { position:relative; z-index:2; }
 .timer-shell h2 { margin:6px 0; font-size:1.4rem; }
-.timer-subtitle { color:#997b9a; margin:8px 0 20px; }
-body.dark .timer-subtitle { color:#d0b5d0; }
+.timer-subtitle { color:#d0b5d0; margin:8px 0 20px; }
 .bubble {
-  position:absolute; z-index:0; border-radius:50%;
-  background:rgba(255,255,255,.45); border:1px solid rgba(255,255,255,.65);
+  position:absolute;
+  z-index:0;
+  border-radius:50%;
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.12);
   animation:floatBubble 7s ease-in-out infinite;
 }
 .bubble.b1 { width:34px;height:34px;left:8%;top:18%; }
@@ -170,7 +199,9 @@ body.dark .timer-subtitle { color:#d0b5d0; }
   50% { transform:translateY(-18px) translateX(7px); }
 }
 .sparkle {
-  position:absolute; z-index:1; color:#d6a4e8;
+  position:absolute;
+  z-index:1;
+  color:#d6a4e8;
   animation:twinkle 2.4s ease-in-out infinite;
   pointer-events:none;
 }
@@ -183,19 +214,27 @@ body.dark .timer-subtitle { color:#d0b5d0; }
   50% { opacity:1;transform:scale(1.25) rotate(20deg); }
 }
 .timer-character {
-  width:130px;height:130px;position:relative;margin:12px auto 0;
-  display:flex;align-items:center;justify-content:center;
+  width:130px;
+  height:130px;
+  position:relative;
+  margin:12px auto 0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
 }
 .raspberry {
-  width:75px;height:78px;position:relative;
+  width:75px;
+  height:78px;
+  position:relative;
   filter:drop-shadow(0 7px 4px rgba(132,52,99,.15));
   transform-origin:bottom center;
 }
-.berry-balls {
-  position:absolute;inset:12px 2px 0;
-}
+.berry-balls { position:absolute;inset:12px 2px 0; }
 .berry-balls i {
-  position:absolute;width:27px;height:27px;border-radius:50%;
+  position:absolute;
+  width:27px;
+  height:27px;
+  border-radius:50%;
   background:radial-gradient(circle at 30% 25%,#ff9bc3,#e83c83 65%,#bd2467);
   border:1px solid rgba(170,28,89,.16);
 }
@@ -208,23 +247,49 @@ body.dark .timer-subtitle { color:#d0b5d0; }
 .berry-balls i:nth-child(7) { left:11px;top:48px; }
 .berry-balls i:nth-child(8) { left:34px;top:48px; }
 .berry-leaf {
-  position:absolute;top:2px;left:25px;width:28px;height:17px;
-  background:#78bd78;border-radius:100% 0 100% 0;transform:rotate(-24deg);
+  position:absolute;
+  top:2px;
+  left:25px;
+  width:28px;
+  height:17px;
+  background:#78bd78;
+  border-radius:100% 0 100% 0;
+  transform:rotate(-24deg);
 }
 .berry-leaf::after {
-  content:"";position:absolute;width:23px;height:13px;left:14px;top:3px;
-  background:#91ce8a;border-radius:0 100% 0 100%;transform:rotate(40deg);
+  content:"";
+  position:absolute;
+  width:23px;
+  height:13px;
+  left:14px;
+  top:3px;
+  background:#91ce8a;
+  border-radius:0 100% 0 100%;
+  transform:rotate(40deg);
 }
 .berry-face {
-  position:absolute;left:21px;top:34px;width:37px;
-  display:flex;justify-content:space-between;align-items:center;
+  position:absolute;
+  left:21px;
+  top:34px;
+  width:37px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
 }
 .berry-face span {
-  width:5px;height:7px;border-radius:50%;background:#54283e;
+  width:5px;
+  height:7px;
+  border-radius:50%;
+  background:#54283e;
 }
 .berry-smile {
-  position:absolute;top:47px;left:34px;width:12px;height:7px;
-  border-bottom:2px solid #54283e;border-radius:0 0 12px 12px;
+  position:absolute;
+  top:47px;
+  left:34px;
+  width:12px;
+  height:7px;
+  border-bottom:2px solid #54283e;
+  border-radius:0 0 12px 12px;
 }
 .timer-character.running .raspberry { animation:berryBounce .65s ease-in-out infinite; }
 .timer-character.finished .raspberry { animation:berryHappy .5s ease-in-out 3; }
@@ -237,38 +302,133 @@ body.dark .timer-subtitle { color:#d0b5d0; }
   50% { transform:rotate(12deg) scale(1.12); }
 }
 .timer-ring {
-  width:min(76vw,300px); height:min(76vw,300px);
-  margin:5px auto 18px; position:relative;
-  display:grid;place-items:center;
+  width:min(76vw,300px);
+  height:min(76vw,300px);
+  margin:5px auto 18px;
+  position:relative;
+  display:grid;
+  place-items:center;
 }
-.timer-ring svg { width:100%;height:100%;position:absolute;inset:0;transform:rotate(-90deg); }
+.timer-ring svg {
+  width:100%;
+  height:100%;
+  position:absolute;
+  inset:0;
+  transform:rotate(-90deg);
+}
 .ring-track { fill:none;stroke:rgba(208,157,202,.28);stroke-width:8; }
 .ring-progress {
-  fill:none;stroke:#d66aa0;stroke-width:8;stroke-linecap:round;
-  stroke-dasharray:565.49;stroke-dashoffset:0;
+  fill:none;
+  stroke:#e795c1;
+  stroke-width:8;
+  stroke-linecap:round;
+  stroke-dasharray:565.49;
+  stroke-dashoffset:0;
   transition:stroke-dashoffset .35s linear;
 }
 .timer-ring-content { position:relative;z-index:1;width:100%; }
 #timerDisplay {
-  font-size:clamp(2.5rem,10vw,4.4rem);font-weight:bold;
-  letter-spacing:1px;font-variant-numeric:tabular-nums;
+  font-size:clamp(2.5rem,10vw,4.4rem);
+  font-weight:bold;
+  letter-spacing:1px;
+  font-variant-numeric:tabular-nums;
 }
-#timerMode { font-size:1rem;color:#a07c9c;margin:8px 0; }
-body.dark #timerMode { color:#d6b8d5; }
+#timerMode { font-size:1rem;color:#d6b8d5;margin:8px 0; }
 .timer-message { min-height:28px;margin:8px 0 18px;font-size:.95rem; }
-.timer-controls { display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin:14px 0; }
+.timer-controls {
+  display:flex;
+  justify-content:center;
+  gap:8px;
+  flex-wrap:wrap;
+  margin:14px 0;
+}
 .timer-controls button { min-width:105px; }
 .timer-settings {
-  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
-  gap:10px;max-width:390px;margin:18px auto;
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:10px;
+  max-width:390px;
+  margin:18px auto;
 }
 .timer-settings label { font-size:.85rem;text-align:left; }
 .timer-settings input { text-align:center;padding:12px 5px; }
-.timer-presets { display:flex;justify-content:center;gap:7px;flex-wrap:wrap;margin-top:12px; }
+.timer-presets {
+  display:flex;
+  justify-content:center;
+  gap:7px;
+  flex-wrap:wrap;
+  margin-top:12px;
+}
 .timer-presets button { padding:9px 12px;font-size:.86rem; }
-.timer-presets button.selected { background:var(--accent);color:white; }
-.timer-note { font-size:.8rem;color:#9c7e9b;margin:14px 0 0; }
+.timer-presets button.selected { background:var(--accent);color:#321e2d; }
+.timer-note { font-size:.8rem;color:#d0b5d0;margin:14px 0 0; }
+
+/* NOTES ET POST-IT */
+.notes-form textarea { min-height:120px; resize:vertical; }
+.note-card {
+  border:1px solid var(--border);
+  border-radius:18px;
+  padding:16px;
+  background:var(--surface);
+  margin:12px 0;
+}
+.note-card h3 { margin:0 0 8px; overflow-wrap:anywhere; }
+.note-card p { white-space:pre-wrap; overflow-wrap:anywhere; }
+.note-card .note-subject { color:var(--muted); font-size:.85rem; }
+.note-actions { display:flex; gap:8px; flex-wrap:wrap; }
+.postit-board {
+  position:relative;
+  min-height:480px;
+  overflow:hidden;
+  border:2px dashed var(--border);
+  border-radius:18px;
+  background:
+    radial-gradient(circle at 15% 20%,rgba(255,220,238,.10),transparent 35%),
+    radial-gradient(circle at 85% 75%,rgba(224,211,255,.12),transparent 35%),
+    var(--surface2);
+}
+.postit {
+  position:absolute;
+  width:175px;
+  min-height:145px;
+  padding:0 12px 12px;
+  border-radius:3px 3px 12px 3px;
+  box-shadow:3px 7px 14px rgba(0,0,0,.25);
+  color:#57434f;
+  transform:rotate(var(--tilt, -1deg));
+  z-index:1;
+}
+.postit-head {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+  min-height:34px;
+  cursor:grab;
+  user-select:none;
+  font-size:.8rem;
+  border-bottom:1px dashed rgba(80,60,70,.2);
+  margin-bottom:8px;
+}
+.postit-head:active { cursor:grabbing; }
+.postit-text { white-space:pre-wrap; overflow-wrap:anywhere; min-height:80px; font-size:.92rem; }
+.postit-actions { display:flex; gap:4px; }
+.postit-actions button {
+  padding:3px 6px;
+  font-size:.8rem;
+  background:rgba(255,255,255,.55);
+  color:#57434f;
+  border-radius:7px;
+}
+.postit.dragging { z-index:20; transform:rotate(0deg); box-shadow:6px 12px 24px rgba(0,0,0,.35); }
+.postit-color-1 { background:#fff0a8; }
+.postit-color-2 { background:#ffd9e8; }
+.postit-color-3 { background:#dff5d7; }
+.postit-color-4 { background:#e7ddff; }
+.postit-color-5 { background:#d9f2ff; }
 @media(max-width:480px) {
+  .postit { width:145px; }
+  .postit-board { min-height:560px; }
   nav { gap:5px; }
   nav button { padding:9px 10px;font-size:.82rem; }
   main { padding:18px 12px 40px; }
@@ -280,7 +440,7 @@ body.dark #timerMode { color:#d6b8d5; }
 </style>
 </head>
 
-<body data-theme="berry">
+<body class="dark" data-theme="berry">
 <header>
   <div class="logo">🍇</div>
   <h1>Framboise</h1>
@@ -290,6 +450,7 @@ body.dark #timerMode { color:#d6b8d5; }
 <nav aria-label="Navigation principale">
   <button class="active" data-page="home">🏡 Accueil</button>
   <button data-page="tasks">📝 Tâches</button>
+  <button data-page="notes">📒 Notes</button>
   <button data-page="calendar">📅 Calendrier</button>
   <button data-page="timer">⏱️ Timer</button>
   <button data-page="customize">🎨 Personnaliser</button>
@@ -316,6 +477,11 @@ body.dark #timerMode { color:#d6b8d5; }
         <h2>📅 Mon calendrier</h2>
         <p>Retrouve tes tâches et organise tes journées.</p>
         <button class="primary" data-goto="calendar">Ouvrir le calendrier</button>
+      </div>
+      <div class="card">
+        <h2>📒 Mes notes</h2>
+        <p>Garde tes idées et crée des Post-it colorés.</p>
+        <button class="primary" data-goto="notes">Ouvrir mes notes</button>
       </div>
     </div>
 
@@ -452,7 +618,7 @@ body.dark #timerMode { color:#d6b8d5; }
         <button id="timerReset" class="secondary" type="button">↻ Réinitialiser</button>
       </div>
 
-      <div class="card" style="background:rgba(255,255,255,.48);box-shadow:none;border-color:rgba(225,190,220,.65);">
+      <div class="card" style="background:rgba(40,30,50,.55);box-shadow:none;border-color:rgba(225,190,220,.2);">
         <h2>Choisis ta durée 🌷</h2>
         <div class="timer-settings">
           <div>
@@ -482,25 +648,52 @@ body.dark #timerMode { color:#d6b8d5; }
     </div>
   </section>
 
+  <!-- NOTES -->
+  <section id="notes" class="page">
+    <h1>Mon carnet de notes 📒</h1>
+    <p class="muted">Tes idées, tes cours et tes petits rappels restent ici. 💗</p>
+
+    <div class="card">
+      <h2>✍️ Écrire une note</h2>
+      <form id="noteForm" class="notes-form">
+        <label for="noteTitle">Titre de la note</label>
+        <input id="noteTitle" maxlength="120" placeholder="Ex. Résumé de SVT" required>
+        <label for="noteSubject">Matière ou catégorie (facultatif)</label>
+        <input id="noteSubject" maxlength="80" placeholder="Ex. SVT, idées, personnel...">
+        <label for="noteBody">Ta note</label>
+        <textarea id="noteBody" maxlength="12000" placeholder="Écris ici tout ce que tu veux garder..." required></textarea>
+        <div class="row" style="margin-top:12px">
+          <button class="primary" id="saveNoteButton" type="submit">＋ Enregistrer la note</button>
+          <button class="secondary" id="cancelNoteEdit" type="button" hidden>Annuler la modification</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="card">
+      <h2>📚 Mes notes enregistrées</h2>
+      <div id="notesList"></div>
+    </div>
+
+    <div class="card">
+      <h2>🎀 Mes Post-it</h2>
+      <p class="muted">Crée des petits rappels et déplace-les librement sur le tableau. Tu peux les superposer, comme sur un vrai bureau !</p>
+      <div class="row">
+        <button class="primary" id="addPostit" type="button">＋ Ajouter un Post-it</button>
+        <button class="secondary" id="clearPostits" type="button">🧹 Tout effacer</button>
+      </div>
+      <p class="muted" style="font-size:.85rem">Astuce : fais glisser le Post-it en attrapant sa petite barre du haut.</p>
+      <div id="postitBoard" class="postit-board" aria-label="Tableau de Post-it déplaçables"></div>
+    </div>
+  </section>
+
   <!-- PERSONNALISATION -->
   <section id="customize" class="page">
     <h1>Personnaliser Framboise 🎨</h1>
     <p class="muted">Choisis l'ambiance qui te plaît.</p>
 
     <div class="card">
-      <h2>Couleurs du site</h2>
-      <div class="grid">
-        <button class="theme-choice" data-theme-choice="berry">🍇 Framboise</button>
-        <button class="theme-choice" data-theme-choice="purple">💜 Lavande</button>
-        <button class="theme-choice" data-theme-choice="rose">🌸 Rose</button>
-        <button class="theme-choice" data-theme-choice="plum">🪻 Prune</button>
-      </div>
-    </div>
-
-    <div class="card">
-      <h2>Mode sombre 🌙</h2>
-      <p class="muted">Pour une ambiance plus douce le soir.</p>
-      <button id="darkToggle" class="primary">Activer / désactiver le mode sombre</button>
+      <h2>🌙 Mode sombre permanent</h2>
+      <p class="muted">Framboise reste toujours en mode sombre, pour garder ton ambiance douce et violette. 💜</p>
     </div>
 
     <div class="card">
@@ -513,7 +706,6 @@ body.dark #timerMode { color:#d6b8d5; }
 </main>
 
 <footer>Fait avec 💗 pour t'aider à avancer à ton rythme · Framboise 🍇</footer>
-
 <script>
 "use strict";
 
@@ -563,6 +755,10 @@ function showPage(pageId) {
   });
   if (pageId === "calendar") renderCalendar();
   if (pageId === "tasks") renderTasks();
+  if (pageId === "notes") {
+    renderNotes();
+    renderPostits();
+  }
   if (pageId === "home") renderHome();
 }
 
@@ -720,7 +916,7 @@ function renderCalendar() {
   const cells = [];
 
   for (let i = 0; i < offset; i++) {
-    cells.push('<div></div>');
+    cells.push("<div></div>");
   }
 
   for (let day = 1; day <= daysInMonth; day++) {
@@ -770,29 +966,273 @@ $("nextMonth").addEventListener("click", () => {
   calendarDate = new Date(calendarDate.getFullYear(), calendarDate.getMonth() + 1, 1);
   renderCalendar();
 });
-
-/* PERSONNALISATION */
-document.querySelectorAll("[data-theme-choice]").forEach(button => {
-  button.addEventListener("click", () => {
-    document.body.dataset.theme = button.dataset.themeChoice;
-    localStorage.setItem("framboise-theme", button.dataset.themeChoice);
-  });
-});
-
-$("darkToggle").addEventListener("click", () => {
-  document.body.classList.toggle("dark");
-  localStorage.setItem("framboise-dark", document.body.classList.contains("dark") ? "yes" : "no");
-});
+  /* NOTES : notes écrites + Post-it déplaçables */
+const NOTES_STORAGE_KEY = "framboise-notes-v1";
+const POSTITS_STORAGE_KEY = "framboise-postits-v1";
+let notes = [];
+let postits = [];
+let editingNoteId = null;
 
 try {
-  const savedTheme = localStorage.getItem("framboise-theme");
-  if (["berry","purple","rose","plum"].includes(savedTheme)) {
-    document.body.dataset.theme = savedTheme;
+  const savedNotes = JSON.parse(localStorage.getItem(NOTES_STORAGE_KEY) || "[]");
+  notes = Array.isArray(savedNotes) ? savedNotes : [];
+} catch (error) { notes = []; }
+
+try {
+  const savedPostits = JSON.parse(localStorage.getItem(POSTITS_STORAGE_KEY) || "[]");
+  postits = Array.isArray(savedPostits) ? savedPostits : [];
+} catch (error) { postits = []; }
+
+function saveNotes() {
+  try {
+    localStorage.setItem(NOTES_STORAGE_KEY, JSON.stringify(notes));
+  } catch (error) {
+    alert("Impossible d'enregistrer les notes dans ce navigateur.");
   }
-  if (localStorage.getItem("framboise-dark") === "yes") {
-    document.body.classList.add("dark");
+}
+
+function savePostits() {
+  try {
+    localStorage.setItem(POSTITS_STORAGE_KEY, JSON.stringify(postits));
+  } catch (error) {
+    alert("Impossible d'enregistrer les Post-it dans ce navigateur.");
   }
-} catch (error) {}
+}
+
+function renderNotes() {
+  const list = $("notesList");
+  if (!notes.length) {
+    list.innerHTML = '<div class="empty">Ton carnet est encore vide. Écris ta première note ! 🌷</div>';
+    return;
+  }
+
+  list.innerHTML = [...notes]
+    .sort((a,b) => (b.updated || b.created || 0) - (a.updated || a.created || 0))
+    .map(note => `
+      <article class="note-card">
+        <h3>${escapeHTML(note.title)}</h3>
+        ${note.subject ? `<div class="note-subject">${escapeHTML(note.subject)}</div>` : ""}
+        <p>${escapeHTML(note.body)}</p>
+        <div class="note-actions">
+          <button type="button" class="secondary" data-edit-note="${escapeHTML(note.id)}">✏️ Modifier</button>
+          <button type="button" class="danger" data-delete-note="${escapeHTML(note.id)}">🗑️ Supprimer</button>
+        </div>
+      </article>`).join("");
+
+  list.querySelectorAll("[data-edit-note]").forEach(button => {
+    button.addEventListener("click", () => {
+      const note = notes.find(item => item.id === button.dataset.editNote);
+      if (!note) return;
+
+      editingNoteId = note.id;
+      $("noteTitle").value = note.title;
+      $("noteSubject").value = note.subject || "";
+      $("noteBody").value = note.body;
+      $("saveNoteButton").textContent = "💾 Enregistrer les modifications";
+      $("cancelNoteEdit").hidden = false;
+      $("noteTitle").focus();
+
+      window.scrollTo({
+        top: $("noteForm").getBoundingClientRect().top + window.scrollY - 90,
+        behavior:"smooth"
+      });
+    });
+  });
+
+  list.querySelectorAll("[data-delete-note]").forEach(button => {
+    button.addEventListener("click", () => {
+      const note = notes.find(item => item.id === button.dataset.deleteNote);
+      if (note && confirm(`Supprimer la note « ${note.title} » ?`)) {
+        notes = notes.filter(item => item.id !== note.id);
+        if (editingNoteId === note.id) resetNoteForm();
+        saveNotes();
+        renderNotes();
+      }
+    });
+  });
+}
+
+function resetNoteForm() {
+  editingNoteId = null;
+  $("noteForm").reset();
+  $("saveNoteButton").textContent = "＋ Enregistrer la note";
+  $("cancelNoteEdit").hidden = true;
+}
+
+$("noteForm").addEventListener("submit", event => {
+  event.preventDefault();
+
+  const title = $("noteTitle").value.trim();
+  const subject = $("noteSubject").value.trim();
+  const body = $("noteBody").value.trim();
+  if (!title || !body) return;
+
+  if (editingNoteId) {
+    const note = notes.find(item => item.id === editingNoteId);
+    if (note) {
+      note.title = title;
+      note.subject = subject;
+      note.body = body;
+      note.updated = Date.now();
+    }
+  } else {
+    notes.push({
+      id:makeId(),
+      title,
+      subject,
+      body,
+      created:Date.now(),
+      updated:Date.now()
+    });
+  }
+
+  saveNotes();
+  resetNoteForm();
+  renderNotes();
+});
+
+$("cancelNoteEdit").addEventListener("click", resetNoteForm);
+
+const postitColors = [
+  "postit-color-1",
+  "postit-color-2",
+  "postit-color-3",
+  "postit-color-4",
+  "postit-color-5"
+];
+
+function renderPostits() {
+  const board = $("postitBoard");
+
+  board.innerHTML = postits.map((item, index) => `
+    <article class="postit ${postitColors.includes(item.color) ? item.color : postitColors[index % postitColors.length]}"
+      data-postit-id="${escapeHTML(item.id)}"
+      style="left:${Math.max(0, Number(item.x) || 0)}px;top:${Math.max(0, Number(item.y) || 0)}px;--tilt:${Number(item.tilt) || 0}deg">
+      <div class="postit-head" data-drag-handle="${escapeHTML(item.id)}" title="Faire glisser pour déplacer">
+        <span>✦ Petit rappel</span>
+        <span class="postit-actions">
+          <button type="button" data-edit-postit="${escapeHTML(item.id)}" aria-label="Modifier le Post-it">✏️</button>
+          <button type="button" data-delete-postit="${escapeHTML(item.id)}" aria-label="Supprimer le Post-it">×</button>
+        </span>
+      </div>
+      <div class="postit-text">${escapeHTML(item.text)}</div>
+    </article>`).join("");
+
+  board.querySelectorAll("[data-edit-postit]").forEach(button => {
+    button.addEventListener("click", () => {
+      const item = postits.find(note => note.id === button.dataset.editPostit);
+      if (!item) return;
+
+      const updated = prompt("Modifie le texte de ton Post-it :", item.text);
+      if (updated !== null && updated.trim()) {
+        item.text = updated.trim();
+        savePostits();
+        renderPostits();
+      }
+    });
+  });
+
+  board.querySelectorAll("[data-delete-postit]").forEach(button => {
+    button.addEventListener("click", () => {
+      const item = postits.find(note => note.id === button.dataset.deletePostit);
+      if (item && confirm("Supprimer ce Post-it ?")) {
+        postits = postits.filter(note => note.id !== item.id);
+        savePostits();
+        renderPostits();
+      }
+    });
+  });
+
+  board.querySelectorAll("[data-drag-handle]").forEach(handle => {
+    handle.addEventListener("pointerdown", event => {
+      if (event.target.closest("button")) return;
+
+      const card = handle.closest(".postit");
+      const item = postits.find(note => note.id === handle.dataset.dragHandle);
+      if (!card || !item) return;
+
+      event.preventDefault();
+
+      const startX = event.clientX;
+      const startY = event.clientY;
+      const originalX = card.offsetLeft;
+      const originalY = card.offsetTop;
+
+      card.classList.add("dragging");
+      card.style.zIndex = "20";
+      handle.setPointerCapture?.(event.pointerId);
+
+      const move = moveEvent => {
+        const maxX = Math.max(0, board.clientWidth - card.offsetWidth);
+        const maxY = Math.max(0, board.clientHeight - card.offsetHeight);
+        const x = Math.min(maxX, Math.max(0, originalX + moveEvent.clientX - startX));
+        const y = Math.min(maxY, Math.max(0, originalY + moveEvent.clientY - startY));
+
+        card.style.left = x + "px";
+        card.style.top = y + "px";
+      };
+
+      const finish = () => {
+        card.classList.remove("dragging");
+        card.style.zIndex = "";
+        handle.removeEventListener("pointermove", move);
+        handle.removeEventListener("pointerup", finish);
+        handle.removeEventListener("pointercancel", finish);
+
+        item.x = card.offsetLeft;
+        item.y = card.offsetTop;
+        savePostits();
+      };
+
+      handle.addEventListener("pointermove", move);
+      handle.addEventListener("pointerup", finish);
+      handle.addEventListener("pointercancel", finish);
+    });
+  });
+}
+
+$("addPostit").addEventListener("click", () => {
+  const text = prompt(
+    "Qu'est-ce que tu veux écrire sur ton Post-it ?",
+    "N'oublie pas de réviser ! 💗"
+  );
+
+  if (text === null || !text.trim()) return;
+
+  const board = $("postitBoard");
+  const index = postits.length;
+  const cardWidth = window.innerWidth <= 480 ? 145 : 175;
+  const maxX = Math.max(0, board.clientWidth - cardWidth);
+
+  postits.push({
+    id:makeId(),
+    text:text.trim(),
+    x:Math.min(maxX, 14 + (index % 4) * (cardWidth + 12)),
+    y:12 + (index % 5) * 24,
+    color:postitColors[index % postitColors.length],
+    tilt:((index % 3) - 1) * 1.2
+  });
+
+  savePostits();
+  renderPostits();
+});
+
+$("clearPostits").addEventListener("click", () => {
+  if (!postits.length) {
+    alert("Tu n'as pas encore de Post-it à effacer. 🌷");
+    return;
+  }
+
+  if (confirm("Supprimer tous tes Post-it ?")) {
+    postits = [];
+    savePostits();
+    renderPostits();
+  }
+});
+
+/* PERSONNALISATION : mode sombre permanent */
+document.body.classList.add("dark");
+document.body.dataset.theme = "berry";
 
 /* AMBIANCE SONORE */
 let audioContext = null;
@@ -801,6 +1241,7 @@ let ambienceOn = false;
 
 function playSoftNote() {
   if (!audioContext || !ambienceOn) return;
+
   const frequencies = [261.63,329.63,392,440,523.25];
   const frequency = frequencies[Math.floor(Math.random() * frequencies.length)];
   const oscillator = audioContext.createOscillator();
@@ -823,6 +1264,7 @@ $("ambienceToggle").addEventListener("click", async () => {
     try {
       const AudioContextClass = window.AudioContext || window.webkitAudioContext;
       if (!AudioContextClass) throw new Error("Audio non disponible");
+
       audioContext = audioContext || new AudioContextClass();
       if (audioContext.state === "suspended") await audioContext.resume();
 
@@ -871,6 +1313,7 @@ function updateTimerDisplay() {
   const elapsedRatio = timerDuration > 0
     ? 1 - timerRemaining / timerDuration
     : 0;
+
   $("timerProgress").style.strokeDashoffset =
     ringCircumference * Math.max(0, Math.min(1, elapsedRatio));
 
@@ -884,6 +1327,7 @@ function stopTimer() {
     clearInterval(timerInterval);
     timerInterval = null;
   }
+
   timerEndTime = null;
   $("timerCharacter").classList.remove("running");
 }
@@ -921,6 +1365,7 @@ function applyCustomDuration() {
   $("timerSeconds").value = seconds;
 
   const total = hours * 3600 + minutes * 60 + seconds;
+
   if (total <= 0) {
     $("timerMessage").textContent = "Choisis une durée supérieure à zéro. 🌷";
     return;
@@ -928,9 +1373,11 @@ function applyCustomDuration() {
 
   timerDuration = total;
   timerRemaining = total;
+
   document.querySelectorAll(".timer-preset").forEach(button => {
     button.classList.toggle("selected", total === Number(button.dataset.minutes) * 60);
   });
+
   $("timerMode").textContent = "Ta durée personnalisée";
   $("timerMessage").textContent = "C'est parti quand tu veux ! 💗";
   updateTimerDisplay();
@@ -1003,6 +1450,8 @@ document.querySelectorAll(".timer-preset").forEach(button => {
 syncTimerInputs();
 resetTimer();
 renderAll();
+renderNotes();
+renderPostits();
 </script>
 </body>
 </html>
