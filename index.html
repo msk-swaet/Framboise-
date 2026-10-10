@@ -6,1183 +6,337 @@
 <meta name="theme-color" content="#f8e8f1">
 <meta name="description" content="Framboise, ton petit espace pour t'organiser, étudier et te concentrer.">
 <title>Framboise 🍇</title>
-
 <style>
-:root {
-  --bg: #fff7fb;
-  --surface: #ffffff;
-  --surface2: #fff0f7;
-  --text: #51384d;
-  --muted: #987b91;
-  --accent: #d66aa0;
-  --accent2: #a984d6;
-  --border: #f0d9e8;
-  --shadow: 0 8px 25px rgba(145, 86, 125, .10);
-}
-body[data-theme="purple"] {
-  --bg:#faf6ff; --surface:#fff; --surface2:#f0e8ff;
-  --text:#49375d; --muted:#89749e; --accent:#9874d8;
-  --accent2:#c39be8; --border:#e7daf8;
-}
-body[data-theme="rose"] {
-  --bg:#fff6f5; --surface:#fff; --surface2:#ffe9e8;
-  --text:#633d49; --muted:#a07b85; --accent:#e77d91;
-  --accent2:#f3b1bd; --border:#f7d9dd;
-}
-body[data-theme="plum"] {
-  --bg:#f8f3fa; --surface:#fff; --surface2:#eee2f4;
-  --text:#49344e; --muted:#8b7590; --accent:#9562a5;
-  --accent2:#c59acb; --border:#e4d2e9;
-}
-body.dark {
-  --bg:#211a29; --surface:#302638; --surface2:#3a2c43;
-  --text:#f7eaf5; --muted:#c2a9c1; --accent:#e795c1;
-  --accent2:#c3a1f0; --border:#4c3b52;
-  --shadow:0 8px 25px rgba(0,0,0,.2);
-}
-* { box-sizing:border-box; }
-body {
-  margin:0; background:var(--bg); color:var(--text);
-  font-family:"Trebuchet MS",Arial,sans-serif;
-  transition:background .3s,color .3s;
-}
-button,input,select,textarea { font:inherit; }
-button {
-  border:0; border-radius:14px; padding:11px 15px;
-  background:var(--surface2); color:var(--text);
-  cursor:pointer; transition:transform .2s,opacity .2s;
-}
-button:hover { transform:translateY(-2px); }
-button:focus-visible,input:focus-visible,select:focus-visible {
-  outline:3px solid var(--accent2); outline-offset:2px;
-}
-button.primary { background:var(--accent); color:white; }
-button.secondary { border:1px solid var(--border); }
-button.danger { background:#ffe4e8; color:#a83f5c; }
-input,select,textarea {
-  width:100%; padding:12px; border-radius:12px;
-  border:1px solid var(--border); background:var(--surface);
-  color:var(--text);
-}
-label { display:block; margin:10px 0 6px; font-size:.92rem; }
-h1 { font-size:clamp(1.7rem,4vw,2.3rem); margin:8px 0 12px; }
-h2 { font-size:1.2rem; }
-p { line-height:1.6; }
-.muted { color:var(--muted); }
-header {
-  padding:24px 18px 18px; text-align:center;
-  background:linear-gradient(135deg,var(--surface2),var(--bg));
-}
-.logo { font-size:2.3rem; }
-header p { margin:6px 0; }
-nav {
-  display:flex; flex-wrap:wrap; justify-content:center; gap:8px;
-  padding:12px; position:sticky; top:0; z-index:10;
-  background:var(--bg); border-bottom:1px solid var(--border);
-}
-nav button { font-size:.92rem; padding:10px 13px; }
-nav button.active { background:var(--accent); color:white; }
-main { max-width:1000px; margin:auto; padding:24px 16px 60px; }
-.page { display:none; animation:fadeIn .3s ease; }
-.page.active { display:block; }
-@keyframes fadeIn {
-  from { opacity:0; transform:translateY(5px); }
-  to { opacity:1; transform:translateY(0); }
-}
-.card {
-  background:var(--surface); border:1px solid var(--border);
-  border-radius:22px; padding:20px; margin:16px 0;
-  box-shadow:var(--shadow);
-}
-.grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:14px; }
-.row { display:flex; gap:10px; flex-wrap:wrap; align-items:center; }
-.row > * { flex:1; }
-.row button { flex:0 0 auto; }
-.task-item {
-  display:flex; gap:12px; align-items:flex-start;
-  padding:13px 0; border-bottom:1px solid var(--border);
-}
-.task-item:last-child { border-bottom:0; }
-.task-item input[type="checkbox"] { width:20px; margin-top:4px; accent-color:var(--accent); }
-.task-content { flex:1; min-width:0; }
-.task-content strong { overflow-wrap:anywhere; }
-.task-content small { display:block; margin-top:5px; color:var(--muted); }
-.task-item.done .task-content strong {
-  text-decoration:line-through; opacity:.6;
-}
-.tag {
-  display:inline-block; border-radius:20px; padding:4px 9px;
-  background:var(--surface2); font-size:.78rem; margin-top:6px;
-}
-.empty { text-align:center; color:var(--muted); padding:22px 8px; }
-footer { text-align:center; padding:24px; color:var(--muted); }
-.calendar-head {
-  display:flex; justify-content:space-between; align-items:center; gap:12px;
-}
-.calendar-grid { display:grid; grid-template-columns:repeat(7,1fr); gap:5px; }
-.calendar-day-name { text-align:center; padding:8px 0; font-size:.8rem; color:var(--muted); }
-.calendar-day {
-  min-height:65px; padding:7px 2px; border:1px solid var(--border);
-  background:var(--surface); border-radius:12px; text-align:center;
-  font-size:.9rem; cursor:pointer;
-}
-.calendar-day.today { border:2px solid var(--accent); }
-.calendar-day.selected { background:var(--surface2); }
-.calendar-day .dot { color:var(--accent); font-size:1.2rem; line-height:1; }
-.calendar-detail { margin-top:18px; }
+:root{--bg:#fff7fb;--surface:#fff;--surface2:#fff0f7;--text:#51384d;--muted:#987b91;--accent:#d66aa0;--accent2:#a984d6;--border:#f0d9e8;--shadow:0 8px 25px rgba(145,86,125,.1)}
+body[data-theme="purple"]{--bg:#faf6ff;--surface:#fff;--surface2:#f0e8ff;--text:#49375d;--muted:#89749e;--accent:#9874d8;--accent2:#c39be8;--border:#e7daf8}
+body[data-theme="rose"]{--bg:#fff6f5;--surface:#fff;--surface2:#ffe9e8;--text:#633d49;--muted:#a07b85;--accent:#e77d91;--accent2:#f3b1bd;--border:#f7d9dd}
+body[data-theme="plum"]{--bg:#f8f3fa;--surface:#fff;--surface2:#eee2f4;--text:#49344e;--muted:#8b7590;--accent:#9562a5;--accent2:#c59acb;--border:#e4d2e9}
+body.dark{--bg:#211a29;--surface:#302638;--surface2:#3a2c43;--text:#f7eaf5;--muted:#c2a9c1;--accent:#e795c1;--accent2:#c3a1f0;--border:#4c3b52;--shadow:0 8px 25px rgba(0,0,0,.2)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:"Trebuchet MS",Arial,sans-serif;transition:background .3s,color .3s}
+button,input,select,textarea{font:inherit}
+button{border:0;border-radius:14px;padding:11px 15px;background:var(--surface2);color:var(--text);cursor:pointer;transition:transform .2s,opacity .2s}
+button:hover{transform:translateY(-2px)}
+button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid var(--accent2);outline-offset:2px}
+button.primary{background:var(--accent);color:white}
+button.secondary{border:1px solid var(--border)}
+button.danger{background:#ffe4e8;color:#a83f5c}
+input,select,textarea{width:100%;padding:12px;border-radius:12px;border:1px solid var(--border);background:var(--surface);color:var(--text)}
+label{display:block;margin:10px 0 6px;font-size:.92rem}
+h1{font-size:clamp(1.7rem,4vw,2.3rem);margin:8px 0 12px}
+h2{font-size:1.2rem}
+p{line-height:1.6}
+.muted{color:var(--muted)}
+header{padding:24px 18px 18px;text-align:center;background:linear-gradient(135deg,var(--surface2),var(--bg))}
+.logo{font-size:2.3rem}
+header p{margin:6px 0}
+nav{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;padding:12px;position:sticky;top:0;z-index:10;background:var(--bg);border-bottom:1px solid var(--border)}
+nav button{font-size:.92rem;padding:10px 13px}
+nav button.active{background:var(--accent);color:white}
+main{max-width:1000px;margin:auto;padding:24px 16px 60px}
+.page{display:none;animation:fadeIn .3s ease}
+.page.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:22px;padding:20px;margin:16px 0;box-shadow:var(--shadow)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.row>*{flex:1}
+.row button{flex:0 0 auto}
+.task-item{display:flex;gap:12px;align-items:flex-start;padding:13px 0;border-bottom:1px solid var(--border)}
+.task-item:last-child{border-bottom:0}
+.task-item input[type=checkbox]{width:20px;margin-top:4px;accent-color:var(--accent)}
+.task-content{flex:1;min-width:0}
+.task-content strong{overflow-wrap:anywhere}
+.task-content small{display:block;margin-top:5px;color:var(--muted)}
+.task-item.done .task-content strong{text-decoration:line-through;opacity:.6}
+.tag{display:inline-block;border-radius:20px;padding:4px 9px;background:var(--surface2);font-size:.78rem;margin-top:6px}
+.empty{text-align:center;color:var(--muted);padding:22px 8px}
+footer{text-align:center;padding:24px;color:var(--muted)}
+.calendar-head{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.calendar-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:5px}
+.calendar-day-name{text-align:center;padding:8px 0;font-size:.8rem;color:var(--muted)}
+.calendar-day{min-height:65px;padding:7px 2px;border:1px solid var(--border);background:var(--surface);border-radius:12px;text-align:center;font-size:.9rem;cursor:pointer}
+.calendar-day.today{border:2px solid var(--accent)}
+.calendar-day.selected{background:var(--surface2)}
+.calendar-day .dot{color:var(--accent);font-size:1.2rem;line-height:1}
+.calendar-detail{margin-top:18px}
 
-/* TIMER : ambiance pastel */
-.timer-shell {
-  max-width:650px; margin:22px auto; position:relative; overflow:hidden;
-  border-radius:30px; padding:25px 16px 30px;
-  text-align:center; isolation:isolate;
-  background:
-    radial-gradient(circle at 15% 20%,#ffe3f0 0,transparent 32%),
-    radial-gradient(circle at 85% 30%,#e9ddff 0,transparent 34%),
-    radial-gradient(circle at 55% 100%,#fff0d9 0,transparent 35%),
-    linear-gradient(145deg,#fff8fc,#f9f0ff,#fff6f0);
-  border:1px solid #f1ddec;
-  box-shadow:0 15px 40px rgba(174,112,163,.16);
-  color:#624568;
-}
-body.dark .timer-shell {
-  background:
-    radial-gradient(circle at 15% 20%,#58354e 0,transparent 35%),
-    radial-gradient(circle at 85% 30%,#40335e 0,transparent 35%),
-    linear-gradient(145deg,#302438,#28213a);
-  border-color:#59425e; color:#f8e9f7;
-}
-.timer-shell > *:not(.bubble):not(.sparkle) { position:relative; z-index:2; }
-.timer-shell h2 { margin:6px 0; font-size:1.4rem; }
-.timer-subtitle { color:#997b9a; margin:8px 0 20px; }
-body.dark .timer-subtitle { color:#d0b5d0; }
-.bubble {
-  position:absolute; z-index:0; border-radius:50%;
-  background:rgba(255,255,255,.45); border:1px solid rgba(255,255,255,.65);
-  animation:floatBubble 7s ease-in-out infinite;
-}
-.bubble.b1 { width:34px;height:34px;left:8%;top:18%; }
-.bubble.b2 { width:19px;height:19px;right:9%;top:25%;animation-delay:-2s; }
-.bubble.b3 { width:46px;height:46px;right:12%;bottom:12%;animation-delay:-4s; }
-.bubble.b4 { width:23px;height:23px;left:12%;bottom:18%;animation-delay:-1s; }
-@keyframes floatBubble {
-  0%,100% { transform:translateY(0) translateX(0); }
-  50% { transform:translateY(-18px) translateX(7px); }
-}
-.sparkle {
-  position:absolute; z-index:1; color:#d6a4e8;
-  animation:twinkle 2.4s ease-in-out infinite;
-  pointer-events:none;
-}
-.sparkle.s1 { top:13%;left:25%;font-size:23px; }
-.sparkle.s2 { top:35%;right:10%;font-size:19px;animation-delay:-.7s; }
-.sparkle.s3 { bottom:25%;left:7%;font-size:18px;animation-delay:-1.3s; }
-.sparkle.s4 { top:8%;right:28%;font-size:15px;animation-delay:-1.8s; }
-@keyframes twinkle {
-  0%,100% { opacity:.35;transform:scale(.7) rotate(0); }
-  50% { opacity:1;transform:scale(1.25) rotate(20deg); }
-}
-.timer-character {
-  width:130px;height:130px;position:relative;margin:12px auto 0;
-  display:flex;align-items:center;justify-content:center;
-}
-.raspberry {
-  width:75px;height:78px;position:relative;
-  filter:drop-shadow(0 7px 4px rgba(132,52,99,.15));
-  transform-origin:bottom center;
-}
-.berry-balls {
-  position:absolute;inset:12px 2px 0;
-}
-.berry-balls i {
-  position:absolute;width:27px;height:27px;border-radius:50%;
-  background:radial-gradient(circle at 30% 25%,#ff9bc3,#e83c83 65%,#bd2467);
-  border:1px solid rgba(170,28,89,.16);
-}
-.berry-balls i:nth-child(1) { left:23px;top:0; }
-.berry-balls i:nth-child(2) { left:8px;top:13px; }
-.berry-balls i:nth-child(3) { left:37px;top:13px; }
-.berry-balls i:nth-child(4) { left:0;top:31px; }
-.berry-balls i:nth-child(5) { left:22px;top:31px; }
-.berry-balls i:nth-child(6) { left:44px;top:31px; }
-.berry-balls i:nth-child(7) { left:11px;top:48px; }
-.berry-balls i:nth-child(8) { left:34px;top:48px; }
-.berry-leaf {
-  position:absolute;top:2px;left:25px;width:28px;height:17px;
-  background:#78bd78;border-radius:100% 0 100% 0;transform:rotate(-24deg);
-}
-.berry-leaf::after {
-  content:"";position:absolute;width:23px;height:13px;left:14px;top:3px;
-  background:#91ce8a;border-radius:0 100% 0 100%;transform:rotate(40deg);
-}
-.berry-face {
-  position:absolute;left:21px;top:34px;width:37px;
-  display:flex;justify-content:space-between;align-items:center;
-}
-.berry-face span {
-  width:5px;height:7px;border-radius:50%;background:#54283e;
-}
-.berry-smile {
-  position:absolute;top:47px;left:34px;width:12px;height:7px;
-  border-bottom:2px solid #54283e;border-radius:0 0 12px 12px;
-}
-.timer-character.running .raspberry { animation:berryBounce .65s ease-in-out infinite; }
-.timer-character.finished .raspberry { animation:berryHappy .5s ease-in-out 3; }
-@keyframes berryBounce {
-  0%,100% { transform:translateY(0) rotate(-4deg); }
-  50% { transform:translateY(-13px) rotate(4deg); }
-}
-@keyframes berryHappy {
-  0%,100% { transform:rotate(0) scale(1); }
-  50% { transform:rotate(12deg) scale(1.12); }
-}
-.timer-ring {
-  width:min(76vw,300px); height:min(76vw,300px);
-  margin:5px auto 18px; position:relative;
-  display:grid;place-items:center;
-}
-.timer-ring svg { width:100%;height:100%;position:absolute;inset:0;transform:rotate(-90deg); }
-.ring-track { fill:none;stroke:rgba(208,157,202,.28);stroke-width:8; }
-.ring-progress {
-  fill:none;stroke:#d66aa0;stroke-width:8;stroke-linecap:round;
-  stroke-dasharray:565.49;stroke-dashoffset:0;
-  transition:stroke-dashoffset .35s linear;
-}
-.timer-ring-content { position:relative;z-index:1;width:100%; }
-#timerDisplay {
-  font-size:clamp(2.5rem,10vw,4.4rem);font-weight:bold;
-  letter-spacing:1px;font-variant-numeric:tabular-nums;
-}
-#timerMode { font-size:1rem;color:#a07c9c;margin:8px 0; }
-body.dark #timerMode { color:#d6b8d5; }
-.timer-message { min-height:28px;margin:8px 0 18px;font-size:.95rem; }
-.timer-controls { display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin:14px 0; }
-.timer-controls button { min-width:105px; }
-.timer-settings {
-  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
-  gap:10px;max-width:390px;margin:18px auto;
-}
-.timer-settings label { font-size:.85rem;text-align:left; }
-.timer-settings input { text-align:center;padding:12px 5px; }
-.timer-presets { display:flex;justify-content:center;gap:7px;flex-wrap:wrap;margin-top:12px; }
-.timer-presets button { padding:9px 12px;font-size:.86rem; }
-.timer-presets button.selected { background:var(--accent);color:white; }
-.timer-note { font-size:.8rem;color:#9c7e9b;margin:14px 0 0; }
+/* TIMER PASTEL */
+.timer-shell{max-width:650px;margin:22px auto;position:relative;overflow:hidden;border-radius:30px;padding:25px 16px 30px;text-align:center;isolation:isolate;background:radial-gradient(circle at 15% 20%,#ffe3f0 0,transparent 32%),radial-gradient(circle at 85% 30%,#e9ddff 0,transparent 34%),radial-gradient(circle at 55% 100%,#fff0d9 0,transparent 35%),linear-gradient(145deg,#fff8fc,#f9f0ff,#fff6f0);border:1px solid #f1ddec;box-shadow:0 15px 40px rgba(174,112,163,.16);color:#624568}
+body.dark .timer-shell{background:radial-gradient(circle at 15% 20%,#58354e 0,transparent 35%),radial-gradient(circle at 85% 30%,#40335e 0,transparent 35%),linear-gradient(145deg,#302438,#28213a);border-color:#59425e;color:#f8e9f7}
+.timer-shell>*:not(.bubble):not(.sparkle){position:relative;z-index:2}
+.timer-shell h2{margin:6px 0;font-size:1.4rem}
+.timer-subtitle{color:#997b9a;margin:8px 0 20px}
+body.dark .timer-subtitle{color:#d0b5d0}
+.bubble{position:absolute;z-index:0;border-radius:50%;background:rgba(255,255,255,.45);border:1px solid rgba(255,255,255,.65);animation:floatBubble 7s ease-in-out infinite}
+.bubble.b1{width:34px;height:34px;left:8%;top:18%}
+.bubble.b2{width:19px;height:19px;right:9%;top:25%;animation-delay:-2s}
+.bubble.b3{width:46px;height:46px;right:12%;bottom:12%;animation-delay:-4s}
+.bubble.b4{width:23px;height:23px;left:12%;bottom:18%;animation-delay:-1s}
+@keyframes floatBubble{0%,100%{transform:translateY(0) translateX(0)}50%{transform:translateY(-18px) translateX(7px)}}
+.sparkle{position:absolute;z-index:1;color:#d6a4e8;animation:twinkle 2.4s ease-in-out infinite;pointer-events:none}
+.sparkle.s1{top:13%;left:25%;font-size:23px}
+.sparkle.s2{top:35%;right:10%;font-size:19px;animation-delay:-.7s}
+.sparkle.s3{bottom:25%;left:7%;font-size:18px;animation-delay:-1.3s}
+.sparkle.s4{top:8%;right:28%;font-size:15px;animation-delay:-1.8s}
+@keyframes twinkle{0%,100%{opacity:.35;transform:scale(.7) rotate(0)}50%{opacity:1;transform:scale(1.25) rotate(20deg)}}
+.timer-character{width:130px;height:130px;position:relative;margin:12px auto 0;display:flex;align-items:center;justify-content:center}
+.raspberry{width:75px;height:78px;position:relative;filter:drop-shadow(0 7px 4px rgba(132,52,99,.15));transform-origin:bottom center}
+.berry-balls{position:absolute;inset:12px 2px 0}
+.berry-balls i{position:absolute;width:27px;height:27px;border-radius:50%;background:radial-gradient(circle at 30% 25%,#ff9bc3,#e83c83 65%,#bd2467);border:1px solid rgba(170,28,89,.16)}
+.berry-balls i:nth-child(1){left:23px;top:0}.berry-balls i:nth-child(2){left:8px;top:13px}.berry-balls i:nth-child(3){left:37px;top:13px}.berry-balls i:nth-child(4){left:0;top:31px}.berry-balls i:nth-child(5){left:22px;top:31px}.berry-balls i:nth-child(6){left:44px;top:31px}.berry-balls i:nth-child(7){left:11px;top:48px}.berry-balls i:nth-child(8){left:34px;top:48px}
+.berry-leaf{position:absolute;top:2px;left:25px;width:28px;height:17px;background:#78bd78;border-radius:100% 0 100% 0;transform:rotate(-24deg)}
+.berry-leaf:after{content:"";position:absolute;width:23px;height:13px;left:14px;top:3px;background:#91ce8a;border-radius:0 100% 0 100%;transform:rotate(40deg)}
+.berry-face{position:absolute;left:21px;top:34px;width:37px;display:flex;justify-content:space-between;align-items:center}
+.berry-face span{width:5px;height:7px;border-radius:50%;background:#54283e}
+.berry-smile{position:absolute;top:47px;left:34px;width:12px;height:7px;border-bottom:2px solid #54283e;border-radius:0 0 12px 12px}
+.timer-character.running .raspberry{animation:berryBounce .65s ease-in-out infinite}
+.timer-character.finished .raspberry{animation:berryHappy .5s ease-in-out 3}
+@keyframes berryBounce{0%,100%{transform:translateY(0) rotate(-4deg)}50%{transform:translateY(-13px) rotate(4deg)}}
+@keyframes berryHappy{0%,100%{transform:rotate(0) scale(1)}50%{transform:rotate(12deg) scale(1.12)}}
+.timer-ring{width:min(76vw,300px);height:min(76vw,300px);margin:5px auto 18px;position:relative;display:grid;place-items:center}
+.timer-ring svg{width:100%;height:100%;position:absolute;inset:0;transform:rotate(-90deg)}
+.ring-track{fill:none;stroke:rgba(208,157,202,.28);stroke-width:8}
+.ring-progress{fill:none;stroke:#d66aa0;stroke-width:8;stroke-linecap:round;stroke-dasharray:565.49;stroke-dashoffset:0;transition:stroke-dashoffset .35s linear}
+.timer-ring-content{position:relative;z-index:1;width:100%}
+#timerDisplay{font-size:clamp(2.5rem,10vw,4.4rem);font-weight:bold;letter-spacing:1px;font-variant-numeric:tabular-nums}
+#timerMode{font-size:1rem;color:#a07c9c;margin:8px 0}
+body.dark #timerMode{color:#d6b8d5}
+.timer-message{min-height:28px;margin:8px 0 18px;font-size:.95rem}
+.timer-controls{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin:14px 0}
+.timer-controls button{min-width:105px}
+.timer-settings{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;max-width:390px;margin:18px auto}
+.timer-settings label{font-size:.85rem;text-align:left}
+.timer-settings input{text-align:center;padding:12px 5px}
+.timer-presets{display:flex;justify-content:center;gap:7px;flex-wrap:wrap;margin-top:12px}
+.timer-presets button{padding:9px 12px;font-size:.86rem}
+.timer-presets button.selected{background:var(--accent);color:white}
+.timer-note{font-size:.8rem;color:#9c7e9b;margin:14px 0 0}
 
-/* NOTES ET POST-IT */
-.notes-form textarea { min-height:120px; resize:vertical; }
-.note-card { border:1px solid var(--border); border-radius:18px; padding:16px; background:var(--surface); margin:12px 0; }
-.note-card h3 { margin:0 0 8px; overflow-wrap:anywhere; }
-.note-card .note-subject { color:var(--muted); font-size:.85rem; margin-bottom:12px; }
-.note-canvas { position:relative; min-height:260px; padding:12px; margin:14px 0; border:1px dashed var(--border); border-radius:12px; background:var(--surface2); overflow:hidden; isolation:isolate; }
-.note-body { position:relative; z-index:0; margin:0; white-space:pre-wrap; overflow-wrap:anywhere; line-height:1.7; }
-.note-postit { position:absolute; width:175px; min-height:145px; padding:0 12px 12px; border-radius:3px 3px 12px 3px; box-shadow:3px 7px 14px rgba(0,0,0,.25); color:#57434f; transform:rotate(var(--tilt, -1deg)); z-index:2; }
-.note-postit-head { display:flex; align-items:center; justify-content:space-between; gap:8px; min-height:34px; cursor:grab; user-select:none; touch-action:none; font-size:.8rem; border-bottom:1px dashed rgba(80,60,70,.2); margin-bottom:8px; }
-.note-postit-head:active { cursor:grabbing; }
-.note-postit-text { min-height:80px; white-space:pre-wrap; overflow-wrap:anywhere; font-size:.92rem; }
-.note-postit-actions { display:flex; gap:4px; }
-.note-postit-actions button { padding:3px 6px; font-size:.8rem; background:rgba(255,255,255,.65); color:#57434f; border-radius:7px; }
-.note-postit.dragging { z-index:50; transform:rotate(0deg); box-shadow:6px 12px 24px rgba(0,0,0,.3); }
-.postit-color-1 { background:#fff0a8; }
-.postit-color-2 { background:#ffd9e8; }
-.postit-color-3 { background:#dff5d7; }
-.postit-color-4 { background:#e7ddff; }
-.postit-color-5 { background:#d9f2ff; }
-.note-actions { display:flex; gap:8px; flex-wrap:wrap; }
-@media(max-width:480px) { .note-postit { width:145px; } .note-canvas { min-height:300px; } }
-
-@media(max-width:480px) {
-  nav { gap:5px; }
-  nav button { padding:9px 10px;font-size:.82rem; }
-  main { padding:18px 12px 40px; }
-  .card { padding:16px; }
-  .timer-shell { padding:20px 10px 24px; }
-  .timer-controls button { flex:1;min-width:95px; }
-  .calendar-day { min-height:49px; }
-}
+/* FICHES DE NOTES DECORATIVES */
+.notes-form textarea{min-height:120px;resize:vertical}
+.note-card{border:1px solid var(--border);border-radius:18px;padding:16px;background:var(--surface);margin:16px 0;box-shadow:var(--shadow)}
+.note-card h3{margin:0 0 8px;overflow-wrap:anywhere}
+.note-card .note-subject{color:var(--muted);font-size:.85rem;margin-bottom:12px}
+.note-canvas{--frame:#c9a9e8;--paper:#fffdfb;position:relative;min-height:280px;padding:28px 20px 22px;margin:14px 0;border:3px solid var(--frame);border-radius:28px 34px 26px 36px;background:var(--paper);overflow:hidden;isolation:isolate;box-shadow:inset 0 0 0 4px rgba(255,255,255,.72)}
+.note-canvas:before{content:attr(data-decoration);position:absolute;top:7px;right:12px;font-size:1.5rem;opacity:.9;z-index:1;pointer-events:none}
+.note-canvas:after{content:"✦ · ✧";position:absolute;bottom:5px;left:12px;color:var(--frame);font-size:.95rem;letter-spacing:5px;pointer-events:none}
+.note-canvas .note-body{z-index:1}
+.note-canvas.template-lavender{--frame:#b99ad8;--paper:#fffaff;border-style:dashed;border-radius:38px}
+.note-canvas.template-tulip{--frame:#e99aa6;--paper:#fffafa;border-radius:8px}
+.note-canvas.template-cloud{--frame:#83b5df;--paper:#fbfdff;border-radius:45px}
+.note-canvas.template-bear{--frame:#d7b27e;--paper:#fffaf1;border-radius:32px 32px 22px 22px}
+.note-canvas.template-grid{--frame:#a8c879;--paper-color:#fffef8;background-color:var(--paper-color);background-image:linear-gradient(#e8e8d7 1px,transparent 1px),linear-gradient(90deg,#e8e8d7 1px,transparent 1px);background-size:25px 25px;border-radius:30px}
+.note-canvas.template-strawberry{--frame:#e78c8b;--paper:#fff9f7;border-radius:24px 36px 24px 36px}
+.note-canvas.template-star{--frame:#e7bd68;--paper:#fffdf5;border-radius:24px 42px 24px 42px}
+.note-canvas.template-flowers{--frame:#b5a0df;--paper:#fffaff;border-style:double;border-width:5px;border-radius:30px}
+.note-canvas.template-penguin{--frame:#7ca9ce;--paper:#fafdff;border-radius:8px 30px 8px 30px}
+.note-canvas.template-heart{--frame:#e99aa9;--paper:#fff7f7;border-radius:30px}
+.note-canvas.template-daisy{--frame:#e2b58a;--paper:#fffaf4;border-radius:34px 18px 34px 18px}
+.note-canvas.template-notebook{--frame:#b99ad8;--paper:#fffaff;border-radius:12px;border-left-width:9px}
+.note-template-select{margin-top:6px}
+.note-body{position:relative;z-index:0;margin:0;white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.7}
+.note-postit{position:absolute;width:175px;min-height:145px;padding:0 12px 12px;border-radius:3px 3px 12px 3px;box-shadow:3px 7px 14px rgba(0,0,0,.25);color:#57434f;transform:rotate(var(--tilt,-1deg));z-index:2}
+.note-postit-head{display:flex;align-items:center;justify-content:space-between;gap:8px;min-height:34px;cursor:grab;user-select:none;touch-action:none;font-size:.8rem;border-bottom:1px dashed rgba(80,60,70,.2);margin-bottom:8px}
+.note-postit-head:active{cursor:grabbing}
+.note-postit-text{min-height:80px;white-space:pre-wrap;overflow-wrap:anywhere;font-size:.92rem}
+.note-postit-actions{display:flex;gap:4px}
+.note-postit-actions button{padding:3px 6px;font-size:.8rem;background:rgba(255,255,255,.65);color:#57434f;border-radius:7px}
+.note-postit.dragging{z-index:50;transform:rotate(0);box-shadow:6px 12px 24px rgba(0,0,0,.3)}
+.postit-color-1{background:#fff0a8}.postit-color-2{background:#ffd9e8}.postit-color-3{background:#dff5d7}.postit-color-4{background:#e7ddff}.postit-color-5{background:#d9f2ff}
+.note-actions{display:flex;gap:8px;flex-wrap:wrap}
+@media(max-width:480px){.note-postit{width:145px}.note-canvas{min-height:300px}}
+@media(max-width:480px){nav{gap:5px}nav button{padding:9px 10px;font-size:.82rem}main{padding:18px 12px 40px}.card{padding:16px}.timer-shell{padding:20px 10px 24px}.timer-controls button{flex:1;min-width:95px}.calendar-day{min-height:49px}}
 </style>
 </head>
 <body data-theme="berry">
-<header>
-  <div class="logo">🍇</div>
-  <h1>Framboise</h1>
-  <p>Ton petit espace pour apprendre, t'organiser et réussir ✨</p>
-</header>
+<header><div class="logo">🍇</div><h1>Framboise</h1><p>Ton petit espace pour apprendre, t'organiser et réussir ✨</p></header>
 <nav aria-label="Navigation principale">
-  <button class="active" data-page="home">🏡 Accueil</button>
-  <button data-page="tasks">📝 Tâches</button>
-  <button data-page="notes">📒 Notes</button>
-  <button data-page="calendar">📅 Calendrier</button>
-  <button data-page="timer">⏱️ Timer</button>
-  <button data-page="customize">🎨 Personnaliser</button>
+<button class="active" data-page="home">🏡 Accueil</button><button data-page="tasks">📝 Tâches</button><button data-page="notes">📒 Notes</button><button data-page="calendar">📅 Calendrier</button><button data-page="timer">⏱️ Timer</button><button data-page="customize">🎨 Personnaliser</button>
 </nav>
 <main>
-  <section id="home" class="page active">
-    <h1>Coucou, bienvenue ! 🌷</h1>
-    <p class="muted">Avance à ton rythme. Chaque petit progrès compte.</p>
-    <div class="grid">
-      <div class="card">
-        <h2>📝 Mes tâches</h2>
-        <p><strong id="homeTaskCount">0</strong> tâche(s) à terminer</p>
-        <button class="primary" data-goto="tasks">Voir mes tâches</button>
-      </div>
-      <div class="card">
-        <h2>⏱️ Mon temps de concentration</h2>
-        <p>Un moment rien que pour tes études.</p>
-        <button class="primary" data-goto="timer">Lancer le timer</button>
-      </div>
-      <div class="card">
-        <h2>📅 Mon calendrier</h2>
-        <p>Retrouve tes tâches et organise tes journées.</p>
-        <button class="primary" data-goto="calendar">Ouvrir le calendrier</button>
-      </div>
-      <div class="card">
-        <h2>📒 Mes notes</h2>
-        <p>Garde tes idées et crée des Post-it colorés.</p>
-        <button class="primary" data-goto="notes">Ouvrir mes notes</button>
-      </div>
-    </div>
-    <div class="card">
-      <h2>✨ Mes prochaines tâches</h2>
-      <div id="homeTasks"></div>
-    </div>
-  </section>
-
-  <section id="tasks" class="page">
-    <h1>Mes tâches 📝</h1>
-    <p class="muted">Note ce que tu dois faire et coche chaque tâche terminée.</p>
-    <div class="card">
-      <h2>Ajouter une tâche</h2>
-      <form id="taskForm">
-        <label for="taskTitle">Nom de la tâche</label>
-        <input id="taskTitle" maxlength="120" placeholder="Ex. Réviser les maths" required>
-        <div class="grid">
-          <div>
-            <label for="taskCategory">Catégorie</label>
-            <select id="taskCategory">
-              <option>Études</option><option>Devoirs</option><option>Révisions</option><option>Personnel</option><option>Autre</option>
-            </select>
-          </div>
-          <div>
-            <label for="taskDate">Date (facultatif)</label>
-            <input id="taskDate" type="date">
-          </div>
-        </div>
-        <label for="taskPriority">Priorité</label>
-        <select id="taskPriority">
-          <option value="Normale">Normale</option><option value="Importante">Importante</option><option value="Urgente">Urgente</option>
-        </select>
-        <div style="margin-top:15px"><button class="primary" type="submit">＋ Ajouter la tâche</button></div>
-      </form>
-    </div>
-    <div class="card">
-      <div class="row">
-        <h2>Ma liste</h2>
-        <select id="taskFilter" aria-label="Filtrer les tâches">
-          <option value="all">Toutes les tâches</option><option value="todo">À faire</option><option value="done">Terminées</option>
-        </select>
-      </div>
-      <div id="taskList"></div>
-      <div class="row" style="margin-top:12px">
-        <button id="deleteCompleted" class="secondary">🧹 Supprimer les tâches terminées</button>
-        <button id="exportTasks" class="secondary">⬇️ Exporter mes tâches</button>
-      </div>
-    </div>
-  </section>
-
-  <section id="calendar" class="page">
-    <h1>Mon calendrier 📅</h1>
-    <p class="muted">Sélectionne une date pour voir les tâches prévues.</p>
-    <div class="card">
-      <div class="calendar-head">
-        <button id="prevMonth" aria-label="Mois précédent">←</button>
-        <h2 id="monthTitle"></h2>
-        <button id="nextMonth" aria-label="Mois suivant">→</button>
-      </div>
-      <div class="calendar-grid" id="calendarNames"></div>
-      <div class="calendar-grid" id="calendarDays"></div>
-      <div class="calendar-detail">
-        <h2 id="selectedDateTitle">Mes tâches du jour</h2>
-        <div id="calendarTasks"></div>
-      </div>
-    </div>
-  </section>
-
-  <section id="notes" class="page">
-    <h1>Mon carnet de notes 📒</h1>
-    <p class="muted">Tes idées, tes cours et tes petits rappels restent ici. 💗</p>
-    <div class="card">
-      <h2>✍️ Écrire une note</h2>
-      <form id="noteForm" class="notes-form">
-        <label for="noteTitle">Titre de la note</label>
-        <input id="noteTitle" maxlength="120" placeholder="Ex. Résumé de SVT" required>
-        <label for="noteSubject">Matière ou catégorie (facultatif)</label>
-        <input id="noteSubject" maxlength="80" placeholder="Ex. SVT, idées, personnel...">
-        <label for="noteBody">Ta note</label>
-        <textarea id="noteBody" maxlength="12000" placeholder="Écris ici tout ce que tu veux garder..." required></textarea>
-        <div class="row" style="margin-top:12px">
-          <button class="primary" id="saveNoteButton" type="submit">＋ Enregistrer la note</button>
-          <button class="secondary" id="cancelNoteEdit" type="button" hidden>Annuler la modification</button>
-        </div>
-      </form>
-    </div>
-    <div class="card">
-      <h2>📚 Mes notes enregistrées</h2>
-      <div id="notesList"></div>
-    </div>
-  </section>
-
-  <section id="timer" class="page">
-    <h1>Mon temps de concentration ⏱️</h1>
-    <p class="muted">Un petit pas à la fois, tu vas y arriver. 💗</p>
-    <div class="timer-shell">
-      <span class="bubble b1"></span><span class="bubble b2"></span><span class="bubble b3"></span><span class="bubble b4"></span>
-      <span class="sparkle s1">✦</span><span class="sparkle s2">✧</span><span class="sparkle s3">✦</span><span class="sparkle s4">✧</span>
-      <h2>Mon petit moment à moi</h2>
-      <p class="timer-subtitle">Respire, concentre-toi et fais de ton mieux 🌸</p>
-      <div id="timerCharacter" class="timer-character" aria-hidden="true">
-        <div class="raspberry">
-          <div class="berry-leaf"></div>
-          <div class="berry-balls"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
-          <div class="berry-face"><span></span><span></span></div><div class="berry-smile"></div>
-        </div>
-      </div>
-      <div class="timer-ring">
-        <svg viewBox="0 0 200 200" aria-hidden="true">
-          <circle class="ring-track" cx="100" cy="100" r="90"></circle>
-          <circle id="timerProgress" class="ring-progress" cx="100" cy="100" r="90"></circle>
-        </svg>
-        <div class="timer-ring-content">
-          <div id="timerDisplay" role="timer" aria-live="off">30:00</div>
-          <div id="timerMode">Session de concentration</div>
-        </div>
-      </div>
-      <p id="timerMessage" class="timer-message">Prête à te concentrer ? 💗</p>
-      <div class="timer-controls">
-        <button id="timerStart" class="primary" type="button">▶ Démarrer</button>
-        <button id="timerPause" class="secondary" type="button">⏸ Pause</button>
-        <button id="timerReset" class="secondary" type="button">↻ Réinitialiser</button>
-      </div>
-      <div class="card" style="background:rgba(255,255,255,.48);box-shadow:none;border-color:rgba(225,190,220,.65);">
-        <h2>Choisis ta durée 🌷</h2>
-        <div class="timer-settings">
-          <div><label for="timerHours">Heures</label><input id="timerHours" type="number" min="0" max="99" value="0" inputmode="numeric"></div>
-          <div><label for="timerMinutes">Minutes</label><input id="timerMinutes" type="number" min="0" max="59" value="30" inputmode="numeric"></div>
-          <div><label for="timerSeconds">Secondes</label><input id="timerSeconds" type="number" min="0" max="59" value="0" inputmode="numeric"></div>
-        </div>
-        <button id="timerApply" class="primary" type="button">Appliquer ma durée</button>
-        <div class="timer-presets">
-          <button class="secondary timer-preset" data-minutes="15" type="button">15 min</button>
-          <button class="secondary timer-preset" data-minutes="25" type="button">25 min</button>
-          <button class="secondary timer-preset selected" data-minutes="30" type="button">30 min</button>
-          <button class="secondary timer-preset" data-minutes="45" type="button">45 min</button>
-          <button class="secondary timer-preset" data-minutes="60" type="button">1 heure</button>
-        </div>
-      </div>
-      <p class="timer-note">Tu peux choisir une durée courte ou longue, comme tu veux. 🍇</p>
-    </div>
-  </section>
-
-  <section id="customize" class="page">
-    <h1>Personnaliser Framboise 🎨</h1>
-    <p class="muted">Choisis l'ambiance qui te plaît.</p>
-    <div class="card">
-      <h2>Couleurs du site</h2>
-      <div class="grid">
-        <button class="theme-choice" data-theme-choice="berry">🍇 Framboise</button>
-        <button class="theme-choice" data-theme-choice="purple">💜 Lavande</button>
-        <button class="theme-choice" data-theme-choice="rose">🌸 Rose</button>
-        <button class="theme-choice" data-theme-choice="plum">🪻 Prune</button>
-      </div>
-    </div>
-    <div class="card">
-      <h2>Mode sombre 🌙</h2>
-      <p class="muted">Pour une ambiance plus douce le soir.</p>
-      <button id="darkToggle" class="primary">Activer / désactiver le mode sombre</button>
-    </div>
-    <div class="card">
-      <h2>Ambiance sonore 🎵</h2>
-      <p class="muted">Un son doux généré directement par le navigateur, sans musique à télécharger.</p>
-      <button id="ambienceToggle" class="primary">♫ Activer l'ambiance</button>
-      <p id="ambienceStatus" class="muted">Ambiance désactivée.</p>
-    </div>
-  </section>
+<section id="home" class="page active">
+<h1>Coucou, bienvenue ! 🌷</h1><p class="muted">Avance à ton rythme. Chaque petit progrès compte.</p>
+<div class="grid">
+<div class="card"><h2>📝 Mes tâches</h2><p><strong id="homeTaskCount">0</strong> tâche(s) à terminer</p><button class="primary" data-goto="tasks">Voir mes tâches</button></div>
+<div class="card"><h2>⏱️ Mon temps de concentration</h2><p>Un moment rien que pour tes études.</p><button class="primary" data-goto="timer">Lancer le timer</button></div>
+<div class="card"><h2>📅 Mon calendrier</h2><p>Retrouve tes tâches et organise tes journées.</p><button class="primary" data-goto="calendar">Ouvrir le calendrier</button></div>
+<div class="card"><h2>📒 Mes notes</h2><p>Garde tes idées et crée des Post-it colorés.</p><button class="primary" data-goto="notes">Ouvrir mes notes</button></div>
+</div><div class="card"><h2>✨ Mes prochaines tâches</h2><div id="homeTasks"></div></div>
+</section>
+<section id="tasks" class="page">
+<h1>Mes tâches 📝</h1><p class="muted">Note ce que tu dois faire et coche chaque tâche terminée.</p>
+<div class="card"><h2>Ajouter une tâche</h2><form id="taskForm">
+<label for="taskTitle">Nom de la tâche</label><input id="taskTitle" maxlength="120" placeholder="Ex. Réviser les maths" required>
+<div class="grid"><div><label for="taskCategory">Catégorie</label><select id="taskCategory"><option>Études</option><option>Devoirs</option><option>Révisions</option><option>Personnel</option><option>Autre</option></select></div>
+<div><label for="taskDate">Date (facultatif)</label><input id="taskDate" type="date"></div></div>
+<label for="taskPriority">Priorité</label><select id="taskPriority"><option value="Normale">Normale</option><option value="Importante">Importante</option><option value="Urgente">Urgente</option></select>
+<div style="margin-top:15px"><button class="primary" type="submit">＋ Ajouter la tâche</button></div>
+</form></div>
+<div class="card"><div class="row"><h2>Ma liste</h2><select id="taskFilter" aria-label="Filtrer les tâches"><option value="all">Toutes les tâches</option><option value="todo">À faire</option><option value="done">Terminées</option></select></div>
+<div id="taskList"></div><div class="row" style="margin-top:12px"><button id="deleteCompleted" class="secondary">🧹 Supprimer les tâches terminées</button><button id="exportTasks" class="secondary">⬇️ Exporter mes tâches</button></div></div>
+</section>
+<section id="calendar" class="page">
+<h1>Mon calendrier 📅</h1><p class="muted">Sélectionne une date pour voir les tâches prévues.</p>
+<div class="card"><div class="calendar-head"><button id="prevMonth" aria-label="Mois précédent">←</button><h2 id="monthTitle"></h2><button id="nextMonth" aria-label="Mois suivant">→</button></div>
+<div class="calendar-grid" id="calendarNames"></div><div class="calendar-grid" id="calendarDays"></div>
+<div class="calendar-detail"><h2 id="selectedDateTitle">Mes tâches du jour</h2><div id="calendarTasks"></div></div></div>
+</section>
+<section id="notes" class="page">
+<h1>Mon carnet de notes 📒</h1><p class="muted">Tes idées, tes cours et tes petits rappels restent ici. 💗</p>
+<div class="card"><h2>✍️ Écrire une note</h2><form id="noteForm" class="notes-form">
+<label for="noteTitle">Titre de la note</label><input id="noteTitle" maxlength="120" placeholder="Ex. Résumé de SVT" required>
+<label for="noteSubject">Matière ou catégorie (facultatif)</label><input id="noteSubject" maxlength="80" placeholder="Ex. SVT, idées, personnel...">
+<label for="noteTemplate">Modèle décoratif de la fiche</label>
+<select id="noteTemplate" class="note-template-select">
+<option value="lavender">💜 Cadre lavande</option><option value="tulip">🌷 Tulipes roses</option><option value="cloud">☁️ Nuage bleu</option><option value="bear">🧸 Petit ours</option><option value="grid">🌼 Grille verte</option><option value="strawberry">🍓 Fraise rose</option><option value="star">⭐ Étoile dorée</option><option value="flowers">🌸 Fleurs violettes</option><option value="penguin">🐧 Pingouin bleu</option><option value="heart">💗 Cœurs roses</option><option value="daisy">🌼 Marguerites crème</option><option value="notebook">📒 Page de carnet</option>
+</select>
+<label for="noteBody">Ta note</label><textarea id="noteBody" maxlength="12000" placeholder="Écris ici tout ce que tu veux garder..." required></textarea>
+<div class="row" style="margin-top:12px"><button class="primary" id="saveNoteButton" type="submit">＋ Enregistrer la note</button><button class="secondary" id="cancelNoteEdit" type="button" hidden>Annuler la modification</button></div>
+</form></div>
+<div class="card"><h2>📚 Mes notes enregistrées</h2><div id="notesList"></div></div>
+</section>
+<section id="timer" class="page">
+<h1>Mon temps de concentration ⏱️</h1><p class="muted">Un petit pas à la fois, tu vas y arriver. 💗</p>
+<div class="timer-shell">
+<span class="bubble b1"></span><span class="bubble b2"></span><span class="bubble b3"></span><span class="bubble b4"></span><span class="sparkle s1">✦</span><span class="sparkle s2">✧</span><span class="sparkle s3">✦</span><span class="sparkle s4">✧</span>
+<h2>Mon petit moment à moi</h2><p class="timer-subtitle">Respire, concentre-toi et fais de ton mieux 🌸</p>
+<div id="timerCharacter" class="timer-character" aria-hidden="true"><div class="raspberry"><div class="berry-leaf"></div><div class="berry-balls"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="berry-face"><span></span><span></span></div><div class="berry-smile"></div></div></div>
+<div class="timer-ring"><svg viewBox="0 0 200 200" aria-hidden="true"><circle class="ring-track" cx="100" cy="100" r="90"></circle><circle id="timerProgress" class="ring-progress" cx="100" cy="100" r="90"></circle></svg><div class="timer-ring-content"><div id="timerDisplay" role="timer" aria-live="off">30:00</div><div id="timerMode">Session de concentration</div></div></div>
+<p id="timerMessage" class="timer-message">Prête à te concentrer ? 💗</p>
+<div class="timer-controls"><button id="timerStart" class="primary" type="button">▶ Démarrer</button><button id="timerPause" class="secondary" type="button">⏸ Pause</button><button id="timerReset" class="secondary" type="button">↻ Réinitialiser</button></div>
+<div class="card" style="background:rgba(255,255,255,.48);box-shadow:none;border-color:rgba(225,190,220,.65)"><h2>Choisis ta durée 🌷</h2>
+<div class="timer-settings"><div><label for="timerHours">Heures</label><input id="timerHours" type="number" min="0" max="99" value="0" inputmode="numeric"></div><div><label for="timerMinutes">Minutes</label><input id="timerMinutes" type="number" min="0" max="59" value="30" inputmode="numeric"></div><div><label for="timerSeconds">Secondes</label><input id="timerSeconds" type="number" min="0" max="59" value="0" inputmode="numeric"></div></div>
+<button id="timerApply" class="primary" type="button">Appliquer ma durée</button>
+<div class="timer-presets"><button class="secondary timer-preset" data-minutes="15" type="button">15 min</button><button class="secondary timer-preset" data-minutes="25" type="button">25 min</button><button class="secondary timer-preset selected" data-minutes="30" type="button">30 min</button><button class="secondary timer-preset" data-minutes="45" type="button">45 min</button><button class="secondary timer-preset" data-minutes="60" type="button">1 heure</button></div>
+</div><p class="timer-note">Tu peux choisir une durée courte ou longue, comme tu veux. 🍇</p>
+</div>
+</section>
+<section id="customize" class="page">
+<h1>Personnaliser Framboise 🎨</h1><p class="muted">Choisis l'ambiance qui te plaît.</p>
+<div class="card"><h2>Couleurs du site</h2><div class="grid"><button class="theme-choice" data-theme-choice="berry">🍇 Framboise</button><button class="theme-choice" data-theme-choice="purple">💜 Lavande</button><button class="theme-choice" data-theme-choice="rose">🌸 Rose</button><button class="theme-choice" data-theme-choice="plum">🪻 Prune</button></div></div>
+<div class="card"><h2>Mode sombre 🌙</h2><p class="muted">Pour une ambiance plus douce le soir.</p><button id="darkToggle" class="primary">Activer / désactiver le mode sombre</button></div>
+<div class="card"><h2>Ambiance sonore 🎵</h2><p class="muted">Un son doux généré directement par le navigateur, sans musique à télécharger.</p><button id="ambienceToggle" class="primary">♫ Activer l'ambiance</button><p id="ambienceStatus" class="muted">Ambiance désactivée.</p></div>
+</section>
 </main>
 <footer>Fait avec 💗 pour t'aider à avancer à ton rythme · Framboise 🍇</footer>
 <script>
 "use strict";
-
-const $ = id => document.getElementById(id);
-const STORAGE_KEY = "framboise-tasks-v1";
-const NOTES_STORAGE_KEY = "framboise-notes-v1";
-
-function makeId() {
-  return Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
-}
-
-function escapeHTML(value) {
-  return String(value ?? "").replace(/[&<>"']/g, char => ({
-    "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#39;"
-  })[char]);
-}
-
-function localDateString(date = new Date()) {
-  return `${date.getFullYear()}-${String(date.getMonth()+1).padStart(2,"0")}-${String(date.getDate()).padStart(2,"0")}`;
-}
-
-function loadArray(key) {
-  try {
-    const value = JSON.parse(localStorage.getItem(key) || "[]");
-    return Array.isArray(value) ? value : [];
-  } catch {
-    return [];
-  }
-}
-
-let tasks = loadArray(STORAGE_KEY);
-let notes = loadArray(NOTES_STORAGE_KEY);
-let editingNoteId = null;
-
-function saveTasks() {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(tasks));
-}
-
-function saveNotes() {
-  localStorage.setItem(NOTES_STORAGE_KEY, JSON.stringify(notes));
-}
+const $=id=>document.getElementById(id);
+const STORAGE_KEY="framboise-tasks-v1";
+let tasks=[];
+try{const saved=JSON.parse(localStorage.getItem(STORAGE_KEY)||"[]");tasks=Array.isArray(saved)?saved:[]}catch(error){tasks=[]}
+function saveTasks(){try{localStorage.setItem(STORAGE_KEY,JSON.stringify(tasks))}catch(error){alert("Impossible d'enregistrer les tâches dans ce navigateur.")}}
+function makeId(){return Date.now().toString(36)+Math.random().toString(36).slice(2,8)}
+function escapeHTML(value){return String(value??"").replace(/[&<>"']/g,char=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[char]))}
+function localDateString(date=new Date()){const year=date.getFullYear(),month=String(date.getMonth()+1).padStart(2,"0"),day=String(date.getDate()).padStart(2,"0");return `${year}-${month}-${day}`}
 
 /* NAVIGATION */
-function showPage(pageId) {
-  document.querySelectorAll(".page").forEach(page => {
-    page.classList.toggle("active", page.id === pageId);
-  });
-  document.querySelectorAll("nav [data-page]").forEach(button => {
-    button.classList.toggle("active", button.dataset.page === pageId);
-  });
-  if (pageId === "calendar") renderCalendar();
-  if (pageId === "tasks") renderTasks();
-  if (pageId === "notes") renderNotes();
-  if (pageId === "home") renderHome();
-}
-
-document.querySelectorAll("nav [data-page]").forEach(button => {
-  button.addEventListener("click", () => showPage(button.dataset.page));
-});
-document.querySelectorAll("[data-goto]").forEach(button => {
-  button.addEventListener("click", () => showPage(button.dataset.goto));
-});
+function showPage(pageId){document.querySelectorAll(".page").forEach(page=>page.classList.toggle("active",page.id===pageId));document.querySelectorAll("nav [data-page]").forEach(button=>button.classList.toggle("active",button.dataset.page===pageId));if(pageId==="calendar")renderCalendar();if(pageId==="tasks")renderTasks();if(pageId==="notes")renderNotes();if(pageId==="home")renderHome()}
+document.querySelectorAll("nav [data-page]").forEach(button=>button.addEventListener("click",()=>showPage(button.dataset.page)));
+document.querySelectorAll("[data-goto]").forEach(button=>button.addEventListener("click",()=>showPage(button.dataset.goto)));
 
 /* TÂCHES */
-function renderTasks() {
-  const list = $("taskList");
-  const filter = $("taskFilter").value;
-  let filtered = [...tasks];
-
-  if (filter === "todo") filtered = filtered.filter(task => !task.done);
-  if (filter === "done") filtered = filtered.filter(task => task.done);
-
-  filtered.sort((a,b) => {
-    if (a.done !== b.done) return Number(a.done)-Number(b.done);
-    if (a.date && b.date) return a.date.localeCompare(b.date);
-    if (a.date) return -1;
-    if (b.date) return 1;
-    return (b.created || 0)-(a.created || 0);
-  });
-
-  list.innerHTML = filtered.length ? filtered.map(task => `
-    <div class="task-item ${task.done ? "done" : ""}">
-      <input type="checkbox" data-toggle-task="${escapeHTML(task.id)}"
-        ${task.done ? "checked" : ""} aria-label="Marquer comme terminée">
-      <div class="task-content">
-        <strong>${escapeHTML(task.title)}</strong>
-        <small>${task.date ? "📅 "+escapeHTML(task.date)+" · " : ""}${escapeHTML(task.category || "Autre")}</small>
-        <span class="tag">${escapeHTML(task.priority || "Normale")}</span>
-      </div>
-      <button class="secondary" data-delete-task="${escapeHTML(task.id)}">🗑️</button>
-    </div>
-  `).join("") : '<div class="empty">Rien ici pour le moment. 🌷</div>';
-
-  list.querySelectorAll("[data-toggle-task]").forEach(input => {
-    input.addEventListener("change", () => {
-      const task = tasks.find(t => t.id === input.dataset.toggleTask);
-      if (task) task.done = input.checked;
-      saveTasks();
-      renderAll();
-    });
-  });
-
-  list.querySelectorAll("[data-delete-task]").forEach(button => {
-    button.addEventListener("click", () => {
-      tasks = tasks.filter(t => t.id !== button.dataset.deleteTask);
-      saveTasks();
-      renderAll();
-    });
-  });
+function renderTasks(){
+const list=$("taskList"),filter=$("taskFilter").value;let filtered=[...tasks];
+if(filter==="todo")filtered=filtered.filter(task=>!task.done);if(filter==="done")filtered=filtered.filter(task=>task.done);
+filtered.sort((a,b)=>{if(a.done!==b.done)return Number(a.done)-Number(b.done);if(a.date&&b.date)return a.date.localeCompare(b.date);if(a.date)return -1;if(b.date)return 1;return (b.created||0)-(a.created||0)});
+list.innerHTML=filtered.length?filtered.map(task=>`<div class="task-item ${task.done?"done":""}"><input type="checkbox" data-toggle-task="${escapeHTML(task.id)}" ${task.done?"checked":""} aria-label="Marquer comme terminée"><div class="task-content"><strong>${escapeHTML(task.title)}</strong><small>${task.date?"📅 "+escapeHTML(task.date)+" · ":""}${escapeHTML(task.category||"Autre")}</small><span class="tag">${escapeHTML(task.priority||"Normale")}</span></div><button class="secondary" data-delete-task="${escapeHTML(task.id)}" aria-label="Supprimer cette tâche">🗑️</button></div>`).join(""):'<div class="empty">Rien ici pour le moment. 🌷</div>';
+list.querySelectorAll("[data-toggle-task]").forEach(input=>input.addEventListener("change",()=>{const task=tasks.find(item=>item.id===input.dataset.toggleTask);if(task)task.done=input.checked;saveTasks();renderAll()}));
+list.querySelectorAll("[data-delete-task]").forEach(button=>button.addEventListener("click",()=>{tasks=tasks.filter(task=>task.id!==button.dataset.deleteTask);saveTasks();renderAll()}))
 }
-
-$("taskForm").addEventListener("submit", event => {
-  event.preventDefault();
-  const title = $("taskTitle").value.trim();
-  if (!title) return;
-
-  tasks.push({
-    id:makeId(),
-    title,
-    category:$("taskCategory").value,
-    date:$("taskDate").value,
-    priority:$("taskPriority").value,
-    done:false,
-    created:Date.now()
-  });
-
-  saveTasks();
-  $("taskForm").reset();
-  renderAll();
-});
-
-$("taskFilter").addEventListener("change", renderTasks);
-
-$("deleteCompleted").addEventListener("click", () => {
-  const count = tasks.filter(t => t.done).length;
-  if (!count) return alert("Tu n'as pas encore de tâche terminée. 🌷");
-  if (confirm(`Supprimer les ${count} tâche(s) terminée(s) ?`)) {
-    tasks = tasks.filter(t => !t.done);
-    saveTasks();
-    renderAll();
-  }
-});
-
-$("exportTasks").addEventListener("click", () => {
-  const blob = new Blob([JSON.stringify(tasks,null,2)], {type:"application/json"});
-  const url = URL.createObjectURL(blob);
-  const link = document.createElement("a");
-  link.href = url;
-  link.download = "mes-taches-framboise.json";
-  link.click();
-  URL.revokeObjectURL(url);
-});
-
-function renderHome() {
-  const remaining = tasks.filter(t => !t.done);
-  $("homeTaskCount").textContent = remaining.length;
-  const upcoming = [...remaining].sort((a,b) => {
-    if (a.date && b.date) return a.date.localeCompare(b.date);
-    if (a.date) return -1;
-    if (b.date) return 1;
-    return (b.created || 0)-(a.created || 0);
-  }).slice(0,5);
-
-  $("homeTasks").innerHTML = upcoming.length ? upcoming.map(task => `
-    <div class="task-item">
-      <div class="task-content">
-        <strong>${escapeHTML(task.title)}</strong>
-        <small>${task.date ? "📅 "+escapeHTML(task.date) : escapeHTML(task.category || "Autre")}</small>
-      </div>
-    </div>
-  `).join("") : '<div class="empty">Tu es à jour ! Prends un petit moment pour toi. 💗</div>';
-}
-
-function renderAll() {
-  renderTasks();
-  renderHome();
-  renderCalendar();
-}
+$("taskForm").addEventListener("submit",event=>{event.preventDefault();const title=$("taskTitle").value.trim();if(!title)return;tasks.push({id:makeId(),title,category:$("taskCategory").value,date:$("taskDate").value,priority:$("taskPriority").value,done:false,created:Date.now()});saveTasks();$("taskForm").reset();renderAll();$("taskTitle").focus()});
+$("taskFilter").addEventListener("change",renderTasks);
+$("deleteCompleted").addEventListener("click",()=>{const count=tasks.filter(task=>task.done).length;if(!count){alert("Tu n'as pas encore de tâche terminée à supprimer. 🌷");return}if(confirm(`Supprimer les ${count} tâche(s) terminée(s) ?`)){tasks=tasks.filter(task=>!task.done);saveTasks();renderAll()}});
+$("exportTasks").addEventListener("click",()=>{const blob=new Blob([JSON.stringify(tasks,null,2)],{type:"application/json"}),url=URL.createObjectURL(blob),link=document.createElement("a");link.href=url;link.download="mes-taches-framboise.json";link.click();URL.revokeObjectURL(url)});
+function renderHome(){const remaining=tasks.filter(task=>!task.done);$("homeTaskCount").textContent=remaining.length;const homeList=$("homeTasks");const upcoming=[...remaining].sort((a,b)=>{if(a.date&&b.date)return a.date.localeCompare(b.date);if(a.date)return -1;if(b.date)return 1;return (b.created||0)-(a.created||0)}).slice(0,5);homeList.innerHTML=upcoming.length?upcoming.map(task=>`<div class="task-item"><div class="task-content"><strong>${escapeHTML(task.title)}</strong><small>${task.date?"📅 "+escapeHTML(task.date):escapeHTML(task.category||"Autre")}</small></div></div>`).join(""):'<div class="empty">Tu es à jour ! Prends un petit moment pour toi. 💗</div>'}
+function renderAll(){renderTasks();renderHome();renderCalendar()}
 
 /* CALENDRIER */
-let calendarDate = new Date();
-let selectedDate = localDateString();
-
-$("calendarNames").innerHTML = ["Lun","Mar","Mer","Jeu","Ven","Sam","Dim"]
-  .map(name => `<div class="calendar-day-name">${name}</div>`).join("");
-
-function renderCalendar() {
-  const year = calendarDate.getFullYear();
-  const month = calendarDate.getMonth();
-
-  $("monthTitle").textContent = new Intl.DateTimeFormat("fr-FR", {
-    month:"long", year:"numeric"
-  }).format(calendarDate);
-
-  const offset = (new Date(year,month,1).getDay()+6)%7;
-  const daysInMonth = new Date(year,month+1,0).getDate();
-  const cells = [];
-
-  for (let i=0;i<offset;i++) cells.push("<div></div>");
-
-  for (let day=1;day<=daysInMonth;day++) {
-    const date = `${year}-${String(month+1).padStart(2,"0")}-${String(day).padStart(2,"0")}`;
-    const hasTasks = tasks.some(t => t.date === date);
-    cells.push(`
-      <button type="button" class="calendar-day ${date===localDateString()?"today":""} ${date===selectedDate?"selected":""}"
-        data-calendar-date="${date}" aria-label="${date}">
-        ${day}${hasTasks ? '<div class="dot">•</div>' : ""}
-      </button>
-    `);
-  }
-
-  $("calendarDays").innerHTML = cells.join("");
-  $("calendarDays").querySelectorAll("[data-calendar-date]").forEach(button => {
-    button.addEventListener("click", () => {
-      selectedDate = button.dataset.calendarDate;
-      renderCalendar();
-    });
-  });
-
-  $("selectedDateTitle").textContent = new Intl.DateTimeFormat("fr-FR", {
-    day:"numeric", month:"long", year:"numeric"
-  }).format(new Date(selectedDate+"T12:00:00"));
-
-  const dayTasks = tasks.filter(t => t.date === selectedDate);
-  $("calendarTasks").innerHTML = dayTasks.length ? dayTasks.map(task => `
-    <div class="task-item ${task.done?"done":""}">
-      <div class="task-content">
-        <strong>${escapeHTML(task.title)}</strong>
-        <small>${escapeHTML(task.category || "Autre")} · ${task.done?"Terminée":"À faire"}</small>
-      </div>
-    </div>
-  `).join("") : '<div class="empty">Aucune tâche prévue pour cette date. 🌼</div>';
+let calendarDate=new Date(),selectedDate=localDateString();
+$("calendarNames").innerHTML=["Lun","Mar","Mer","Jeu","Ven","Sam","Dim"].map(name=>`<div class="calendar-day-name">${name}</div>`).join("");
+function renderCalendar(){
+const year=calendarDate.getFullYear(),month=calendarDate.getMonth();
+$("monthTitle").textContent=new Intl.DateTimeFormat("fr-FR",{month:"long",year:"numeric"}).format(calendarDate);
+const firstDay=new Date(year,month,1),offset=(firstDay.getDay()+6)%7,daysInMonth=new Date(year,month+1,0).getDate(),cells=[];
+for(let i=0;i<offset;i++)cells.push("<div></div>");
+for(let day=1;day<=daysInMonth;day++){const date=`${year}-${String(month+1).padStart(2,"0")}-${String(day).padStart(2,"0")}`,hasTasks=tasks.some(task=>task.date===date),isToday=date===localDateString(),isSelected=date===selectedDate;cells.push(`<button type="button" class="calendar-day ${isToday?"today":""} ${isSelected?"selected":""}" data-calendar-date="${date}" aria-label="${date}">${day}${hasTasks?'<div class="dot">•</div>':""}</button>`)}
+$("calendarDays").innerHTML=cells.join("");
+$("calendarDays").querySelectorAll("[data-calendar-date]").forEach(button=>button.addEventListener("click",()=>{selectedDate=button.dataset.calendarDate;renderCalendar()}));
+const prettyDate=new Date(selectedDate+"T12:00:00");
+$("selectedDateTitle").textContent=new Intl.DateTimeFormat("fr-FR",{day:"numeric",month:"long",year:"numeric"}).format(prettyDate);
+const dayTasks=tasks.filter(task=>task.date===selectedDate);
+$("calendarTasks").innerHTML=dayTasks.length?dayTasks.map(task=>`<div class="task-item ${task.done?"done":""}"><div class="task-content"><strong>${escapeHTML(task.title)}</strong><small>${escapeHTML(task.category||"Autre")} · ${task.done?"Terminée":"À faire"}</small></div></div>`).join(""):'<div class="empty">Aucune tâche prévue pour cette date. 🌼</div>'
 }
+$("prevMonth").addEventListener("click",()=>{calendarDate=new Date(calendarDate.getFullYear(),calendarDate.getMonth()-1,1);renderCalendar()});
+$("nextMonth").addEventListener("click",()=>{calendarDate=new Date(calendarDate.getFullYear(),calendarDate.getMonth()+1,1);renderCalendar()});
 
-$("prevMonth").addEventListener("click", () => {
-  calendarDate = new Date(calendarDate.getFullYear(),calendarDate.getMonth()-1,1);
-  renderCalendar();
-});
-$("nextMonth").addEventListener("click", () => {
-  calendarDate = new Date(calendarDate.getFullYear(),calendarDate.getMonth()+1,1);
-  renderCalendar();
-});
+/* NOTES ET POST-IT */
+const NOTES_STORAGE_KEY="framboise-notes-v1",POSTITS_STORAGE_KEY="framboise-postits-v1";
+let notes=[],editingNoteId=null,oldPostits=[];
+try{const savedNotes=JSON.parse(localStorage.getItem(NOTES_STORAGE_KEY)||"[]");notes=Array.isArray(savedNotes)?savedNotes:[]}catch(error){notes=[]}
+try{const savedPostits=JSON.parse(localStorage.getItem(POSTITS_STORAGE_KEY)||"[]");oldPostits=Array.isArray(savedPostits)?savedPostits:[]}catch(error){oldPostits=[]}
+const postitColors=["postit-color-1","postit-color-2","postit-color-3","postit-color-4","postit-color-5"];
+function saveNotes(){try{localStorage.setItem(NOTES_STORAGE_KEY,JSON.stringify(notes))}catch(error){alert("Impossible d'enregistrer les notes dans ce navigateur.")}}
+if(oldPostits.length&&notes.length){if(!Array.isArray(notes[0].postits))notes[0].postits=[];oldPostits.forEach((p,i)=>notes[0].postits.push({id:p.id||makeId(),text:p.text||"",x:Number(p.x)||12,y:Number(p.y)||12,color:postitColors.includes(p.color)?p.color:postitColors[i%5],tilt:Number(p.tilt)||0}));try{localStorage.setItem(POSTITS_STORAGE_KEY,"[]")}catch(error){}saveNotes()}
 
-/* NOTES ET POST-IT SUR CHAQUE NOTE */
-const postitColors = [
-  "postit-color-1","postit-color-2","postit-color-3",
-  "postit-color-4","postit-color-5"
-];
+function renderNotes(){
+const list=$("notesList");
+if(!notes.length){list.innerHTML='<div class="empty">Ton carnet est encore vide. Écris ta première note ! 🌷</div>';return}
+const templates=["lavender","tulip","cloud","bear","grid","strawberry","star","flowers","penguin","heart","daisy","notebook"];
+const decorations={lavender:"✧ ✿",tulip:"🌷",cloud:"☁️",bear:"🧸",grid:"🌼",strawberry:"🍓",star:"⭐",flowers:"🌸",penguin:"🐧",heart:"♡",daisy:"🌼",notebook:"✦"};
+list.innerHTML=[...notes].sort((a,b)=>(b.updated||b.created||0)-(a.updated||a.created||0)).map(note=>{
+const notePostits=Array.isArray(note.postits)?note.postits:[];
+const template=templates.includes(note.template)?note.template:"lavender";
+return `<article class="note-card" data-note-id="${escapeHTML(note.id)}"><h3>${escapeHTML(note.title)}</h3>${note.subject?`<div class="note-subject">${escapeHTML(note.subject)}</div>`:""}<div class="note-canvas template-${template}" data-decoration="${decorations[template]||"✧ ✿"}"><p class="note-body">${escapeHTML(note.body)}</p>${notePostits.map((item,index)=>`<article class="note-postit ${postitColors.includes(item.color)?item.color:postitColors[index%5]}" data-postit-id="${escapeHTML(item.id)}" style="left:${Math.max(0,Number(item.x)||0)}px;top:${Math.max(0,Number(item.y)||0)}px;--tilt:${Number(item.tilt)||0}deg"><div class="note-postit-head" data-drag-handle="${escapeHTML(item.id)}"><span>✦ Petit rappel</span><span class="note-postit-actions"><button type="button" data-edit-p="${escapeHTML(item.id)}" aria-label="Modifier le Post-it">✏️</button><button type="button" data-delete-p="${escapeHTML(item.id)}" aria-label="Supprimer le Post-it">×</button></span></div><div class="note-postit-text">${escapeHTML(item.text)}</div></article>`).join("")}</div><div class="note-actions"><button class="primary" type="button" data-add-p="${escapeHTML(note.id)}">＋ Ajouter un Post-it</button><button class="secondary" type="button" data-edit-note="${escapeHTML(note.id)}">✏️ Modifier la note</button><button class="danger" type="button" data-delete-note="${escapeHTML(note.id)}">🗑️ Supprimer</button></div></article>`
+}).join("");
 
-function renderNotes() {
-  const list = $("notesList");
-
-  if (!notes.length) {
-    list.innerHTML = '<div class="empty">Ton carnet est encore vide. Écris ta première note ! 🌷</div>';
-    return;
-  }
-
-  list.innerHTML = [...notes]
-    .sort((a,b) => (b.updated || b.created || 0)-(a.updated || a.created || 0))
-    .map(note => `
-      <article class="note-card" data-note-id="${escapeHTML(note.id)}">
-        <h3>${escapeHTML(note.title)}</h3>
-        ${note.subject ? `<div class="note-subject">${escapeHTML(note.subject)}</div>` : ""}
-        <div class="note-canvas">
-          <p class="note-body">${escapeHTML(note.body)}</p>
-          ${(note.postits || []).map((p,i) => `
-            <article class="note-postit ${postitColors.includes(p.color)?p.color:postitColors[i%5]}"
-              data-postit-id="${escapeHTML(p.id)}"
-              style="left:${Math.max(0,Number(p.x)||0)}px;top:${Math.max(0,Number(p.y)||0)}px;--tilt:${Number(p.tilt)||0}deg">
-              <div class="note-postit-head" data-drag-handle="${escapeHTML(p.id)}">
-                <span>✦ Petit rappel</span>
-                <span class="note-postit-actions">
-                  <button type="button" data-edit-p="${escapeHTML(p.id)}">✏️</button>
-                  <button type="button" data-delete-p="${escapeHTML(p.id)}">×</button>
-                </span>
-              </div>
-              <div class="note-postit-text">${escapeHTML(p.text)}</div>
-            </article>
-          `).join("")}
-        </div>
-        <div class="note-actions">
-          <button class="primary" type="button" data-add-p="${escapeHTML(note.id)}">＋ Ajouter un Post-it</button>
-          <button class="secondary" type="button" data-edit-note="${escapeHTML(note.id)}">✏️ Modifier</button>
-          <button class="danger" type="button" data-delete-note="${escapeHTML(note.id)}">🗑️ Supprimer</button>
-        </div>
-      </article>
-    `).join("");
-
-  list.querySelectorAll("[data-add-p]").forEach(button => {
-    button.addEventListener("click", () => {
-      const note = notes.find(n => n.id === button.dataset.addP);
-      if (!note) return;
-
-      const text = prompt("Que veux-tu écrire sur ton Post-it ?", "N'oublie pas de réviser ! 💗");
-      if (text === null || !text.trim()) return;
-
-      if (!Array.isArray(note.postits)) note.postits = [];
-      const i = note.postits.length;
-
-      note.postits.push({
-        id:makeId(), text:text.trim(),
-        x:12+(i%3)*25, y:12+(i%4)*22,
-        color:postitColors[i%5], tilt:((i%3)-1)*1.2
-      });
-
-      note.updated = Date.now();
-      saveNotes();
-      renderNotes();
-    });
-  });
-
-  list.querySelectorAll("[data-edit-note]").forEach(button => {
-    button.addEventListener("click", () => {
-      const note = notes.find(n => n.id === button.dataset.editNote);
-      if (!note) return;
-
-      editingNoteId = note.id;
-      $("noteTitle").value = note.title;
-      $("noteSubject").value = note.subject || "";
-      $("noteBody").value = note.body;
-      $("saveNoteButton").textContent = "💾 Enregistrer les modifications";
-      $("cancelNoteEdit").hidden = false;
-      window.scrollTo({
-        top:$("noteForm").getBoundingClientRect().top+window.scrollY-90,
-        behavior:"smooth"
-      });
-    });
-  });
-
-  list.querySelectorAll("[data-delete-note]").forEach(button => {
-    button.addEventListener("click", () => {
-      const note = notes.find(n => n.id === button.dataset.deleteNote);
-      if (note && confirm(`Supprimer « ${note.title} » et ses Post-it ?`)) {
-        notes = notes.filter(n => n.id !== note.id);
-        if (editingNoteId === note.id) resetNoteForm();
-        saveNotes();
-        renderNotes();
-      }
-    });
-  });
-
-  list.querySelectorAll("[data-edit-p]").forEach(button => {
-    button.addEventListener("click", () => {
-      const card = button.closest("[data-note-id]");
-      const note = notes.find(n => n.id === card.dataset.noteId);
-      const p = note?.postits?.find(x => x.id === button.dataset.editP);
-      if (!p) return;
-
-      const text = prompt("Modifier ton Post-it :", p.text);
-      if (text === null || !text.trim()) return;
-      p.text = text.trim();
-      saveNotes();
-      renderNotes();
-    });
-  });
-
-  list.querySelectorAll("[data-delete-p]").forEach(button => {
-    button.addEventListener("click", () => {
-      const card = button.closest("[data-note-id]");
-      const note = notes.find(n => n.id === card.dataset.noteId);
-      if (!note || !confirm("Supprimer ce Post-it ?")) return;
-      note.postits = (note.postits || []).filter(p => p.id !== button.dataset.deleteP);
-      saveNotes();
-      renderNotes();
-    });
-  });
-
-  list.querySelectorAll("[data-drag-handle]").forEach(handle => {
-    handle.addEventListener("pointerdown", event => {
-      if (event.target.closest("button")) return;
-
-      const element = handle.closest(".note-postit");
-      const canvas = handle.closest(".note-canvas");
-      const card = handle.closest("[data-note-id]");
-      const note = notes.find(n => n.id === card?.dataset.noteId);
-      const p = note?.postits?.find(x => x.id === handle.dataset.dragHandle);
-      if (!element || !canvas || !p) return;
-
-      event.preventDefault();
-      const startX = event.clientX;
-      const startY = event.clientY;
-      const originalX = element.offsetLeft;
-      const originalY = element.offsetTop;
-      element.classList.add("dragging");
-
-      const move = e => {
-        element.style.left = Math.max(0,originalX+e.clientX-startX)+"px";
-        element.style.top = Math.max(0,originalY+e.clientY-startY)+"px";
-      };
-
-      const finish = () => {
-        element.classList.remove("dragging");
-        p.x = element.offsetLeft;
-        p.y = element.offsetTop;
-        saveNotes();
-        handle.removeEventListener("pointermove",move);
-        handle.removeEventListener("pointerup",finish);
-        handle.removeEventListener("pointercancel",finish);
-      };
-
-      handle.addEventListener("pointermove",move);
-      handle.addEventListener("pointerup",finish);
-      handle.addEventListener("pointercancel",finish);
-    });
-  });
+list.querySelectorAll("[data-add-p]").forEach(button=>button.addEventListener("click",()=>{const note=notes.find(n=>n.id===button.dataset.addP);if(!note)return;const text=prompt("Que veux-tu écrire sur ce Post-it ?","N'oublie pas de réviser ! 💗");if(text===null||!text.trim())return;if(!Array.isArray(note.postits))note.postits=[];const i=note.postits.length;note.postits.push({id:makeId(),text:text.trim(),x:12+(i%3)*25,y:12+(i%4)*22,color:postitColors[i%5],tilt:((i%3)-1)*1.2});note.updated=Date.now();saveNotes();renderNotes()}));
+list.querySelectorAll("[data-edit-note]").forEach(button=>button.addEventListener("click",()=>{const note=notes.find(n=>n.id===button.dataset.editNote);if(!note)return;editingNoteId=note.id;$("noteTitle").value=note.title;$("noteSubject").value=note.subject||"";$("noteBody").value=note.body;$("noteTemplate").value=templates.includes(note.template)?note.template:"lavender";$("saveNoteButton").textContent="💾 Enregistrer les modifications";$("cancelNoteEdit").hidden=false;window.scrollTo({top:$("noteForm").getBoundingClientRect().top+window.scrollY-90,behavior:"smooth"})}));
+list.querySelectorAll("[data-delete-note]").forEach(button=>button.addEventListener("click",()=>{const note=notes.find(n=>n.id===button.dataset.deleteNote);if(note&&confirm(`Supprimer la note « ${note.title} » et ses Post-it ?`)){notes=notes.filter(n=>n.id!==note.id);if(editingNoteId===note.id)resetNoteForm();saveNotes();renderNotes()}}));
+list.querySelectorAll("[data-edit-p]").forEach(button=>button.addEventListener("click",()=>{const card=button.closest("[data-note-id]"),note=notes.find(n=>n.id===card?.dataset.noteId),p=note?.postits?.find(item=>item.id===button.dataset.editP);if(!p)return;const text=prompt("Modifier ton Post-it :",p.text);if(text===null||!text.trim())return;p.text=text.trim();note.updated=Date.now();saveNotes();renderNotes()}));
+list.querySelectorAll("[data-delete-p]").forEach(button=>button.addEventListener("click",()=>{const card=button.closest("[data-note-id]"),note=notes.find(n=>n.id===card?.dataset.noteId);if(!note||!confirm("Supprimer ce Post-it ?"))return;note.postits=(note.postits||[]).filter(item=>item.id!==button.dataset.deleteP);note.updated=Date.now();saveNotes();renderNotes()}));
+list.querySelectorAll("[data-drag-handle]").forEach(handle=>handle.addEventListener("pointerdown",event=>{
+if(event.target.closest("button"))return;
+const postit=handle.closest(".note-postit"),canvas=handle.closest(".note-canvas"),card=handle.closest("[data-note-id]"),note=notes.find(n=>n.id===card?.dataset.noteId),item=note?.postits?.find(p=>p.id===handle.dataset.dragHandle);
+if(!postit||!canvas||!item)return;
+event.preventDefault();const startX=event.clientX,startY=event.clientY,originalX=postit.offsetLeft,originalY=postit.offsetTop;postit.classList.add("dragging");
+try{handle.setPointerCapture(event.pointerId)}catch(error){}
+const move=e=>{const maxX=Math.max(0,canvas.clientWidth-postit.offsetWidth),maxY=Math.max(0,canvas.clientHeight-postit.offsetHeight);postit.style.left=Math.min(maxX,Math.max(0,originalX+e.clientX-startX))+"px";postit.style.top=Math.min(maxY,Math.max(0,originalY+e.clientY-startY))+"px"};
+const finish=()=>{postit.classList.remove("dragging");item.x=postit.offsetLeft;item.y=postit.offsetTop;note.updated=Date.now();saveNotes();handle.removeEventListener("pointermove",move);handle.removeEventListener("pointerup",finish);handle.removeEventListener("pointercancel",finish)};
+handle.addEventListener("pointermove",move);handle.addEventListener("pointerup",finish);handle.addEventListener("pointercancel",finish)
+}))
 }
-
-function resetNoteForm() {
-  editingNoteId = null;
-  $("noteForm").reset();
-  $("saveNoteButton").textContent = "＋ Enregistrer la note";
-  $("cancelNoteEdit").hidden = true;
-}
-
-$("noteForm").addEventListener("submit", event => {
-  event.preventDefault();
-  const title = $("noteTitle").value.trim();
-  const subject = $("noteSubject").value.trim();
-  const body = $("noteBody").value.trim();
-  if (!title || !body) return;
-
-  if (editingNoteId) {
-    const note = notes.find(n => n.id === editingNoteId);
-    if (note) Object.assign(note,{title,subject,body,updated:Date.now()});
-  } else {
-    notes.push({
-      id:makeId(),title,subject,body,postits:[],
-      created:Date.now(),updated:Date.now()
-    });
-  }
-
-  saveNotes();
-  resetNoteForm();
-  renderNotes();
-});
-
+function resetNoteForm(){editingNoteId=null;$("noteForm").reset();$("saveNoteButton").textContent="＋ Enregistrer la note";$("cancelNoteEdit").hidden=true}
+$("noteForm").addEventListener("submit",event=>{event.preventDefault();const title=$("noteTitle").value.trim(),subject=$("noteSubject").value.trim(),body=$("noteBody").value.trim(),template=$("noteTemplate").value;if(!title||!body)return;if(editingNoteId){const note=notes.find(n=>n.id===editingNoteId);if(note)Object.assign(note,{title,subject,body,template,updated:Date.now()})}else{notes.push({id:makeId(),title,subject,body,template,postits:[],created:Date.now(),updated:Date.now()})}saveNotes();resetNoteForm();renderNotes()});
 $("cancelNoteEdit").addEventListener("click",resetNoteForm);
-  $("cancelNoteEdit").addEventListener("click",resetNoteForm);
-  /* PERSONNALISATION */
-document.querySelectorAll("[data-theme-choice]").forEach(button => {
-  button.addEventListener("click", () => {
-    document.body.dataset.theme = button.dataset.themeChoice;
-    localStorage.setItem("framboise-theme", button.dataset.themeChoice);
-  });
-});
 
-$("darkToggle").addEventListener("click", () => {
-  document.body.classList.toggle("dark");
-  localStorage.setItem(
-    "framboise-dark",
-    document.body.classList.contains("dark") ? "yes" : "no"
-  );
-});
-
-try {
-  const savedTheme = localStorage.getItem("framboise-theme");
-  if (["berry","purple","rose","plum"].includes(savedTheme)) {
-    document.body.dataset.theme = savedTheme;
-  }
-  if (localStorage.getItem("framboise-dark") === "yes") {
-    document.body.classList.add("dark");
-  }
-} catch (error) {}
+/* PERSONNALISATION */
+document.querySelectorAll("[data-theme-choice]").forEach(button=>button.addEventListener("click",()=>{document.body.dataset.theme=button.dataset.themeChoice;localStorage.setItem("framboise-theme",button.dataset.themeChoice)}));
+$("darkToggle").addEventListener("click",()=>{document.body.classList.toggle("dark");localStorage.setItem("framboise-dark",document.body.classList.contains("dark")?"yes":"no")});
+try{const savedTheme=localStorage.getItem("framboise-theme");if(["berry","purple","rose","plum"].includes(savedTheme))document.body.dataset.theme=savedTheme;if(localStorage.getItem("framboise-dark")==="yes")document.body.classList.add("dark")}catch(error){}
 
 /* AMBIANCE SONORE */
-let audioContext = null;
-let ambienceTimer = null;
-let ambienceOn = false;
+let audioContext=null,ambienceTimer=null,ambienceOn=false;
+function playSoftNote(){if(!audioContext||!ambienceOn)return;const frequencies=[261.63,329.63,392,440,523.25],frequency=frequencies[Math.floor(Math.random()*frequencies.length)],oscillator=audioContext.createOscillator(),gain=audioContext.createGain();oscillator.type="sine";oscillator.frequency.value=frequency;gain.gain.setValueAtTime(.0001,audioContext.currentTime);gain.gain.exponentialRampToValueAtTime(.035,audioContext.currentTime+.08);gain.gain.exponentialRampToValueAtTime(.0001,audioContext.currentTime+1.1);oscillator.connect(gain);gain.connect(audioContext.destination);oscillator.start();oscillator.stop(audioContext.currentTime+1.15)}
+$("ambienceToggle").addEventListener("click",async()=>{if(!ambienceOn){try{const AudioContextClass=window.AudioContext||window.webkitAudioContext;if(!AudioContextClass)throw new Error("Audio non disponible");audioContext=audioContext||new AudioContextClass();if(audioContext.state==="suspended")await audioContext.resume();ambienceOn=true;playSoftNote();ambienceTimer=setInterval(playSoftNote,1600);$("ambienceToggle").textContent="♫ Désactiver l'ambiance";$("ambienceStatus").textContent="Ambiance activée. 🎶"}catch(error){alert("L'ambiance sonore n'est pas disponible sur ce navigateur.")}}else{ambienceOn=false;clearInterval(ambienceTimer);ambienceTimer=null;$("ambienceToggle").textContent="♫ Activer l'ambiance";$("ambienceStatus").textContent="Ambiance désactivée."}});
 
-function playSoftNote() {
-  if (!audioContext || !ambienceOn) return;
-
-  const frequencies = [261.63,329.63,392,440,523.25];
-  const frequency = frequencies[Math.floor(Math.random()*frequencies.length)];
-  const oscillator = audioContext.createOscillator();
-  const gain = audioContext.createGain();
-
-  oscillator.type = "sine";
-  oscillator.frequency.value = frequency;
-  gain.gain.setValueAtTime(0.0001,audioContext.currentTime);
-  gain.gain.exponentialRampToValueAtTime(0.035,audioContext.currentTime+.08);
-  gain.gain.exponentialRampToValueAtTime(0.0001,audioContext.currentTime+1.1);
-
-  oscillator.connect(gain);
-  gain.connect(audioContext.destination);
-  oscillator.start();
-  oscillator.stop(audioContext.currentTime+1.15);
-}
-
-$("ambienceToggle").addEventListener("click",async () => {
-  if (!ambienceOn) {
-    try {
-      const AudioContextClass = window.AudioContext || window.webkitAudioContext;
-      if (!AudioContextClass) throw new Error("Audio non disponible");
-
-      audioContext = audioContext || new AudioContextClass();
-      if (audioContext.state === "suspended") await audioContext.resume();
-
-      ambienceOn = true;
-      playSoftNote();
-      ambienceTimer = setInterval(playSoftNote,1600);
-      $("ambienceToggle").textContent = "♫ Désactiver l'ambiance";
-      $("ambienceStatus").textContent = "Ambiance activée. 🎶";
-    } catch (error) {
-      alert("L'ambiance sonore n'est pas disponible sur ce navigateur.");
-    }
-  } else {
-    ambienceOn = false;
-    clearInterval(ambienceTimer);
-    ambienceTimer = null;
-    $("ambienceToggle").textContent = "♫ Activer l'ambiance";
-    $("ambienceStatus").textContent = "Ambiance désactivée.";
-  }
-});
-
-/* TIMER FRAMBOISE */
-let timerDuration = 30*60;
-let timerRemaining = timerDuration;
-let timerInterval = null;
-let timerEndTime = null;
-const ringCircumference = 2*Math.PI*90;
-
-$("timerProgress").style.strokeDasharray = ringCircumference;
-$("timerProgress").style.strokeDashoffset = 0;
-
-function formatTime(seconds) {
-  seconds = Math.max(0,Math.floor(seconds));
-  const hours = Math.floor(seconds/3600);
-  const minutes = Math.floor((seconds%3600)/60);
-  const secs = seconds%60;
-
-  if (hours > 0) {
-    return `${String(hours).padStart(2,"0")}:${String(minutes).padStart(2,"0")}:${String(secs).padStart(2,"0")}`;
-  }
-  return `${String(minutes).padStart(2,"0")}:${String(secs).padStart(2,"0")}`;
-}
-
-function updateTimerDisplay() {
-  $("timerDisplay").textContent = formatTime(timerRemaining);
-
-  const ratio = timerDuration > 0 ? 1-timerRemaining/timerDuration : 0;
-  $("timerProgress").style.strokeDashoffset =
-    ringCircumference*Math.max(0,Math.min(1,ratio));
-
-  document.title = timerInterval
-    ? `${formatTime(timerRemaining)} — Framboise 🍇`
-    : "Framboise 🍇";
-}
-
-function stopTimer() {
-  if (timerInterval !== null) {
-    clearInterval(timerInterval);
-    timerInterval = null;
-  }
-  timerEndTime = null;
-  $("timerCharacter").classList.remove("running");
-}
-
-function syncTimerInputs() {
-  $("timerHours").value = Math.floor(timerDuration/3600);
-  $("timerMinutes").value = Math.floor((timerDuration%3600)/60);
-  $("timerSeconds").value = timerDuration%60;
-}
-
-function resetTimer() {
-  stopTimer();
-  timerRemaining = timerDuration;
-  $("timerCharacter").classList.remove("finished");
-  $("timerMode").textContent = "Session de concentration";
-  $("timerMessage").textContent = "Prête à te concentrer ? 💗";
-  updateTimerDisplay();
-}
-
-function applyCustomDuration() {
-  if (timerInterval !== null) stopTimer();
-
-  let hours = Number($("timerHours").value);
-  let minutes = Number($("timerMinutes").value);
-  let seconds = Number($("timerSeconds").value);
-
-  hours = Number.isFinite(hours) ? Math.min(99,Math.max(0,Math.floor(hours))) : 0;
-  minutes = Number.isFinite(minutes) ? Math.min(59,Math.max(0,Math.floor(minutes))) : 0;
-  seconds = Number.isFinite(seconds) ? Math.min(59,Math.max(0,Math.floor(seconds))) : 0;
-
-  $("timerHours").value = hours;
-  $("timerMinutes").value = minutes;
-  $("timerSeconds").value = seconds;
-
-  const total = hours*3600+minutes*60+seconds;
-  if (total <= 0) {
-    $("timerMessage").textContent = "Choisis une durée supérieure à zéro. 🌷";
-    return;
-  }
-
-  timerDuration = total;
-  timerRemaining = total;
-
-  document.querySelectorAll(".timer-preset").forEach(button => {
-    button.classList.toggle("selected",total===Number(button.dataset.minutes)*60);
-  });
-
-  $("timerMode").textContent = "Ta durée personnalisée";
-  $("timerMessage").textContent = "C'est parti quand tu veux ! 💗";
-  updateTimerDisplay();
-}
-
-function startTimer() {
-  if (timerInterval !== null) return;
-
-  if (timerRemaining <= 0) {
-    timerRemaining = timerDuration;
-    $("timerCharacter").classList.remove("finished");
-  }
-
-  $("timerMessage").textContent = "Tu gères ! Reste concentrée. ✨";
-  $("timerMode").textContent = "Session de concentration";
-  $("timerCharacter").classList.add("running");
-  timerEndTime = Date.now()+timerRemaining*1000;
-
-  timerInterval = setInterval(() => {
-    timerRemaining = Math.max(0,Math.ceil((timerEndTime-Date.now())/1000));
-    updateTimerDisplay();
-
-    if (timerRemaining <= 0) {
-      stopTimer();
-      $("timerCharacter").classList.add("finished");
-      $("timerMessage").textContent = "Bravo ! Ta session est terminée. 🎉";
-      $("timerMode").textContent = "Temps écoulé !";
-      document.title = "Terminé ! — Framboise 🍇";
-      alert("Bravo ! Ta session de concentration est terminée. 💗");
-    }
-  },250);
-
-  updateTimerDisplay();
-}
-
+/* TIMER */
+let timerDuration=30*60,timerRemaining=timerDuration,timerInterval=null,timerEndTime=null;
+const ringCircumference=2*Math.PI*90;
+$("timerProgress").style.strokeDasharray=ringCircumference;$("timerProgress").style.strokeDashoffset=0;
+function formatTime(seconds){seconds=Math.max(0,Math.floor(seconds));const hours=Math.floor(seconds/3600),minutes=Math.floor(seconds%3600/60),secs=seconds%60;return hours>0?`${String(hours).padStart(2,"0")}:${String(minutes).padStart(2,"0")}:${String(secs).padStart(2,"0")}`:`${String(minutes).padStart(2,"0")}:${String(secs).padStart(2,"0")}`}
+function updateTimerDisplay(){$("timerDisplay").textContent=formatTime(timerRemaining);const elapsedRatio=timerDuration>0?1-timerRemaining/timerDuration:0;$("timerProgress").style.strokeDashoffset=ringCircumference*Math.max(0,Math.min(1,elapsedRatio));document.title=timerInterval?`${formatTime(timerRemaining)} — Framboise 🍇`:"Framboise 🍇"}
+function stopTimer(){if(timerInterval!==null){clearInterval(timerInterval);timerInterval=null}timerEndTime=null;$("timerCharacter").classList.remove("running")}
+function syncTimerInputs(){$("timerHours").value=Math.floor(timerDuration/3600);$("timerMinutes").value=Math.floor(timerDuration%3600/60);$("timerSeconds").value=timerDuration%60}
+function resetTimer(){stopTimer();timerRemaining=timerDuration;$("timerCharacter").classList.remove("finished");$("timerMode").textContent="Session de concentration";$("timerMessage").textContent="Prête à te concentrer ? 💗";updateTimerDisplay()}
+function applyCustomDuration(){if(timerInterval!==null)stopTimer();let hours=Number($("timerHours").value),minutes=Number($("timerMinutes").value),seconds=Number($("timerSeconds").value);hours=Number.isFinite(hours)?Math.min(99,Math.max(0,Math.floor(hours))):0;minutes=Number.isFinite(minutes)?Math.min(59,Math.max(0,Math.floor(minutes))):0;seconds=Number.isFinite(seconds)?Math.min(59,Math.max(0,Math.floor(seconds))):0;$("timerHours").value=hours;$("timerMinutes").value=minutes;$("timerSeconds").value=seconds;const total=hours*3600+minutes*60+seconds;if(total<=0){$("timerMessage").textContent="Choisis une durée supérieure à zéro. 🌷";return}timerDuration=total;timerRemaining=total;document.querySelectorAll(".timer-preset").forEach(button=>button.classList.toggle("selected",total===Number(button.dataset.minutes)*60));$("timerMode").textContent="Ta durée personnalisée";$("timerMessage").textContent="C'est parti quand tu veux ! 💗";updateTimerDisplay()}
+function startTimer(){if(timerInterval!==null)return;if(timerRemaining<=0){timerRemaining=timerDuration;$("timerCharacter").classList.remove("finished")}$("timerMessage").textContent="Tu gères ! Reste concentrée. ✨";$("timerMode").textContent="Session de concentration";$("timerCharacter").classList.add("running");timerEndTime=Date.now()+timerRemaining*1000;timerInterval=setInterval(()=>{timerRemaining=Math.max(0,Math.ceil((timerEndTime-Date.now())/1000));updateTimerDisplay();if(timerRemaining<=0){stopTimer();$("timerCharacter").classList.add("finished");$("timerMessage").textContent="Bravo ! Ta session est terminée. 🎉";$("timerMode").textContent="Temps écoulé !";document.title="Terminé ! — Framboise 🍇";alert("Bravo ! Ta session de concentration est terminée. 💗")}},250);updateTimerDisplay()}
 $("timerStart").addEventListener("click",startTimer);
-
-$("timerPause").addEventListener("click",() => {
-  if (timerInterval === null) return;
-
-  timerRemaining = Math.max(0,Math.ceil((timerEndTime-Date.now())/1000));
-  stopTimer();
-  updateTimerDisplay();
-  $("timerMessage").textContent = "Petite pause. Reprends quand tu veux. 🌷";
-  $("timerMode").textContent = "Session en pause";
-});
-
-$("timerReset").addEventListener("click",resetTimer);
-$("timerApply").addEventListener("click",applyCustomDuration);
-
-document.querySelectorAll(".timer-preset").forEach(button => {
-  button.addEventListener("click",() => {
-    stopTimer();
-    timerDuration = Number(button.dataset.minutes)*60;
-    timerRemaining = timerDuration;
-    syncTimerInputs();
-
-    document.querySelectorAll(".timer-preset").forEach(item => {
-      item.classList.toggle("selected",item===button);
-    });
-
-    $("timerMode").textContent = "Session de concentration";
-    $("timerMessage").textContent =
-      "Session réglée sur "+button.dataset.minutes+" minutes. 💗";
-    $("timerCharacter").classList.remove("finished");
-    updateTimerDisplay();
-  });
-});
-
-syncTimerInputs();
-resetTimer();
-renderAll();
-renderNotes();
+$("timerPause").addEventListener("click",()=>{if(timerInterval===null)return;timerRemaining=Math.max(0,Math.ceil((timerEndTime-Date.now())/1000));stopTimer();updateTimerDisplay();$("timerMessage").textContent="Petite pause. Reprends quand tu veux. 🌷";$("timerMode").textContent="Session en pause"});
+$("timerReset").addEventListener("click",resetTimer);$("timerApply").addEventListener("click",applyCustomDuration);
+document.querySelectorAll(".timer-preset").forEach(button=>button.addEventListener("click",()=>{stopTimer();timerDuration=Number(button.dataset.minutes)*60;timerRemaining=timerDuration;syncTimerInputs();document.querySelectorAll(".timer-preset").forEach(item=>item.classList.toggle("selected",item===button));$("timerMode").textContent="Session de concentration";$("timerMessage").textContent="Session réglée sur "+button.dataset.minutes+" minutes. 💗";$("timerCharacter").classList.remove("finished");updateTimerDisplay()}));
+syncTimerInputs();resetTimer();renderAll();renderNotes();
 </script>
 </body>
 </html>
