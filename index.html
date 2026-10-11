@@ -357,5 +357,25 @@ syncTimerInputs();resetTimer();renderAll();renderNotes();
   }
 </script>
 
+<script>
+  if ("serviceWorker" in navigator) {
+    window.addEventListener("load", () => {
+      navigator.serviceWorker.register("./service-worker.js")
+        .then(() => console.log("Framboise est prête 🍓"))
+        .catch((error) => console.error("Erreur :", error));
+    });
+  }
+</script>
+
+<script>
+  if ("serviceWorker" in navigator) {
+    window.addEventListener("load", () => {
+      navigator.serviceWorker.register("./service-worker.js")
+        .then(() => console.log("Framboise est prête 🍓"))
+        .catch((error) => console.error("Erreur :", error));
+    });
+  }
+</script>
+
 </body>
 </html>
